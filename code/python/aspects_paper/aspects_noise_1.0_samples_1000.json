@@ -1,0 +1,1096 @@
+[
+    [
+        {
+            "candidate": "A",
+            "trial": 0,
+            "rep": [
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 1,
+            "rep": [
+                0.299,
+                0.0,
+                1.0,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 2,
+            "rep": [
+                0.0,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 3,
+            "rep": [
+                0.399,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 4,
+            "rep": [
+                0.063,
+                1.0,
+                0.06,
+                1.0,
+                1.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 5,
+            "rep": [
+                0.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 6,
+            "rep": [
+                0.0,
+                1.0,
+                1.0,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 7,
+            "rep": [
+                0.111,
+                0.0,
+                1.0,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 8,
+            "rep": [
+                0.583,
+                1.0,
+                0.0,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 9,
+            "rep": [
+                0.762,
+                1.0,
+                0.759,
+                1.0,
+                1.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 10,
+            "rep": [
+                0.88,
+                1.0,
+                0.059,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 11,
+            "rep": [
+                0.997,
+                1.0,
+                0.003,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 12,
+            "rep": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 13,
+            "rep": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 14,
+            "rep": [
+                0.999,
+                1.0,
+                0.999,
+                0.0,
+                1.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 15,
+            "rep": [
+                0.998,
+                1.0,
+                0.995,
+                1.0,
+                1.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 16,
+            "rep": [
+                1.0,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 17,
+            "rep": [
+                0.311,
+                1.0,
+                0.05,
+                0.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 18,
+            "rep": [
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 19,
+            "rep": [
+                0.951,
+                1.0,
+                0.047,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 20,
+            "rep": [
+                0.289,
+                1.0,
+                0.277,
+                1.0,
+                1.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 21,
+            "rep": [
+                1.0,
+                1.0,
+                1.0,
+                0.0,
+                1.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 22,
+            "rep": [
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 23,
+            "rep": [
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 24,
+            "rep": [
+                1.0,
+                1.0,
+                0.396,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 25,
+            "rep": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 26,
+            "rep": [
+                0.955,
+                1.0,
+                0.044,
+                1.0,
+                1.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 27,
+            "rep": [
+                0.8,
+                1.0,
+                0.769,
+                0.0,
+                1.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 28,
+            "rep": [
+                0.092,
+                1.0,
+                0.098,
+                1.0,
+                1.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 29,
+            "rep": [
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 30,
+            "rep": [
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                1
+            ]
+        },
+        {
+            "candidate": "A",
+            "trial": 31,
+            "rep": [
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                1
+            ]
+        }
+    ],
+    [
+        {
+            "candidate": "D",
+            "trial": 0,
+            "rep": [
+                1.0,
+                0.0,
+                1.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 1,
+            "rep": [
+                0.0,
+                0.0,
+                0.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 2,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 3,
+            "rep": [
+                1.0,
+                1.0,
+                1.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 4,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 5,
+            "rep": [
+                0.0,
+                0.0,
+                0.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 6,
+            "rep": [
+                0.0,
+                1.0,
+                1.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 7,
+            "rep": [
+                0.0,
+                0.0,
+                0.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 8,
+            "rep": [
+                1.0,
+                1.0,
+                0.391,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 9,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 10,
+            "rep": [
+                0.942,
+                1.0,
+                0.115,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 11,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 12,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 13,
+            "rep": [
+                0.36,
+                1.0,
+                0.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 14,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 15,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 16,
+            "rep": [
+                1.0,
+                0.0,
+                0.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 17,
+            "rep": [
+                0.0,
+                0.0,
+                0.117,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 18,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 19,
+            "rep": [
+                0.948,
+                1.0,
+                0.052,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 20,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 21,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 22,
+            "rep": [
+                0.0,
+                1.0,
+                1.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 23,
+            "rep": [
+                0.11,
+                0.0,
+                1.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 24,
+            "rep": [
+                0.576,
+                1.0,
+                0.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 25,
+            "rep": [
+                1.0,
+                1.0,
+                0.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 26,
+            "rep": [
+                0.945,
+                1.0,
+                0.053,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 27,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 28,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 29,
+            "rep": [
+                1.0,
+                1.0,
+                1.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 30,
+            "rep": [
+                1.0,
+                1.0,
+                1.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "D",
+            "trial": 31,
+            "rep": [
+                1.0,
+                0.0,
+                1.0,
+                true,
+                1
+            ]
+        }
+    ],
+    [
+        {
+            "candidate": "box",
+            "trial": 0,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 1,
+            "rep": [
+                0.0,
+                0.0,
+                0.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 2,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 3,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 4,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 5,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 6,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 7,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 8,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 9,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 10,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 11,
+            "rep": [
+                0.989,
+                1.0,
+                0.006,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 12,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 13,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 14,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 15,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 16,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 17,
+            "rep": [
+                0.848,
+                1.0,
+                0.827,
+                false,
+                1
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 18,
+            "rep": [
+                0.0,
+                0.0,
+                0.0,
+                true,
+                1
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 19,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 20,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 21,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 22,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 23,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 24,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 25,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 26,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 27,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 28,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 29,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 30,
+            "rep": [
+                NaN,
+                NaN,
+                NaN,
+                NaN,
+                NaN
+            ]
+        },
+        {
+            "candidate": "box",
+            "trial": 31,
+            "rep": [
+                0.275,
+                0.0,
+                0.0,
+                true,
+                1
+            ]
+        }
+    ]
+]
