@@ -538,7 +538,7 @@ def cross_validation(splits,
     
     model = "semantics" if lesion_rsa else "full"
     
-    filename = "useful_csvs/cv_model_{}_caused_{}_affected_{}.csv".format(model, caused_version, affected_version)
+    filename = "model_performance/cv_{}_model.csv".format(model)
     
     df_perf.to_csv(filename)
     
