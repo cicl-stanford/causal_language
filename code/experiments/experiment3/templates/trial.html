@@ -1,0 +1,372 @@
+<!-- Bot Check -->
+<div class="slide", id="botcheck">
+  <h1 align="center">Bot Check</h1>
+  <div class="blue" text-align="center">
+    <div id="challenge_container" text-align="center"></div>
+    <!-- <textarea id="bot_text"></textarea> -->
+    <input type="text" id="bot_text"></input>
+  </div>
+  <div class="continue">
+    <button type="button" id="bot_check_button" class="bfmt">Continue</button>
+  </div>
+</div>
+
+<!-- Bot check success -->
+<div class="slide" id="botcheck_pass">
+  <h1>Bot Check Passed</h1>
+  <div class="blue">
+    <p>Nice job! Click the button to proceed with the experiment.</p>
+  </div>
+  <div class="continue">
+    <button type="button" class="bfmt" id="botcheck_pass_button">Continue</button>
+  </div>
+</div>
+
+
+<!-- Bot check fail -->
+<div class="slide" id="botcheck_fail">
+  <h1>Bot Check feedback</h1>
+<div class="blue">
+
+<p>Unfortunately, you didn't pass the bot check. Please make sure to spell carefully!</p>
+
+</div>
+<div class="continue" >
+    <button type="button" class="bfmt" id="botcheck_fail_button">Continue</button>
+  </div>
+</div>
+
+<!-- Instructions -->
+<div class="slide" class="instructions" id="instructions-1">
+  <h1>Instructions</h1>
+  <div class="blue">
+    <p>In this experiment we will ask you to make judgments about videos of physical interactions. The interactions will take place in the rectangular space shown below.</p>
+    <p>In each video you will see some of the following four objects:<ul>
+      <li>a <b>green ball</b> (labeled with <b>A</b>)</li>
+      <li>a <b>grey ball</b> (labeled with <b>B</b>)</li>
+      <li>an unlabeled <b>blue ball</b></li>
+      <li>a <b>box</b></li>
+    </ul>
+    Not all of the objects will appear in every video, however every video will contain <b>ball A</b> and <b>ball B</b>. Objects will either start on screen or enter from the right. The balls can exit the space through the <b>red exit</b> on the left but only when it is not blocked by the <b>brown gate</b>. The position of the brown gate can be changed by pressing either of the <b>green buttons</b> next to it.</p>
+
+    <p>Take a look at the example video below by clicking the "Play Video" button. You can watch the video again by clicking on "Replay".</p>
+    <div class="video_container">
+      <video id="inst_video" width="600" height="450">
+        <source src="/static/videos/inst_video.mp4">
+        <source src="/static/videos/inst_video.webm">
+      </video>
+      <div class="continue">
+        <button class="vid_play" type="button" id="inst_play" class="bfmt">Play Video</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="continue">
+    <button type="button" id="inst1_cont" class="bfmt">Continue</button>
+  </div>
+  <p id ="video_check" style="text-align:center">(You have to watch the video first to be able to proceed)</p>
+</div>
+
+<div class="slide" class="instructions" id="instructions-2">
+  <h1>Instructions</h1>
+  <div class="blue">
+    <p>In the first part of the experiment you will see a series of videos like the one we just showed you. For each video we will ask you to choose a sentence that best describes what happened in the video. You will be able to choose one of these four descriptions: <ul class="instructions_list">
+      <li>Ball A <b>caused</b> Ball B to go through the red exit.</li>
+      <li>Ball A <b>enabled</b> Ball B to go through the red exit.</li>
+      <li>Ball A <b>affected</b> Ball B's going through the red exit.</li>
+      <li>Ball A <b>made no difference</b> to Ball B's going through the red exit.</li>
+    </ul>
+    You will watch each video twice before making a selection. You may replay the video as many times as you like before deciding. 
+  </p>
+  <p>
+    Below we have included a screenshot of an example trial. The participant has selected the "caused" description as the most appropriate for this clip.
+  </p>
+  <figure>
+    <img id="inst_image1" src="static/images/inst_image1.jpeg">
+  </figure>
+
+  <p>This first part of the experiment will consist of 4 short trials. Before you start this part we will ask you a few quick questions to make sure the setup is clear. If you answer one or more of these questions incorrectly, you will be redirected to take another look at the instructions.</p>
+  </div>
+
+
+  <div class="continue">
+    <button type="button" id="inst2_cont" class="bfmt">Continue</button>
+  </div>
+</div>
+
+
+<div class="slide" class="instructions" id="instructions-3">
+  <h1>Instructions</h1>
+  <div class="blue">
+
+    <p>Nice job! Now for the second part of the experiment we are going to change things up. Rather than selecting a description yourself, you will see what description someone else chose. Your job is to figure out what video they were watching! Just as you did in the previous session, the describer saw a video and chose one of four descriptions as depicted in the example below.</p>
+
+    <figure>
+      <img id="inst_image2", src="static/images/inst_image2.jpeg">
+    </figure>
+
+    <p> On each trial, you will see what description they selected at the top, and two candidate videos that they may have watched underneath. Once you have watched both videos, a slider will appear above the videos. Use this slider to indicate which video you think the describer saw.</p>
+
+    <p>
+      In this example, the describer has selected the sentence "Ball A <b>caused</b> Ball B to go through the red exit." The participant (your job) indicated on the slider that the describer probably watched Video 2.
+    </p>
+
+    <p>This part of the experiment will consist of 38 trials. As in the previous phase, before starting this part we will ask you some quick comprehension questions. Make sure you take time your time to review the instructions and press continue when you are ready to move on!</p>
+    
+  </div>
+
+  <div class="continue">
+    <button type="button" id="inst3_cont" class="bfmt">Continue</button>
+  </div>
+</div>
+
+
+<div class="slide" id="comprehension-check1">
+  <h1>Check questions</h1>
+  <div class="blue">
+    <p><b>Please answer the following questions</b>:</p>
+     <!-- <br/> -->
+     <p>Which objects will appear in every video?
+      <br/>
+      <br/>
+      <input class="compQ" type="radio" name="comprehension_radio1" value="A_B">The green A ball and the grey B ball<br/>
+      <input class="compQ" type="radio" name="comprehension_radio1" value="A_blue">The green A ball and the blue unlabeled ball<br/>
+      <input class="compQ" type="radio" name="comprehension_radio1" value="B_box">The grey B ball and the box<br/>
+      <input class="compQ" type="radio" name="comprehension_radio1" value="blue_box">The blue unlabeled ball and the box<br/>
+     </p>
+    <br/>
+    <p>What happens when an object collides with the green button?
+      <br/>
+      <br/>
+      <input class="compQ" type="radio" name="comprehension_radio2" value="video">The video starts over.<br/>
+      <input class="compQ" type="radio" name="comprehension_radio2" value="new_ball">A new ball enters from the right.<br/>
+      <input class="compQ" type="radio" name="comprehension_radio2" value="gate">The gate moves.<br/>
+      <input class="compQ" type="radio" name="comprehension_radio2" value="nothing">Nothing happens.<br/>
+    </p>
+    <br/>
+    <p>How many different descriptions will you be able to choose from?
+      <br/>
+      <br/>
+      <input class="compQ" type="radio" name="comprehension_radio3" value="3">3<br/>
+      <input class="compQ" type="radio" name="comprehension_radio3" value="4">4<br/>
+      <input class="compQ" type="radio" name="comprehension_radio3" value="5">5<br/>
+      <input class="compQ" type="radio" name="comprehension_radio3" value="6">6<br/>
+    </p>
+  </div>
+  <div class="continue">
+    <button type="button" class="bfmt" id="comp-cont1">Continue</button>
+  </div>
+</div>
+
+
+
+
+<!-- COMPREHENSION CHECK QUESTIONS -->
+<div class="slide" id="comprehension-check2">
+  <h1>Check questions</h1>
+  <div class="blue">
+    <p><b>Please answer the following question</b>:</p>
+     <!-- <br/> -->
+    <p>How many videos will you watch for each trial in part 2?<br/> 
+     <input class="compQ" type="radio" name="comprehension_radio4" value="1">1<br/>
+     <input class="compQ" type="radio" name="comprehension_radio4" value="2">2<br/>
+     <input class="compQ" type="radio" name="comprehension_radio4" value="3">3<br/>
+     <input class="compQ" type="radio" name="comprehension_radio4" value="4">4<br/>
+    </p>
+    <br/>
+    <p>Which of the following descriptions will the describer be able to choose from? Check all that apply.<br/>
+      <input class="compQ" type="checkbox" name="comprehension_checkbox" value="stopped">Ball A stopped Ball B's going through the red exit.<br/>
+      <input class="compQ" type="checkbox" name="comprehension_checkbox" value="caused">Ball A caused Ball B to go through the red exit.<br/>
+      <input class="compQ" type="checkbox" name="comprehension_checkbox" value="enabled">Ball A enabled Ball B to go through the red exit.<br/>
+      <input class="compQ" type="checkbox" name="comprehension_checkbox" value="helped">Ball A helped Ball B go through the red exit.<br/>
+    </p>
+  </div>
+  <div class="continue">
+    <button type="button" class="bfmt" id="comp-cont2">Continue</button>
+  </div>
+</div>
+
+<div class="slide" id="comprehension_check_pass">
+  <h1>Comprehension Check Passed</h1>
+  <div class="blue">
+    <p>Nice job! When you are ready press the continue button to get started with the experiment.</p>
+  </div>
+  <div class="continue">
+    <button type="button" class="bfmt" id="comprehension_pass">Continue</button>
+  </div>
+</div>
+
+<div class="slide" id="comprehension_check_fail">
+  <h1>Check questions feedback</h1>
+<div class="blue">
+
+<p>Unfortunately, you didn't answer all of the comprehension check questions correctly.</p>
+
+<p>Please have another close look at the instructions! </p>
+
+</div>
+<div class="continue" >
+    <button type="button" class="bfmt" id="comprehension_fail">Continue</button>
+  </div>
+</div>
+
+<!-- Trial -->
+<div class="slide" id="training">
+  <div class="refresh_warning"><p>WARNING: DO NOT REFRESH THIS PAGE</p></div>
+  <div class="progress">
+    <div id="training-progress-text">Progress</div>
+    <div class="indicator-container">
+      <div class="indicator-outer">
+        <div id="training-indicator-stage"></div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+  <hr />
+  <div id="training-stim">
+    <div class = "container">   
+      <div class ="video_container">
+        <video class ="stim_video" width="600" height="450">
+          <source src = "" id = "training_video_mp4">
+          <source src = "" id = "training_video_webm">
+        </video>
+        <div class="continue">
+          <button type="button" class="bfmt" width="129px" height="39px" id="training-play">Play Video</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div id="training_response_container">
+      <div id="training-prompt-text">
+        <p class="prompt" style="font-weight: bold">Which of the following sentences best describes the clip?</p>
+        <div id="training_answer_container"></div>
+      </div>
+      <div class="spacer"></div>
+      <hr />   
+
+      <div class="continue">
+        <button type="button" id="training_next" class="bfmt">Continue</button>
+      </div>
+      <p id ="training_video_check" style="text-align:center">(You have to watch the video twice and select a description in order to continue.)</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="slide" id="trial">
+  <div class="refresh_warning"><p>WARNING: DO NOT REFRESH THIS PAGE</p></div>
+  <div class="progress">
+    <div id="progress-text">Progress</div>
+    <div class="indicator-container">
+      <div class="indicator-outer">
+        <div id="indicator-stage"></div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+  <hr />
+  <div id="stim">
+
+    <div id="question-text">
+      <div id="question-container" class="blue">
+        <p class="prompt" style="font-weight: bold">The describer made the following selection:</p>
+        <div id="describer-selection"></div>
+        <p class="prompt" style="font-weight: bold">Which video were they watching?</p>
+      </div>
+    </div>
+
+    <div id="response_container" class="start_hidden">
+      <div id="slider_label">
+          <label id="label_left">Definitely Video 1</label>
+          <label id="label_middle">Unsure</label>
+          <label id="label_right">Definitely Video 2</label>
+      </div>
+      <div id="task_slider" class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-cornder-all">
+        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0", style="left: 45%; display: block;"></span>
+      </div>
+      <div class="spacer"></div>
+      <hr />   
+
+    </div>
+
+    <div id ="video1_container" class="video_container">
+      Video 1
+      <video id ="stim_video1" width="400" height="300">
+        <source src = "" id = "video1_mp4">
+        <source src = "" id = "video1_webm">
+      </video>
+      <div class="continue">
+        <button  class="vid_play" type="button" class="bfmt" id="play1">Play Video</button>
+      </div>
+    </div>
+
+    <div id ="video2_container" class="video_container">
+      Video 2
+      <video id ="stim_video2" width="400" height="300">
+        <source src = "" id = "video2_mp4">
+        <source src = "" id = "video2_webm">
+      </video>
+      <div class="continue">
+        <button  class="vid_play" type="button" class="bfmt" id="play2">Play Video</button>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="continue start_hidden">
+      <button type="button" id="trial_next" class="bfmt">Continue</button>
+    </div>
+
+
+  </div>
+</div>
+
+<!-- DEMOGRAPHICS -->
+<div class="slide" id="demographics">
+  <h1>Demographic information</h1>
+  <div class="blue">
+    <p>What factors influenced your video choices? Do you have any comments regarding the experiment? </p>
+
+    <textarea name="feedback" style="width:760px; height:100px;"  ></textarea> 
+
+    <p><b>Please provide the following demographic information to complete the study</b>:</p>
+
+
+    <p><b>1.</b> Native language:
+      <input class = "demoQ" id = "language_answer" type="text" name="language">
+      <input class = "demoQ" id = "language_na" type="checkbox" name="language" value="optout">Prefer not to say
+    </p>
+
+    <p><b>2.</b> Age:
+      <input class = "demoQ" id = "age_answer" type="text" name="age">
+      <input class = "demoQ" id = "age_na" type="checkbox" name="age" value="optout">Prefer not to say
+    </p>
+
+    <p><b>3.</b> Gender:
+      <input class = "demoQ" id = "gender_answer" type="text" name="gender">
+      <input class = "demoQ" id = "gender_na" type="checkbox" name="gender" value="optout">Prefer not to say
+    </p>
+
+    <p><b>4.</b> Race:
+      <input class="demoQ" id = race_answer type="text" name="race">
+      <input class="demoQ" id = "race_na" type="checkbox" name="race" value="outout">Prefer not to say
+    </p>
+
+    <p><b>5.</b> Ethnicity:
+      <input class="demoQ" type="radio" name="ethnicity" value="hispanic">Hispanic
+      <input class="demoQ" type="radio" name="ethnicity" value="non-hispanic">Non-Hispanic
+      <input class="demoQ" type="radio" name="ethnicity" value="optout">Prefer not to say
+    <br/>
+
+    <p align="center">Please press finish to complete the experiment.</p>
+
+  </div> 
+  
+  <div class="continue">
+    <button type="button" class="bfmt" id="trial_finish">Finish</button>
+  </div>
+</div>
+
+

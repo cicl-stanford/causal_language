@@ -83,30 +83,37 @@ def fit_and_compute_softmax(listener_params, human_response, model_type, trial_c
     return model_predictions, optimal_beta
 
 
-def get_regression_pairings(speaker_regression, trial_comparison_indices, trial_utterance_values):
+def get_trial_pairings(model_df, trial_comparison_indices, trial_utterance_values, model_type="regression"):
     
-    regression_pairings = np.zeros((2, len(trial_utterance_values)))
+    trial_pairings = np.zeros((2, len(trial_utterance_values)))
+
+    if model_type == "regression":
+        value = "model_y"
+    elif model_type == "participant":
+        value = "data_y"
+    else:
+        raise Exception("Model Type {} not implemented.".format(model_type))
     
     for trial in range(len(trial_utterance_values)):
         video_a, video_b = trial_comparison_indices[trial,:]
         utterance = vocabulary_dataset[trial_utterance_values[trial]]
 
-        video_a_prob = speaker_regression[(speaker_regression["trial"] == video_a) &
-                                          (speaker_regression["response"] == utterance)]['model_y'].to_numpy()[0]
+        video_a_prob = model_df[(model_df["trial"] == video_a) &
+                                (model_df["response"] == utterance)][value].to_numpy()[0]
 
-        video_b_prob = speaker_regression[(speaker_regression["trial"] == video_b) &
-                                          (speaker_regression["response"] == utterance)]['model_y'].to_numpy()[0]
+        video_b_prob = model_df[(model_df["trial"] == video_b) &
+                                (model_df["response"] == utterance)][value].to_numpy()[0]
 
-        regression_pairings[:,trial] = [video_a_prob, video_b_prob]
+        trial_pairings[:,trial] = [video_a_prob, video_b_prob]
         
-    return regression_pairings
+    return trial_pairings
 
 
-def reg_square_error(beta, regression_pairings, human_means, trial_ind=np.arange(36, dtype=int)):
+def fit_square_error(beta, model_pairings, human_means, trial_ind=np.arange(36, dtype=int)):
     
     human_means = human_means[trial_ind]
     
-    normalized_scores = softmax_normalize(regression_pairings, beta=beta)
+    normalized_scores = softmax_normalize(model_pairings, beta=beta)
     return np.sum((normalized_scores[1,:]-human_means)**2)
 
 

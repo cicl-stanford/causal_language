@@ -152,8 +152,8 @@ ggplot(df_to_show,
   guides(linewidth = "none") +
   scale_x_continuous(breaks = seq(1,7)) +
   scale_linewidth_manual(values = c(0.5, 1.2)) +
-  scale_fill_manual(values = c("hotpink", "mediumpurple2", "dodgerblue1")) +
-  scale_color_manual(values = c("hotpink", "mediumpurple2", "dodgerblue1")) +
+  scale_fill_manual(values = c("dodgerblue1", "mediumpurple2", "hotpink")) +
+  scale_color_manual(values = c("dodgerblue1",  "mediumpurple2", "hotpink")) +
   facet_wrap(~verb,
              ncol = 3) +
   theme(legend.position = "none")
@@ -291,8 +291,8 @@ facet_grid(rows = vars(frame),
            switch = "y") +
   scale_y_continuous(position="right") +
   scale_x_continuous(breaks = seq(1,7)) +
-  scale_fill_manual(values = c("hotpink", "mediumpurple2", "dodgerblue1")) +
-  scale_color_manual(values = c("hotpink", "mediumpurple2", "dodgerblue1")) +
+  scale_fill_manual(values = c("dodgerblue1",  "mediumpurple2", "hotpink")) +
+  scale_color_manual(values = c("dodgerblue1",  "mediumpurple2", "hotpink")) +
   scale_linewidth_manual(values = c(0.5, 1.2)) +
   theme(legend.position = "None",
         strip.text.y.left = element_text(angle=0,
@@ -623,7 +623,10 @@ hyps = c(hyp1 = "0 - verb_ordEA > 0",
          hyp2 = "verb_ordAC - verb_ordCA > 0",
          hyp3 = "verb_ordEC - verb_ordCE > 0")
 
-hypothesis(model, hyps)
+hypothesis(model,
+           hyps,
+           # corresponds to alpha 0.05 for a one-sided test. See supplementary console output
+           alpha=0.025)
 ```
 
 #### Controls
@@ -682,7 +685,9 @@ hyps = c(hyp1 = "0 - verb_ordEA > 0",
          hyp2 = "verb_ordAC - verb_ordCA > 0",
          hyp3 = "verb_ordEC - verb_ordCE > 0")
 
-hypothesis(model, hyps)
+hypothesis(model,
+           hyps,
+           alpha=0.025)
 ```
 
 ##### Verb Difference
@@ -750,7 +755,9 @@ hyps = c(hyp1 = "0 - verb_ordEA > 0",
          hyp2 = "verb_ordAC - verb_ordCA > 0",
          hyp3 = "verb_ordEC - verb_ordCE > 0")
 
-hypothesis(model, hyps)
+hypothesis(model,
+           hyps,
+           alpha=0.025)
 ```
 
 ### Exploratory Analysis
@@ -1053,7 +1060,10 @@ hyps = c(hyp1 = "verb_ordAE - verb_ordEA > 0",
          hyp2 = "0 - verb_ordCA > 0",
          hyp3 = "verb_ordEC - verb_ordCE > 0")
 
-hypothesis(model, hyps)
+hypothesis(model,
+           hyps,
+           # corresponds to alpha 0.05 for a one-sided test. See supplementary console output
+           alpha = 0.025)
 ```
 ### Exploratory Analysis
 
@@ -1084,7 +1094,7 @@ df_data = df_database %>%
 
 ## Demographics
 
-```{r extract-demographics}
+```{r}
 df_demographics = df_data$datastring %>% 
   spread_values(language = jstring("questiondata", "language"),
                 age = jstring("questiondata", "age"),
@@ -1108,7 +1118,7 @@ df_demographics %>%
 ```
 
 ### Gender
-```{r gender}
+```{r}
 df_demographics %>%
   mutate(gender = str_replace(gender, "^[fF].*", "Female"),
          gender = str_replace(gender, "^[mM].*", "Male"),
@@ -1118,7 +1128,7 @@ df_demographics %>%
 ```
 
 ### Race
-```{r race}
+```{r}
 
 df_demographics %>% 
   mutate(race = tolower(race)) %>% 
@@ -1128,7 +1138,7 @@ df_demographics %>%
 
 
 ### Language
-```{r language}
+```{r}
 df_demographics %>%
   mutate(language = str_replace(language, "^[eE][nN][gG].*", "English"),
          language = str_replace(language, "^$", NA_character_)) %>%
@@ -1138,7 +1148,7 @@ df_demographics %>%
 
 ## Wrangle Response Data
 
-```{r Extract-main-data, warning=FALSE}
+```{r warning=FALSE}
 df_long = df_data$datastring %>% 
   as.tbl_json() %>% 
   enter_object("data") %>%
@@ -1157,7 +1167,7 @@ df_long = df_data$datastring %>%
 ```
 
 ### Attention Check
-```{r check-for-and-label-participants-to-exclude}
+```{r}
 df_long = df_long %>%
   mutate(is_attention_check = trial == 30)
 
@@ -1173,7 +1183,7 @@ num_excluded_participants = length(excluded_participants)
 
 
 ### Aggregate Participant Responses
-```{r create-dataframe-with-responses-aggregated-over-participants}
+```{r}
 df_agg = df_long %>%
   # ignore attention check and instruction video
   filter(trial != 30) %>% 
@@ -1761,7 +1771,7 @@ df_database = dbReadTable(con, "language")
 dbDisconnect(con)
 ```
 
-```{r reload-experiment-2}
+```{r}
 df_data = df_database %>%
   filter(status %in% 3:5) %>%
   filter(!str_detect(mode, "debug")) %>%
@@ -1770,7 +1780,7 @@ df_data = df_database %>%
 
 ## Demographics
 
-```{r extract-demographics}
+```{r}
 df_demographics = df_data$datastring %>% 
   spread_values(language = jstring("questiondata", "language"),
                 age = jstring("questiondata", "age"),
@@ -1795,7 +1805,7 @@ df_demographics %>%
 
 ### Gender
 
-```{r gender}
+```{r}
 df_demographics %>%
   mutate(gender = str_replace(gender, "^[fF].*", "Female"),
          gender = str_replace(gender, "^[mM].*", "Male"),
@@ -1806,7 +1816,7 @@ df_demographics %>%
 
 ### Race
 
-```{r race}
+```{r}
 df_demographics %>% 
   mutate(race = ifelse(grepl("asian", race, ignore.case = TRUE), "Asian", race),
          race = ifelse(grepl("black", race, ignore.case = TRUE), "Black", race),
@@ -1819,7 +1829,7 @@ df_demographics %>%
 ```
 ### Ethnicity
 
-```{r race}
+```{r}
 df_demographics %>% 
   count(ethnicity, name = "Count") %>% 
   mutate(ethnicity = recode(ethnicity, .missing = "No response"),
@@ -1828,7 +1838,7 @@ df_demographics %>%
 
 ### Language
 
-```{r language}
+```{r}
 df_demographics %>%
   mutate(language = str_replace(language, "^[eE][nN][gG].*", "English"),
          language = str_replace(language, "^$", NA_character_)) %>%
@@ -1838,7 +1848,7 @@ df_demographics %>%
 
 ### Time
 
-```{r time-taken}
+```{r}
 df_demographics %>%
   summarise(ave_time = round(mean(time, na.rm = TRUE)),
             sd_time = round(sd(time)))
@@ -1848,7 +1858,7 @@ df_demographics %>%
 
 ### Separate Train, Test, Attenion Check
 
-```{r load-data-long-format}
+```{r}
 df_training_and_test = df_data$datastring %>% 
   as.tbl_json() %>% 
   enter_object("data") %>%
@@ -2186,9 +2196,10 @@ ggplot(data = df_to_show,
               grob_fun = "identity") +
   geom_text(data = df_text,
             mapping = aes(label = trial),
-            x = 1.16,
+            x = 1.26,
             y = -0.64,
-            size = 6) + 
+            size = 6,
+            fontface="bold") + 
   geom_richtext(data = df_text,
             mapping = aes(label = descriptions),
             x = 1.26,
@@ -2297,9 +2308,59 @@ ggsave("figures/listener_scatter.jpg",
 
 ```
 
+## Participant Model
+
 ```{r}
-df_model_comparison %>% 
-  group_by(model)
+
+df_part_model = read.csv("../python/model_performance/listener_part_means_predictions.csv") %>% 
+  mutate(model_version = "participant") %>% 
+  select(-X)
+
+df_part_model_vs_data = left_join(df_part_model,
+                                  df_agg,
+                                  by = c("trial",
+                                         "utterance",
+                                         "video_a",
+                                         "video_b"))
+
+df_sum_stats = df_part_model_vs_data %>% 
+  summarise(r = round(cor(video_b_prob, Mean), digits=2),
+            RMSE = round(RMSE(video_b_prob, Mean), digits=2)) %>% 
+  pivot_longer(cols = c(r, RMSE),
+               names_to = "metric",
+               values_to = "value") %>% 
+  mutate(x = c(0.05, 0.05),
+         y = c(0.9, 0.8), 
+         label = paste(metric, ": ", value, sep = ""))
+
+ggplot(df_part_model_vs_data,
+       mapping = aes(x = video_b_prob,
+                     y = Mean)) +
+  geom_smooth(method = "lm",
+              se = T,
+              color = "black",
+              show.legend = F) +
+  geom_errorbar(mapping = aes(ymin = Lower,
+                              ymax = Upper),
+                alpha = 0.6,
+                width = 0,
+                show.legend = F) +
+  geom_text(data = df_sum_stats,
+            mapping = aes(x = x,
+                          y = y,
+                          label = label),
+            hjust = 0,
+            size=6) +
+  geom_point(mapping = aes(fill = utterance,
+                           shape = utterance),
+             alpha = 1.0,
+             size = 4) +
+    scale_shape_manual(values = 21:24) +
+  xlab("Fitted Experiment 2 Predictions") +
+  ylab("Experiment 3 Means ") +
+  xlim(0,1) +
+  ylim(0,1)
+
 ```
 
 
@@ -2418,38 +2479,8 @@ df_cv_perf %>%
             upper_diff = round(quantile(diff, 0.95), digits=2))
 ```
 
-
-#### View individual splits
+# Session Info
 ```{r}
-
-df_cv_split = df_cv %>% 
-  filter(split == 4) %>% 
-  mutate(is_33 = trial == 33)
-
-ggplot(df_cv_split,
-       mapping = aes(x = model_pred,
-                     y = data_val)) +
-  geom_point(mapping = aes(color = is_33)) +
-  geom_smooth(method = "lm") + 
-  scale_color_manual(values = c("black", "red")) +
-  facet_grid(rows = vars(use),
-             cols = vars(model))
-
-```
-
-```{r}
-
-df_cv_perf_wide = df_cv_perf %>%
-  pivot_wider(id_cols = c(model, split),
-              names_from = c(use),
-              values_from = c(split_r, tr33_in_block)) %>% 
-  mutate(test_better = split_r_test > split_r_train) 
-
-df_cv_perf_wide %>% 
-  group_by(model) %>% 
-  summarise(tr33_predicts_better = sum(tr33_in_block_train == test_better),
-            tr33_in_train = sum(tr33_in_block_train),
-            sum_test_better = sum(test_better))
-
+sessionInfo()
 ```
 
