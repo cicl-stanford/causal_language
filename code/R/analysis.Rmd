@@ -434,7 +434,7 @@ df_boots = df_trials %>%
                           verb_ord == "AC" | verb_ord == "CA" ~ "affected-caused",
                           verb_ord == "EC" | verb_ord == "CE" ~ "enabled-caused"),
          type = ifelse(verb_ord %in% c("AE", "AC", "EC"), "non-contradictory", "contradictory"),
-         type = factor(type, levels = c("non-contradictory", "contradictory")),
+         type = factor(type, levels = c("contradictory", "non-contradictory")),
          response = response + 1)
 
 
@@ -452,15 +452,15 @@ df_to_show = df_trials %>%
                           verb_ord == "AC" | verb_ord == "CA" ~ "affected-caused",
                           verb_ord == "EC" | verb_ord == "CE" ~ "enabled-caused"),
          type = ifelse(verb_ord %in% c("AE", "AC", "EC"), "non-contradictory", "contradictory"),
-         type = factor(type, levels = c("non-contradictory", "contradictory")),
+         type = factor(type, levels = c("contradictory", "non-contradictory")),
          response = response + 1)
   
 df_counts = df_to_show %>% 
   group_by(comp, type, response) %>% 
   summarise(total = n()) %>% 
   mutate(x_position = response + ifelse(type == "contradictory",
-                                        dodge_width/2,
-                                        -dodge_width/2))
+                                        -dodge_width/2,
+                                        dodge_width/2))
 
 df_med = df_to_show %>% 
   group_by(comp, type) %>% 
@@ -470,15 +470,15 @@ df_text = df_to_show %>%
   select(comp,
          type) %>% 
   unique() %>% 
-  mutate(x_pos = ifelse(type == "non-contradictory", 2.4, 5.6)) %>% 
+  mutate(x_pos = ifelse(type == "contradictory", 2.4, 5.6)) %>% 
   arrange(comp, type)
 
-df_text["label"] = c("affected \u2192 caused",
-                     "caused \u2192 affected",
-                     "affected \u2192 enabled",
+df_text["label"] = c("caused \u2192 affected",
+                     "affected \u2192 caused",
                      "enabled \u2192 affected",
-                     "enabled \u2192 caused",
-                     "caused \u2192 enabled")
+                     "affected \u2192 enabled",
+                     "caused \u2192 enabled",
+                     "enabled \u2192 caused")
 
 df_to_show = left_join(df_counts,
                        df_med,
@@ -509,7 +509,7 @@ ggplot(df_to_show,
   geom_rect(xmin = 0.22,
             xmax = 7.78,
             ymin = 200,
-            ymax = 245,
+            ymax = 250,
             fill = "transparent",
             color = "black") +
   ylim(0, 190) +
@@ -520,10 +520,10 @@ ggplot(df_to_show,
   xlab("Response") +
   ylab("Count") +
   scale_x_continuous(breaks = seq(1,7)) +
-  scale_fill_manual(values = c("darkorchid1",
-                               "springgreen3")) +
-  scale_color_manual(values = c("darkorchid1",
-                               "springgreen3")) +
+  scale_fill_manual(values = c("springgreen3",
+                               "darkorchid1")) +
+  scale_color_manual(values = c("springgreen3",
+                               "darkorchid1")) +
   scale_linewidth_manual(values = c(0.5, 1.2)) +
   facet_wrap(~comp,
              nrow = 3) +
@@ -584,7 +584,56 @@ ggplot(df_to_show,
 
 ggsave("../../figures/paper_figures/semantics_exp_frames_AE.pdf",
        height = 12,
-       width = 10)
+       width = 12)
+
+```
+
+```{r fig.height=12, fig.width=10}
+
+df_to_show = df_trials %>% 
+  filter(verb_ord == "AE") %>% 
+  mutate(item = str_replace(item, "  ", " "),
+         response = response + 1)
+
+df_med = df_to_show %>% 
+  group_by(item) %>% 
+  summarise(med_resp = median(response))
+
+df_boots = df_to_show %>%
+  bootstraps(times = 1000,
+             strata = item) %>% 
+  mutate(counts = map(.x = splits,
+                      .f = ~ .x %>% 
+                        as_tibble() %>% 
+                        count(item, response, .drop = FALSE))) %>% 
+  select(-splits) %>% 
+  unnest(cols = c(counts)) %>% 
+  group_by(item, response) %>% 
+  summarise(low = quantile(n, 0.025),
+            high = quantile(n, 0.975))
+
+ggplot(df_to_show,
+       mapping = aes(x = response)) +
+  geom_bar(fill = "grey",
+           color = "black") +
+  geom_vline(data = df_med,
+             mapping = aes(xintercept = med_resp),
+             color = "red") +
+  geom_linerange(data = df_boots,
+                 mapping = aes(x = response,
+                                ymin = low,
+                                ymax = high)) +
+  scale_x_continuous(breaks = seq(1,7)) +
+  scale_linewidth_manual(values = c(0.5, 1.2)) +
+  guides(linewidth = "none") +
+  facet_wrap(~item,
+             labeller = label_wrap_gen(width = 40),
+             nrow = 5) +
+  theme(strip.text = element_text(size = 16))
+
+ggsave("../../figures/paper_figures/semantics_exp_frames_AE_alt.pdf",
+       height = 12,
+       width = 12)
 
 ```
 
@@ -619,6 +668,7 @@ summary(model)
 #### Hypothesis Test
 
 ```{r}
+# verb_ordAE is the reference level
 hyps = c(hyp1 = "0 - verb_ordEA > 0",
          hyp2 = "verb_ordAC - verb_ordCA > 0",
          hyp3 = "verb_ordEC - verb_ordCE > 0")
@@ -842,7 +892,7 @@ df_boots = df_trials %>%
                           verb_ord == "AC" | verb_ord == "CA" ~ "affected-caused",
                           verb_ord == "EC" | verb_ord == "CE" ~ "enabled-caused"),
          type = ifelse(verb_ord %in% c("AE", "AC", "EC"), "implicature", "implication"),
-         type = factor(type, levels = c("implicature", "implication")),
+         type = factor(type, levels = c("implication", "implicature")),
          response = response + 1)
 ```
 
@@ -863,7 +913,7 @@ df_to_show = df_trials %>%
                                    "affected-enabled",
                                    "enabled-caused")),
          type = ifelse(verb_ord %in% c("AE", "AC", "EC"), "implicature", "implication"),
-         type = factor(type, levels = c("implicature", "implication")),
+         type = factor(type, levels = c("implication", "implicature")),
          response = response + 1)
 
 
@@ -871,8 +921,8 @@ df_counts = df_to_show %>%
   group_by(type, comp, response) %>% 
   summarise(total = n()) %>% 
   mutate(x_position = response + ifelse(type == "implicature",
-                                        -dodge_width/2,
-                                        dodge_width/2))
+                                        dodge_width/2,
+                                        -dodge_width/2))
 
 
 df_med = df_to_show %>% 
@@ -890,15 +940,15 @@ df_text = df_to_show %>%
   select(comp,
          type) %>% 
   unique() %>% 
-  mutate(x_pos = ifelse(type == "implicature", 2.4, 5.6)) %>% 
+  mutate(x_pos = ifelse(type == "implication", 2.4, 5.6)) %>% 
   arrange(comp, x_pos)
 
-df_text["label"] = c("affected \u2192 caused",
-                     "caused \u2192 affected",
-                     "affected \u2192 enabled",
+df_text["label"] = c("caused \u2192 affected",
+                     "affected \u2192 caused",
                      "enabled \u2192 affected",
-                     "enabled \u2192 caused",
-                     "caused \u2192 enabled")
+                     "affected \u2192 enabled",
+                     "caused \u2192 enabled",
+                     "enabled \u2192 caused")
 
 
 ggplot(df_to_show,
@@ -918,13 +968,13 @@ ggplot(df_to_show,
             mapping = aes(label = label,
                           x = x_pos,
                           color = type),
-            y = 235,
+            y = 245,
             size = 7,
             family = "Arial Unicode MS") +
   geom_rect(xmin = 0.22,
             xmax = 7.78,
-            ymin = 210,
-            ymax = 260,
+            ymin = 220,
+            ymax = 270,
             fill = "transparent",
             color = "black") +
   
@@ -935,8 +985,8 @@ ggplot(df_to_show,
          color = "none") +
   coord_cartesian(clip = "off") +
   scale_x_continuous(breaks = seq(1,7)) +
-  scale_fill_manual(values = c("darkorchid1", "springgreen3")) +
-  scale_color_manual(values = c("darkorchid1", "springgreen3")) +
+  scale_fill_manual(values = c("springgreen3", "darkorchid1")) +
+  scale_color_manual(values = c("springgreen3", "darkorchid1")) +
   scale_linewidth_manual(values = c(0.5, 1.2)) +
   xlab("Response") +
   ylab("Count") +
@@ -994,7 +1044,54 @@ ggplot(df_to_show,
 
 ggsave("../../figures/paper_figures/pragmatics_exp_frames_CE.pdf",
        height = 12,
-       width = 10)
+       width = 12)
+```
+
+```{r fig.height=16, fig.width=10}
+
+df_to_show = df_trials %>% 
+  filter(verb_ord == "CE") %>% 
+  mutate(response = response + 1)
+
+df_med = df_to_show %>% 
+  group_by(item) %>% 
+  summarise(med_resp = median(response))
+
+df_boots = df_to_show %>%
+  bootstraps(times = 1000,
+             strata = item) %>% 
+  mutate(counts = map(.x = splits,
+                      .f = ~ .x %>% 
+                        as_tibble() %>% 
+                        count(item, response, .drop = FALSE))) %>% 
+  select(-splits) %>% 
+  unnest(cols = c(counts)) %>% 
+  group_by(item, response) %>% 
+  summarise(low = quantile(n, 0.025),
+            high = quantile(n, 0.975))
+
+ggplot(df_to_show,
+       mapping = aes(x = response)) + 
+  geom_bar(fill = "grey",
+           color = "black") +
+  geom_vline(data = df_med,
+             mapping = aes(xintercept = med_resp),
+             color = "red") +
+  geom_linerange(data = df_boots,
+                 mapping = aes(x = response,
+                               ymin = low,
+                               ymax = high)) +
+  facet_wrap(~item,
+             labeller = label_wrap_gen(width = 40),
+             ncol = 2) +
+  scale_x_continuous(breaks = seq(1,7)) +
+  scale_linewidth_manual(values = c(0.5, 1.2)) +
+  guides(linewidth = "none") +
+  theme(strip.text = element_text(size = 16))
+
+ggsave("../../figures/paper_figures/pragmatics_exp_frames_CE_alt.pdf",
+       height = 12,
+       width = 12)
 ```
 
 ### Confirmatory Analysis
@@ -1057,6 +1154,7 @@ summary(model)
 ```{r}
 
 hyps = c(hyp1 = "verb_ordAE - verb_ordEA > 0",
+         # verb_ordAC is the reference level
          hyp2 = "0 - verb_ordCA > 0",
          hyp3 = "verb_ordEC - verb_ordCE > 0")
 
@@ -1359,6 +1457,11 @@ df_aspect_noise = df_aspects %>%
 ```
 
 ```{r}
+opt_noise
+```
+
+
+```{r}
 top_reg
 ```
 
@@ -1448,7 +1551,7 @@ write.csv(df_agg, "../../data/experiment2/participant_means.csv")
 
 ### Sample Cases
 ```{r fig.width=13, fig.height=10}
-sample_cases = c(12, 18, 4, 29, 5, 7, 14, 15, 6, 9)
+sample_cases = c(12, 18, 4, 29, 5, 7, 15, 14, 6, 9)
 words = c("no_difference", "affect", "enable", "cause")
 labels = c("N", "A", "E", "C")
 df.plot = df_agg %>%
@@ -1717,6 +1820,7 @@ ggplot(df_cv_perf,
 ### Summarize r and rmse
 ```{r}
 df_cv_perf %>% 
+  filter(use == "test") %>% 
   group_by(use, model) %>% 
   summarise(median_r = round(median(split_r), digits=2),
             lower_r = round(quantile(split_r, probs = 0.05), digits=2),
@@ -1907,11 +2011,17 @@ df_long = df_test %>%
 ### Video play count
 ```{r}
 
-df_test %>%
-  summarise(left_play_mean = round(mean(as.numeric(left_play_count)), digits=2),
-            left_play_sd = round(sd(left_play_count), digits=2),
-            right_play_mean = round(mean(as.numeric(right_play_count)), digits=2),
-            right_play_sd = round(sd(right_play_count), digits = 2))
+combined_play_count = as.numeric(c(df_test$left_play_count,
+                                   df_test$right_play_count))
+
+round(mean(combined_play_count), digits=2)
+round(sd(combined_play_count), digits=2)
+
+# df_test %>%
+#   summarise(left_play_mean = round(mean(as.numeric(left_play_count)), digits=2),
+#             left_play_sd = round(sd(left_play_count), digits=2),
+#             right_play_mean = round(mean(as.numeric(right_play_count)), digits=2),
+#             right_play_sd = round(sd(right_play_count), digits = 2))
 
 ```
 
@@ -2403,8 +2513,7 @@ df_cv_perf = df_cv %>%
   group_by(model, split, use) %>% 
   summarise(sum_sq_err = sum((model_pred - data_val)^2),
             split_r = cor(model_pred, data_val),
-            split_rmse = rmse(model_pred, data_val),
-            tr33_in_block = any((trial == 33)))
+            split_rmse = rmse(model_pred, data_val))
 
 ```
 
@@ -2434,7 +2543,8 @@ ggplot(df_cv_perf,
 
 ### Summarize r and rmse
 ```{r}
-df_cv_perf %>% 
+df_cv_perf %>%
+  filter(use == "test") %>% 
   group_by(use, model) %>% 
   summarise(median_r = round(median(split_r), digits=2),
             lower_r = round(quantile(split_r, probs = 0.05), digits=2),
