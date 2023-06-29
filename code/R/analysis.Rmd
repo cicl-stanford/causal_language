@@ -546,58 +546,12 @@ ggsave("../../figures/paper_figures/contra_vs_noncontra.pdf",
 df_to_show = df_trials %>% 
   filter(verb_ord == "AE") %>% 
   mutate(item = str_replace(item, "  ", " "),
-         response = response + 1) %>% 
-  group_by(item) %>% 
-  mutate(med_resp = median(response),
-         is_med = response == med_resp)
-
-
-df_boots = df_to_show %>%
-  bootstraps(times = 1000,
-             strata = item) %>% 
-  mutate(counts = map(.x = splits,
-                      .f = ~ .x %>% 
-                        as_tibble() %>% 
-                        count(item, response, .drop = FALSE))) %>% 
-  select(-splits) %>% 
-  unnest(cols = c(counts)) %>% 
-  group_by(item, response) %>% 
-  summarise(low = quantile(n, 0.025),
-            high = quantile(n, 0.975))
-
-ggplot(df_to_show,
-       mapping = aes(x = response)) +
-  geom_bar(mapping = aes(linewidth = is_med),
-           fill = "grey",
-           color = "black") +
-  geom_linerange(data = df_boots,
-                 mapping = aes(x = response,
-                                ymin = low,
-                                ymax = high)) +
-  scale_x_continuous(breaks = seq(1,7)) +
-  scale_linewidth_manual(values = c(0.5, 1.2)) +
-  guides(linewidth = "none") +
-  facet_wrap(~item,
-             labeller = label_wrap_gen(width = 40),
-             nrow = 5) +
-  theme(strip.text = element_text(size = 16))
-
-ggsave("../../figures/paper_figures/semantics_exp_frames_AE.pdf",
-       height = 12,
-       width = 12)
-
-```
-
-```{r fig.height=12, fig.width=10}
-
-df_to_show = df_trials %>% 
-  filter(verb_ord == "AE") %>% 
-  mutate(item = str_replace(item, "  ", " "),
          response = response + 1)
 
 df_med = df_to_show %>% 
   group_by(item) %>% 
-  summarise(med_resp = median(response))
+  summarise(med_resp = median(response)) %>% 
+  mutate(count = 25)
 
 df_boots = df_to_show %>%
   bootstraps(times = 1000,
@@ -616,9 +570,12 @@ ggplot(df_to_show,
        mapping = aes(x = response)) +
   geom_bar(fill = "grey",
            color = "black") +
-  geom_vline(data = df_med,
-             mapping = aes(xintercept = med_resp),
-             color = "red") +
+  geom_point(data = df_med,
+             mapping = aes(x = med_resp,
+                           y = count),
+             shape = 25,
+             fill = "red",
+             size = 3) +
   geom_linerange(data = df_boots,
                  mapping = aes(x = response,
                                 ymin = low,
@@ -631,7 +588,7 @@ ggplot(df_to_show,
              nrow = 5) +
   theme(strip.text = element_text(size = 16))
 
-ggsave("../../figures/paper_figures/semantics_exp_frames_AE_alt.pdf",
+ggsave("../../figures/paper_figures/semantics_exp_frames_AE.pdf",
        height = 12,
        width = 12)
 
@@ -1006,56 +963,12 @@ ggsave("../../figures/paper_figures/implicature_vs_implication.pdf",
 
 df_to_show = df_trials %>% 
   filter(verb_ord == "CE") %>% 
-  mutate(response = response + 1) %>% 
-  group_by(item) %>% 
-  mutate(med_resp = median(response),
-         is_med = response == med_resp) %>% 
-  ungroup()
-
-df_boots = df_to_show %>%
-  bootstraps(times = 1000,
-             strata = item) %>% 
-  mutate(counts = map(.x = splits,
-                      .f = ~ .x %>% 
-                        as_tibble() %>% 
-                        count(item, response, .drop = FALSE))) %>% 
-  select(-splits) %>% 
-  unnest(cols = c(counts)) %>% 
-  group_by(item, response) %>% 
-  summarise(low = quantile(n, 0.025),
-            high = quantile(n, 0.975))
-
-ggplot(df_to_show,
-       mapping = aes(x = response)) + 
-  geom_bar(mapping = aes(linewidth = is_med),
-           fill = "grey",
-           color = "black") +
-  geom_linerange(data = df_boots,
-                 mapping = aes(x = response,
-                               ymin = low,
-                               ymax = high)) +
-  facet_wrap(~item,
-             labeller = label_wrap_gen(width = 40),
-             ncol = 2) +
-  scale_x_continuous(breaks = seq(1,7)) +
-  scale_linewidth_manual(values = c(0.5, 1.2)) +
-  guides(linewidth = "none") +
-  theme(strip.text = element_text(size = 16))
-
-ggsave("../../figures/paper_figures/pragmatics_exp_frames_CE.pdf",
-       height = 12,
-       width = 12)
-```
-
-```{r fig.height=16, fig.width=10}
-
-df_to_show = df_trials %>% 
-  filter(verb_ord == "CE") %>% 
   mutate(response = response + 1)
 
 df_med = df_to_show %>% 
   group_by(item) %>% 
-  summarise(med_resp = median(response))
+  summarise(med_resp = median(response)) %>% 
+  mutate(count = 28)
 
 df_boots = df_to_show %>%
   bootstraps(times = 1000,
@@ -1074,9 +987,12 @@ ggplot(df_to_show,
        mapping = aes(x = response)) + 
   geom_bar(fill = "grey",
            color = "black") +
-  geom_vline(data = df_med,
-             mapping = aes(xintercept = med_resp),
-             color = "red") +
+  geom_point(data = df_med,
+             mapping = aes(x = med_resp,
+                           y = count),
+             shape = 25,
+             fill = "red",
+             size = 3) +
   geom_linerange(data = df_boots,
                  mapping = aes(x = response,
                                ymin = low,
@@ -1085,11 +1001,12 @@ ggplot(df_to_show,
              labeller = label_wrap_gen(width = 40),
              ncol = 2) +
   scale_x_continuous(breaks = seq(1,7)) +
+  scale_y_continuous(breaks = seq(0,25,5)) +
   scale_linewidth_manual(values = c(0.5, 1.2)) +
   guides(linewidth = "none") +
   theme(strip.text = element_text(size = 16))
 
-ggsave("../../figures/paper_figures/pragmatics_exp_frames_CE_alt.pdf",
+ggsave("../../figures/paper_figures/pragmatics_exp_frames_CE.pdf",
        height = 12,
        width = 12)
 ```
