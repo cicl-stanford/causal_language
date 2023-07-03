@@ -26,6 +26,7 @@ library("knitr")
 library("ggrepel")
 library("Hmisc")
 library("ggtext")
+library("xtable")
 library("tidyverse")
 ```
 
@@ -520,10 +521,10 @@ ggplot(df_to_show,
   xlab("Response") +
   ylab("Count") +
   scale_x_continuous(breaks = seq(1,7)) +
-  scale_fill_manual(values = c("springgreen3",
-                               "darkorchid1")) +
-  scale_color_manual(values = c("springgreen3",
-                               "darkorchid1")) +
+  scale_fill_manual(values = c("red3",
+                               "mediumseagreen")) +
+  scale_color_manual(values = c("red3",
+                               "mediumseagreen")) +
   scale_linewidth_manual(values = c(0.5, 1.2)) +
   facet_wrap(~comp,
              nrow = 3) +
@@ -942,8 +943,8 @@ ggplot(df_to_show,
          color = "none") +
   coord_cartesian(clip = "off") +
   scale_x_continuous(breaks = seq(1,7)) +
-  scale_fill_manual(values = c("springgreen3", "darkorchid1")) +
-  scale_color_manual(values = c("springgreen3", "darkorchid1")) +
+  scale_fill_manual(values = c("red3", "mediumseagreen")) +
+  scale_color_manual(values = c("red3", "mediumseagreen")) +
   scale_linewidth_manual(values = c(0.5, 1.2)) +
   xlab("Response") +
   ylab("Count") +
@@ -1466,6 +1467,52 @@ df_agg = map_dfr(1:1000,
 write.csv(df_agg, "../../data/experiment2/participant_means.csv")
 ```
 
+### Create Latex Table
+```{r}
+print_table = function(data, format = "html", digits = 2){
+  if(format == "html"){
+    data %>% 
+      kable(digits = digits) %>% 
+      kable_styling()
+  }else if(format == "latex"){
+    data %>% 
+      xtable(digits = digits,
+             caption = "Caption",
+             label = "tab:table") %>%
+      print(include.rownames = F,
+            booktabs = T,
+            sanitize.colnames.function = identity,
+            caption.placement = "top")
+  }
+}
+```
+
+```{r}
+df_agg_rounded = df_agg %>% 
+  mutate_if(is.numeric, ~round(., digits = 2)) %>% 
+  mutate(trial = trial + 1) %>% 
+  select(trial, response, data_y) %>% 
+  mutate(response = factor(response,
+                           levels = c("cause",
+                                      "enable",
+                                      "affect",
+                                      "no_difference"),
+                           labels = c("Caused",
+                                      "Enabled",
+                                      "Affected",
+                                      "No Difference"))) %>%
+  arrange(trial, response) %>%
+  mutate(trial = as.character(trial)) %>% 
+  rename(Scenario = trial) %>% 
+  pivot_wider(id_cols = c(Scenario),
+              names_from = "response",
+              values_from = "data_y")
+
+print_table(df_agg_rounded, format="latex")
+```
+
+
+
 ### Sample Cases
 ```{r fig.width=13, fig.height=10}
 sample_cases = c(12, 18, 4, 29, 5, 7, 15, 14, 6, 9)
@@ -1536,7 +1583,7 @@ ggplot(data = df.plot,
              nrow = 2,
              labeller = "label_both",
              scales = "free_x") +
-  scale_fill_brewer(type = "qual", palette = 6, name = "") +
+  scale_fill_brewer(palette = "Dark2", name="") +
   scale_shape_manual(name = "",
                      values = 21:23) + 
   scale_y_continuous(breaks = seq(0, 1, 0.25), 
@@ -1592,6 +1639,8 @@ df.text = df.plot %>%
                         str_replace(label, "0.", "."),
                         label))
 
+# "dodgerblue1",  "mediumpurple2", "hotpink"
+
 ggplot(data = df.plot,
        mapping = aes(x = model_y,
                      y = data_y)) +
@@ -1617,6 +1666,7 @@ ggplot(data = df.plot,
              size = 4) +
   facet_grid(cols = vars(Model)) +
   scale_shape_manual(values = 21:24) + 
+  scale_fill_manual(values = c("slategray2", "hotpink", "mediumpurple2", "dodgerblue1")) +
   scale_x_continuous(breaks = seq(0,1,0.25),
                      labels = c("0%", "25%", "50%", "75%", "100%")) +
   scale_y_continuous(breaks = seq(0,1,0.25),
@@ -2080,7 +2130,7 @@ ggplot(data = df_to_show,
     alpha = 0.75) +
   facet_wrap(~trial,
              ncol = 1) +
-  scale_fill_brewer(type = "qual", palette = 6, name = "") +
+  scale_fill_brewer(palette = "Dark2", name = "") +
   scale_shape_manual(name = "",
                      values = 21:23) + 
   geom_custom(data = df_figures,
@@ -2208,7 +2258,7 @@ ggplot(data = df_to_show,
     alpha = 0.75) +
   facet_wrap(~trial,
              ncol = 1) +
-  scale_fill_brewer(type = "qual", palette = 6, name = "") +
+  scale_fill_brewer(palette = "Dark2", name = "") +
   scale_shape_manual(name = "",
                      values = 21:23) + 
   geom_custom(data = df_figures,
@@ -2310,6 +2360,7 @@ ggplot(data = df_to_show,
              alpha = 1.0,
              size = 4) +
   scale_shape_manual(values = 21:24) +
+  scale_fill_manual(values = c("slategray2", "hotpink", "mediumpurple2", "dodgerblue1")) +
   xlim(0,1) +
   ylim(0,1) +
   labs(x = "Model Prediction",
@@ -2325,13 +2376,13 @@ ggplot(data = df_to_show,
         legend.box.background = element_rect(color = "black",
                                              linewidth = 1.5))
 
-# ggsave("../../figures/paper_figures/listener_scatter.pdf",
-#        width = 15,
-#        height = 5)
-
-ggsave("figures/listener_scatter.jpg",
+ggsave("../../figures/paper_figures/listener_scatter.pdf",
        width = 15,
        height = 5)
+
+# ggsave("figures/listener_scatter.jpg",
+#        width = 15,
+#        height = 5)
 
 ```
 
