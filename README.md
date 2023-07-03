@@ -22,16 +22,19 @@ Preregistrations for all studies in Experiment 1 are available on the Open Scien
 
 ```
 .
-├── code/
-│   ├── experiments
-│   ├── python
-│   └── R
-├── data/
-│   ├── experiment1
-│   ├── experiment2
-│   └── experiment3
-└── figures/
+├── README.md
+├── code
+│   ├── R
+│   ├── experiments
+│   └── python
+├── data
+│   ├── experiment1
+│   ├── experiment2
+│   └── experiment3
+├── docs
+└── figures
     ├── paper_figures
+    └── trial_schematics
     └── trial_schematics
 ```
 
@@ -46,8 +49,6 @@ Studies from experiment 1 can be run here:
 - [Experiment 1A: Norming Study](https://cicl-stanford.github.io/causal_language/norming_study/)
 - [Experiment 1B: Semantics Study](https://cicl-stanford.github.io/causal_language/semantics_experiment/)
 - [Experiment 1C: Pragmatics Study](https://cicl-stanford.github.io/causal_language/pragmatics_experiment/)
-
-<!-- Studies from experiment 1 should be runnable in your browser by the index.html file in each of the three study folders. -->
 
 Experiments 2 and 3 require [psiturk](https://psiturk.org/). Refer to the [documentation](https://psiturk.readthedocs.io/en/latest/) for an illustration of how to run them.
 
@@ -94,6 +95,10 @@ Contains code for running the counterfactual simulation model, computing semanti
 ### data
 
 Contains faw data files for each of the experiments. Experiment 2 and Experiment 3 also include summarized participant mean responses.
+
+### docs
+
+The docs folder hosts the studies from Experiment 1.
 
 ### figures
 
