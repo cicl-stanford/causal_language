@@ -10,6 +10,14 @@ The way that we communicate a causal story shapes the image a listener brings to
 
 We test our model in a series of experiments. In a first set of psycholinguistic studies (Experiment 1) we validate the semantic and pragmatic assumptions of our model. We show that the three causal expressions "caused", "enabled", and "affected" form a hierarchy of informativity with "caused" being the most informative and "affected" being the least. We then proceed to show that participants exhibit pragmatic behavior in line with the predictions of our model. We follow these qualitative validations of our model with two quantitative tests. In a speaker task (Experiment 2) and a listener task (Expeirment 3) involving dynamic causal physical scenarios, we show that our model makes quantitative predictions that match the distribution of participant responses in both these settings. We compare our model to two lesioned alternatives, one that removes the pragmatic inference component of the full model, and another that removes both the pragmatic inference and the semantic knowledge of the first model. We show that the full model outperforms these two alternatives in both the speaker and the listener setting indicating that causal knowledge, semantics, and pragmatics are all important for understanding how people use causal language.
 
+## Preregistrations
+
+Preregistrations for all studies in Experiment 1 are available on the Open Science Framework:
+
+- [Experiment 1A (norming study)](https://osf.io/kx5fg)
+- [Experiment 1B (semantics study)](https://osf.io/2un9v)
+- [Experiment 1C (pragmatics study)](https://osf.io/ak5yd)
+
 ## Repository Structure
 
 ```
@@ -33,7 +41,13 @@ We test our model in a series of experiments. In a first set of psycholinguistic
 
 Contains code for experiment 1 (psycholinguistics studies), experiment 2 (speaker experiment), and experiment 3 (listener experiment).
 
-Studies from experiment 1 should be runnable in your browser by the index.html file in each of the three study folders.
+Studies from experiment 1 can be run here:
+
+- [Experiment 1A: Norming Study](https://cicl-stanford.github.io/causal_language/norming_study/)
+- [Experiment 1B: Semantics Study](https://cicl-stanford.github.io/causal_language/semantics_experiment/)
+- [Experiment 1C: Pragmatics Study](https://cicl-stanford.github.io/causal_language/pragmatics_experiment/)
+
+<!-- Studies from experiment 1 should be runnable in your browser by the index.html file in each of the three study folders. -->
 
 Experiments 2 and 3 require [psiturk](https://psiturk.org/). Refer to the [documentation](https://psiturk.readthedocs.io/en/latest/) for an illustration of how to run them.
 
@@ -47,7 +61,7 @@ Contains code for running the counterfactual simulation model, computing semanti
 
 3. `speaker_model_fitting.py` contains procedures for running grid search and cross validation in the speaker experiment.
 
-4. `speaker_run_grid_search.py` is a script for running the grid search for the speaker experiment. Assumes a single argument specifying whether to run the search for the "full" model or the "no_pragmatics" model. The parameter search for the no semantics and no pragmatics model is performed in R.
+4. `speaker_run_grid_search.py` is a script for running the grid search for the speaker experiment. Assumes a single argument specifying whether to run the search for the "full" model or the "no_pragmatics" model. The parameter search for the "no semantics and no pragmatics model" is performed in R.
 
 5. `speaker_run_cross_val.py` is a script for running the cross validation for the speaker experiment. Again assumes a single argument specifying "full" or "no_pragmatics" to determine which model to assess.
 

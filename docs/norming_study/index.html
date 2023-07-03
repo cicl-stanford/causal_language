@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Experiment</title>
+
+  <link href="https://unpkg.com/jspsych@7.2.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+
+  <style id="jspsych-survey-likert-css">
+
+    .jspsych-survey-likert-opts:before {
+      display: none !important;
+    }
+
+  </style>';
+
+  <script src="https://unpkg.com/jspsych@7.2.3"></script>
+  <script src='js/jquery.min.js'></script>
+  <script src='js/jquery-ui.min.js'></script>
+  <script src="https://proliferate.alps.science/static/js/proliferate.js"> </script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.1"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-instructions@1.1.1"></script>
+  <!-- <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.1"></script> -->
+  <script src="js/plugin-survey-likert.js"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.1"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.1"></script>
+
+  <script src='js/consent.js'></script>
+  <script src='js/intro.js'></script>
+  <script src='js/trial_info.js'></script>
+  <!-- <script src='js/trial_info_test.js'></script> -->
+  <script src='js/demographic_form.js'></script>
+  <script src='js/utils.js'></script>
+</head>
+
+<body></body>
+<script>
+
+  let timeline = []
+
+  // Data display
+
+  let jsPsych = initJsPsych({
+    show_progress_bar: true,
+    on_finish: () => {
+
+      // console.log("Finish Script");
+
+      jsPsych.data.displayData();
+
+      trialData = jsPsych.data.get().filter({"page_type": "main_trial_likert"}).values();
+      
+      let attnCheckLikert = [];
+      let trialDataLikert = [];
+
+      for (let i = 0; i < trialData.length; i++) {
+        trial = trialData[i]
+
+        if (trial["type"] == "filler") {
+          attnCheckLikert.push({
+            "item": trial["item"],
+            "order": i,
+            "fill_num": trial["fill_num"],
+            "verb": trial["verb"],
+            "response": trial["response"]["Q0"]
+          })
+        } else {
+          trialDataLikert.push({
+            "item": trial["item"],
+            "order": i,
+            "frame": trial["frame"],
+            "verb": trial["verb"],
+            "response": trial["response"]["Q0"]
+          })
+        }
+      }
+
+      // for (const dataPage of jsPsych.data.get().filter({"type": "filler"}).values()) {
+      //   attnCheckLikert.push({
+      //     "item": dataPage["item"],
+      //     "fill_num": dataPage["fill_num"],
+      //     "verb": dataPage["verb"],
+      //     "response": dataPage["response"]["Q0"]
+      //   })
+      // }
+
+      // for (const dataPage of jsPsych.data.get().filter({ "type": "main" }).values()) {
+      //   trialDataLikert.push({
+      //     "item": dataPage["item"],
+      //     "frame": dataPage["frame"],
+      //     "verb": dataPage["verb"],
+      //     "response": dataPage["response"]["Q0"],
+      //   });
+      // }
+
+      const participant = jsPsych.data.get().filter({ "page_type": "participant_survey" }).values()[0]["response"];
+      let feedback = jsPsych.data.get().filter({"page_type": "participant_survey"}).values()[0]["response"].feedback;
+      let gender = jsPsych.data.get().filter({ "page_type": "participant_survey" }).values()[0]["response"].gender;
+      if (!gender && jsPsych.data.get().filter({ "page_type": "participant_survey" }).values()[0]["response"].other_gender) {
+        gender = "other_gender";
+      }
+      let age = parseInt(jsPsych.data.get().filter({ "page_type": "participant_survey" }).values()[0]["response"].age)
+      let race = jsPsych.data.get().filter({ "page_type": "participant_survey" }).values()[0]["response"].race;
+      if (!race && jsPsych.data.get().filter({ "page_type": "participant_survey" }).values()[0]["response"].other_race) {
+        race = "other_race";
+      }
+      let ethnicity = jsPsych.data.get().filter({ "page_type": "participant_survey" }).values()[0]["response"].ethnicity;
+      let demographics = {
+        "feedback": feedback,
+        "age": age,
+        "gender": gender,
+        "race": race,
+        "ethnicity": ethnicity,
+      };
+
+      // combine all data 
+      let dataFinal = {
+        "attnCheckLikert": attnCheckLikert,
+        "trialDataLikert": trialDataLikert,
+        "participants": demographics,
+      };
+
+      // console.log(dataFinal);
+
+      proliferate.submit(dataFinal);
+
+      $('#jspsych-content').html('<div style="margin: auto;"> <p> Thank you for' +
+        ' participating in this experiment! </p> <p> Redirecting you back to' +
+        ' Prolific... </p>');
+      setTimeout(function () { }, 400);
+    }
+  });
+
+
+
+  // Consent page (Needs to be changed to Markman Lab's protocol)
+
+  timeline.push(consent);
+
+
+  // Intro page
+  timeline.push(intro)
+
+  let trials = []
+
+  for (var filler of fillers) {
+    fill = {
+      type: "filler",
+      fill_num: filler["fill_num"],
+      verb: filler["verb"],
+      text: filler["text"]
+    }
+    trials.push(fill)
+  }
+
+  for (const trial_ob of trial_info) {
+    for (const verb of ["caused", "enabled", "affected"]) {
+      const text = trial_ob["subject"] + " " + verb + " " + trial_ob["predicate"]
+      trial = {
+        type: "main",
+        frame: trial_ob["frame"],
+        verb: verb,
+        text: text
+      }
+      trials.push(trial)
+    }
+  }
+
+
+  trials = jsPsych.randomization.shuffle(trials)
+
+// Main trial
+
+  for (const trial of trials) {
+
+    // console.log(trial["trial_type"])
+
+    // if (trial["type"] == "filler") {
+    //   // console.log(trial["text1"])
+    //   qs = [{
+    //     prompt: trial["text1"],
+    //     labels: ["definitely no", "", "", "unsure", "", "", "definitely yes"],
+    //     required: true
+    //   },
+    //   {
+    //     prompt: trial["text2"],
+    //     labels: ["definitely no", "", "", "unsure", "", "", "definitely yes"],
+    //     required: true
+    //   }]
+    // } else {
+    //   qs = [{
+    //     prompt: trial["text"],
+    //     labels: ["definitely no", "", "", "unsure", "", "", "definitely yes"],
+    //     required: true
+    //   }]
+    // }
+
+    let trialPage = {
+      type: jsPsychSurveyLikert,
+      preamble: `<div style="text-align:center; padding:20px; font-size:28px; max-width:1000px;">` +
+        `Is this an acceptable English sentence? <br></div>`,
+      questions: [
+        { prompt: trial["text"], 
+        labels: ["definitely no", "", "", "unsure", "", "", "definitely yes"],
+        required: true},
+      ],
+      // questions: qs,
+      scale_width: 880,
+      data: {
+        "page_type": "main_trial_likert",
+        "type": trial["type"],
+        "item": trial["text"],
+        "frame": trial["frame"],
+        "fill_num": trial["fill_num"],
+        "verb": trial["verb"]
+      },
+    };
+    timeline.push(trialPage);
+  };
+
+
+  // demographics
+
+  timeline.push(demographic_form);
+
+
+
+  jsPsych.run(timeline);
+
+</script>
+
+</html>
