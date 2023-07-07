@@ -82,7 +82,7 @@ Contains code for running the counterfactual simulation model, computing semanti
 
 #### R
 
-1. `analysis.Rmd` is the primary analysis file. Contains analyses and visualizations for all experiments in the paper. Also contains code for fitting the ordinal regression model in experiment 2. You can view rendered analysis [here](https://cicl-stanford.github.io/causal_language/analysis/).
+1. `analysis.Rmd` is the primary analysis file. Contains analyses and visualizations for all experiments in the paper. Also contains code for fitting the ordinal regression model in experiment 2. You can view rendered analysis [here](https://cicl-stanford.github.io/causal_language/analysis/index.html).
 
 2. `crossv_ordreg.R` is a script for fitting the regression model for a particular split in the cross validation. Unlike the primary regression model from experiment 2, the regression model in this file has no random intercepts for trials because trials are not shared across train and test.
 
