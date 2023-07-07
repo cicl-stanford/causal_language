@@ -538,6 +538,10 @@ ggsave("../../figures/paper_figures/contra_vs_noncontra.pdf",
        height = 6,
        device = cairo_pdf)
 
+# ggsave("../../figures/paper_figures/contra_vs_noncontra.jpg",
+#        width = 10,
+#        height = 6)
+
 ```
 
 #### Affected --> Enabled Frames
@@ -953,10 +957,14 @@ ggplot(df_to_show,
         panel.spacing = unit(2.2, "lines"),
         plot.margin = margin(t = 30))
 
-ggsave("../../figures/paper_figures/implicature_vs_implication.pdf",
+# ggsave("../../figures/paper_figures/implicature_vs_implication.pdf",
+#        width = 10,
+#        height = 6,
+#        device = cairo_pdf)
+
+ggsave("../../figures/paper_figures/implicature_vs_implication.jpg",
        width = 10,
-       height = 6,
-       device = cairo_pdf)
+       height = 6)
 ```
 #### Caused --> Enabled Frames
 
@@ -2380,7 +2388,7 @@ ggsave("../../figures/paper_figures/listener_scatter.pdf",
        width = 15,
        height = 5)
 
-# ggsave("figures/listener_scatter.jpg",
+# ggsave("../../figures/paper_figures/listener_scatter.jpg",
 #        width = 15,
 #        height = 5)
 
