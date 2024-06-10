@@ -358,8 +358,8 @@ class World():
 
 
 	def flipy(self, y):
-	    """Small hack to convert chipmunk physics to pygame coordinates"""
-	    return -y+600
+		"""Small hack to convert chipmunk physics to pygame coordinates"""
+		return -y+600
 
 	# Code to update the object image on the screen
 	def update_sprite(self,body,sprite,screen):
@@ -857,6 +857,38 @@ def moving_test(trial, candidate, target):
 
 	return moving
 
+# Procedure to test whether the candidate cause is unique
+# Uniqueness here is defined as the candidate (A) being the only object to directly contact the target (B)
+def unique_test(trial,
+				candidate='A', 
+				target='B',
+				alternatives={'D', 'box'}):
+
+	tr_events = run_trial(trial=trial, rec_paths=False)
+	
+	cols = tr_events['collisions']
+	
+	# initialize outcome to not unique
+	outcome = 0
+	
+	# loop through each collision
+	for col in cols:
+		
+		# if the target is in the collision and it collides with one of the alternatives
+		# it is not unique, return 0.
+		if target in col['objects']:
+			set_int = alternatives.intersection(col['objects'])
+
+			if len(set_int) > 0:
+				return 0
+			
+			# If the candidate is the collision it is possibly unique.
+			# Return 1 if loop completes with no change.
+			elif candidate in col['objects']:
+				outcome = 1
+		
+	return outcome
+
 
 
 ################## Procedures to generate aspect representations for the base of the model ####################
@@ -1018,12 +1050,13 @@ def aspect_rep(trial, candidate, target, alternatives, noise=2, perturb=0.01, nu
 		h = float(how_test(trial, candidate, target, perturb, 1))
 		s = sufficient_test(trial, candidate, target, alternatives, noise, num_samples)
 		mov = moving_test(trial, candidate, target)
-		return [w,h,s,mov,o]
+		un = unique_test(trial, candidate, target, alternatives)
+		return [w,h,s,mov,un,o]
 	else:
 		return [np.nan]*5
 
 
-def make_aspect_file(trials, aspect_file_name, noise_val, num_samples, compute_alternatives=False, candidates=["A", "D", "box"]):
+def make_aspect_file(trials, aspect_file_name, noise_val, num_samples, compute_alternatives=True, candidates=["A"]):
 
 	if type(trials) == str:	
 		trials = load_trials(trials)
@@ -1055,7 +1088,7 @@ def make_aspect_file(trials, aspect_file_name, noise_val, num_samples, compute_a
 
 
 	with open(aspect_file_name, 'w+') as f:
-		json.dump(aspect_reps, f)
+		json.dump(aspect_reps, f, indent=4)
 
 
 

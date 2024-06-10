@@ -1,4 +1,4 @@
-import model_fitting as mf
+import speaker_model_fitting as mf
 import pickle
 from sys import argv
 

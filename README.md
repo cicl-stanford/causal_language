@@ -1,6 +1,6 @@
 # A counterfactual simulation model of causal language
 
-This repository contains materials for the paper "A counterfactual simulation model of causal language" by Ari Beller and Tobias Gerstenberg.
+This repository contains materials for the [paper](https://osf.io/preprints/psyarxiv/xv8hf) "A counterfactual simulation model of causal language" by Ari Beller and Tobias Gerstenberg.
 
 ## Introduction
 
@@ -105,6 +105,65 @@ The docs folder hosts the studies from Experiment 1.
 1. `paper_figures` contains data visualizations generated in R and included in the paper.
 
 2. `trial_schematics` includes static visualizations of the trials from experiment 2.
+
+## Replicating paper results
+
+### Experiment 1
+All code for data-wrangling and analysis in Experiment 1 is provided in the [analysis](https://cicl-stanford.github.io/causal_language/analysis/index.html) file in `code/R/analysis.Rmd`.
+
+### Experiment 2
+
+#### Generate causal aspects
+The base level of the model is the causal aspect representations for the trials in the speaker experiment. `model.py` contains code to compute these representations. Pre-computed aspect values for noise values ranging from 0.5 to 1.6 in increments of 0.1 computed with 1000 samples are provided in `aspects_paper`.
+
+To re-generate model_aspects from scratch, open python in the `code/python/` directory and import `model.py` and then run the following code to load the experiment trials:
+```
+>>> trials = model.load_trials("trialinfo/experiment_trials.json")
+```
+Aspect files can then be computed like so
+```
+>>> model.make_aspect_file(trials, <filename>, <noise_val>, <num_samples>)
+```
+Aspect files will be saved to the `aspects_paper` folder with the given `<filename>`. `<noise_val>` determines the level of simulator noise and `<num_samples>` determines the number of samples to run for whether cause and sufficient cause.
+
+#### Generate model predictions
+With these aspects we can generate model predictions in the speaker and listener task. `speaker_run_grid_search.py` runs a grid search for either the full model or the no pragmatics model. Grid search ranges are specified at the top of the file. Once it identifies the optimal parameter set, it generates predictions for that model and saves the model performance in the `model_performance` folder. Model predictions are pre-computed in the `model_performance` folder. Model predictions can be recomputed like so:
+```
+python speaker_run_grid_search.py <model_type>
+```
+`<model_type>` is either "full" or "no_pragmatics". No pragmatics and no semantics predictions are generated in the [analysis](https://cicl-stanford.github.io/causal_language/analysis/index.html) file using ordinal regression with brms. Pre-computed regression fits are included in `code/R/regression`. Predictions must be extracted from these fits with code provided in the analysis file. Best fitting regression predictions are saved as `model_performance/speaker_regression_predictions.csv`.
+
+#### Cross Validation
+To run cross validation for the speaker experiment use the `speaker_run_cross_val.py` script. The script takes the splits defined in `crossv_splits.pickle`, fits the model to each train set, and then predicts on the test set. The results are saved in the `model_performance` folder. Results are pre-computed but can be regenerated with the following code:
+```
+python speaker_run_cross_val.py <model_type>
+```
+`<model_type>` is either "full" or "no_pragmatics".
+
+No pragmatics and no semantics cross validation can be run with the `code/R/crossv_ordreg.R` script. This code can be run as follows:
+```
+Rscript crossv_ordreg.R <split_num>
+```
+`<split_num>` indicates the split to fit and predict for. Splits range from 1-100
+
+### Experiment 3
+
+#### Generate model predictions
+Once speaker performance is generated for all three models, listener performance can be generated as well. For the listener task, parameters for the model are fixed from the speaker task, and model judgments are transformed into the participant response scale with a softmax. Pre-computed model predictions are again provided in `model_performance`. Model predictions can be recomputed with the following code:
+```
+python listener_fit_softmax.py <model_type>
+```
+Here `<model_type>` is either "full", "no_pragmatics", or "regression".
+
+#### Cross Validation
+Cross validation for the listener experiment can be run using thing `listener_run_cross_val.py` script. The script generates a random set of 100 splits (random seed 1) and fits the softmax parameter for each model on each train set then predicts on the test set, saving results to the `model_performance` folder. Pre-computed cross-validation results are provided in the `model_performance` folder and can be regenerated with the following code:
+```
+python listener_run_cross_val.py <model_type>
+```
+Here `<model_type>` is either "full", "no_pragmatics", or "regression".
+
+### Paper Results
+All model performance and human data is analyzed and in visualized `code/R/analysis.Rmd`. All paper results are included in the document. Knitted document can be viewed [here](https://cicl-stanford.github.io/causal_language/analysis/index.html) and code can be re-run in RStudio.
 
 
 ## Software versions

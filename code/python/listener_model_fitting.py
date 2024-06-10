@@ -116,6 +116,12 @@ def fit_square_error(beta, model_pairings, human_means, trial_ind=np.arange(36, 
     normalized_scores = softmax_normalize(model_pairings, beta=beta)
     return np.sum((normalized_scores[1,:]-human_means)**2)
 
+def reg_square_error(beta, regression_pairings, human_means, trial_ind=np.arange(36, dtype=int)):
+    
+    human_means = human_means[trial_ind]
+    
+    normalized_scores = softmax_normalize(regression_pairings, beta=beta)
+    return np.sum((normalized_scores[1,:]-human_means)**2)
 
 def convert_predictions_to_dataframe(model_predictions, trial_comparison_indices, trial_utterance_values):
     
@@ -236,8 +242,8 @@ def cross_validate(train,
             
         else:
             
-            train_pairings = get_regression_pairings(speaker_regression, train_tci, train_tuv)
-            test_pairings = get_regression_pairings(speaker_regression, test_tci, test_tuv)
+            train_pairings = get_trial_pairings(speaker_regression, train_tci, train_tuv)
+            test_pairings = get_trial_pairings(speaker_regression, test_tci, test_tuv)
             
             optimal_beta = minimize_scalar(reg_square_error, args=(train_pairings, scaled_human_responses, train_ind))["x"]
             
