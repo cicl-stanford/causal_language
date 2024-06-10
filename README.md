@@ -144,7 +144,7 @@ No pragmatics and no semantics cross validation can be run with the `code/R/cros
 ```
 Rscript crossv_ordreg.R <split_num>
 ```
-`<split_num>` indicates the split to fit and predict for. Splits range from 1-100
+`<split_num>` indicates the split to fit and predict for. Splits range from 1-100.
 
 ### Experiment 3
 
