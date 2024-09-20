@@ -159,3 +159,24 @@ The modeling code requires following packages. All results were computed with th
 Analysis and some regression modeling was performed in R version 4.2.3
 
 R package versions are indicated in the knitted analysis file `code/R/analysis.html` at the end of the file after the `sessionInfo()` call.
+
+## CRediT author statement
+
+[What is a CRediT author statement?](https://www.elsevier.com/researcher/author/policies-and-guidelines/credit-author-statement)
+
+| Term                       | Ari Beller | Tobias Gerstenberg |
+|----------------------------|------------|--------------------|
+| Conceptualization          | X          | X                  |
+| Methodology                | X          | X                  |
+| Software                   | X          | X                  |
+| Validation                 | X          | X                  |
+| Formal analysis            | X          | X                  |
+| Investigation              | X          |                    |
+| Resources                  |            |                    |
+| Data Curation              | X          |                    |
+| Writing - Original Draft   | X          |                    |
+| Writing - Review & Editing | X          | X                  |
+| Visualization              | X          |                    |
+| Supervision                |            | X                  |
+| Project administration     |            | X                  |
+| Funding acquisition        |            | X                  |
