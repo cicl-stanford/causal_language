@@ -1,0 +1,464 @@
+/*******************************************************************/
+/* Generic element styles                                           */
+/********************************************************************/
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 1em;
+    line-height: 1.25em;
+}
+
+p {
+    margin-top: .625em;
+    margin-bottom: .625em;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 1.25em;
+    margin-top: .625em;
+    margin-bottom: .625em;
+}
+
+ul {
+    margin: 1em 0;
+}
+
+hr {
+    width: 100%;
+}
+
+/********************************************************************/
+/* buttons                                                          */
+/********************************************************************/
+
+button, .next {
+    background-color: white;
+    box-shadow: 1px 1px 3px;
+    border: 1px solid black;
+    margin: 1%;
+    padding: 1% 2% 1% 2%;
+    font-family: Georgia, serif; 
+    font-size: 1em;
+}
+
+button:active, .next:active {
+    background-color: #c9c9c9;
+    box-shadow: 0px 0px 3px;
+}
+
+.vid_play {
+    height: 35px;
+    width: 120px;
+}
+
+/********************************************************************/
+/* Slide components                                                 */
+/********************************************************************/
+
+div.slide {
+    /*width: 550px;*/
+    width: 900px;
+    /*position: relative;*/
+    /*position: absolute;*/
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1% 2% 1% 2%;
+    /*margin: 0 auto;*/
+}
+
+
+
+#question-text {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#question-container {
+    width: 400px;
+    margin: 0 auto;
+}
+
+#description-container {
+    font-size: 150%;
+    color: blue;
+}
+
+#stim{
+    position: relative;
+}
+
+#inst_video{
+    display: block;
+    margin: 0 auto;
+}
+
+#inst_image1 {
+    width: 460px;
+    height: 500px;
+    display: block;
+    margin: 0 auto;
+    border: 2px solid black;
+}
+
+#inst_image2 {
+    width: 800px;
+    height: 600px;
+    display: block;
+    margin: 0 auto;
+    border:2px solid black
+}
+
+figure {
+    width: 700px;
+}
+
+.stim_image {
+    float: left;
+    /*width: 150px;*/
+    margin: 10px;
+    width: 900px;
+}
+
+.video_container{
+    text-align: center;
+}
+
+#video1_container{
+    float: left;
+    width: 425px;
+    margin-right: 50px;
+    display: inline-block;
+}
+
+#video2_container{
+    float: left;
+    width: 425px;
+    display: inline-block;;
+}
+
+div.choices_container{
+    margin-top: 50px;
+    width: 900px;
+}
+
+.stim_video {
+    display: block;
+    margin: 0 auto;
+    /*width:300px;*/
+    /*margin-top: 10px;*/
+}
+
+.stim_text {
+    margin-left: 10px;
+    margin-right: 10px;
+    /*padding-top: 2cm;*/
+    text-align: center;
+}
+
+
+div.spacer { clear: both; }
+
+div.blue {
+    background-color: #CEECF5;
+    padding: .01em 1em .01em 1em;
+    border: 1px sowqlid #CEECF5;
+    position: relative;
+}
+
+div.continue {
+    text-align: center;
+    width: 100%;
+    margin-top: 1%;
+}
+
+span.warn {
+    font-weight: bold;
+    color: blue;
+}
+
+#challenge_img {
+    display: block;
+    margin: 20px auto;
+}
+
+#bot_text {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+
+/********************************************************************/
+/* Index slide components                                           */
+/********************************************************************/
+
+img.logo { height: 6.25em; }
+
+#consent {
+    font-size: 0.95em;
+    padding-left: 4%;
+    padding-right: 4%;
+    margin: 1.5em 0;
+    text-align: justify;
+}
+
+span.consent {
+    font-color: red;
+}
+
+/********************************************************************/
+/* Trial slide components                                           */
+/********************************************************************/
+
+.response_radio {
+    float: left;
+}
+
+.prompt_radio {
+    float: left;
+}
+
+#describer-selection {
+    text-align: start;
+    width: 360px;
+    margin: 0 auto;
+}
+
+.prompt_radio{
+/*    background-color: #FFFFFF;
+    color: #FFFFFF;*/
+    pointer-events: none;
+}
+
+/*input[type="radio"]:disabled:after {
+    background-color: green;
+    color: white;
+}*/
+
+/*.radio[disabled] {
+    background-color: #FFFFFF;
+}*/
+
+.response_sentence {
+    margin-left: 20px;
+    display: block;
+}
+
+
+#training_answer_container {
+    text-align: start;
+    width: 400px;
+    margin: 0 auto;
+}
+
+#answer_base {
+    display: inline-block;
+}
+
+/*#prompt_top {
+    margin-bottom: 1%;
+    margin-top: 0;
+}*/
+
+
+.refresh_warning {
+    text-align: center;
+    color: red;
+    opacity: 0.5;
+    font-size: 0.7em;
+    font-weight: bold;
+}
+
+/*#prompt_bottom {
+    margin-top: 1%;
+}*/
+
+#response_container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#slider_label {
+    display: inline-block;
+    position: relative;
+    width: 600px;
+}
+
+#label_left {
+    position: absolute;
+    left: 0;
+}
+
+/*#label_middle {
+    position: absolute;
+}*/
+
+#label_right {
+    position: absolute;
+    right: 0;
+}
+
+.compQ_slider_container {
+    text-align: center;
+}
+
+.slider {
+    margin-top: 5px;
+    display: inline-block;
+    width: 500px;
+}
+
+.example_scene {
+    text-align: center;
+}
+
+#text_answer {
+    display: inline-block;
+    font-size: 1em;
+    height: 1em;
+    width: 8em;
+    vertical-align: text-bottom;
+    margin-right: 0.1em;
+}
+
+#drop_answers {
+    display: inline-block;
+    font-size: 1em;
+}
+
+#word_warning {
+    position: relative;
+    right: 120px;
+    display: inline-block;
+    vertical-align: bottom;
+    color: red;
+}
+
+/* Progress bar */
+
+
+.progress {
+    margin-top: .625em;
+    margin-bottom: .625em;
+    position: relative;
+}
+
+#training-progress-text { position: absolute; }
+
+#progress-text { position: absolute; }
+
+.prompt { 
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+    /* font-weight: bold; */
+    text-align: center;
+}
+
+#text_container {
+    padding: 10px;
+    text-align: center;
+}
+
+.indicator-container {
+    position: relative;
+    float: right;
+    width: 70%;
+    margin-bottom: .2em;
+}
+
+.indicator-outer {
+    background-color: white;
+    border: 1px solid black;
+    height: 1em;
+}
+
+#training-indicator-stage {
+    height: 100%;
+    background-color: navy;
+}
+
+#indicator-stage {
+    height: 100%;
+    background-color: navy;
+}
+
+/* Question */
+
+
+
+
+/* Trial phases */
+
+#phase-container {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 1em;
+    position: relative;
+    overflow: hidden;
+    width: 617px;
+}
+
+.phase {
+    width: 600px;
+    display: none;
+    margin: 0 auto;
+}
+
+#feedback-area {
+    text-align: center;
+    line-height: 300px;
+    font-size: 1.5em;
+}
+
+#prestim-area {
+    text-align: center;
+    line-height: 300px;
+    font-size: 1.5em;
+}
+
+/********************************************************************/
+/* Finished slide components                                        */
+/********************************************************************/
+
+#submit_error_slide {
+    display: none;
+}
+
+#resubmit_slide {
+    display: none;
+}
+
+/********************************************************************/
+/* Error                                                            */
+/********************************************************************/
+
+#error-message {
+    background-color: #FEA;
+    padding: 0 0.625em;
+    border: 1px solid black;
+    margin: 0.625em;
+}
+
+
+/********************************************************************/
+/* Labels for the sliders                                           */ 
+/********************************************************************/
+
+/*label{
+  display: inline-block;
+  text-align:center;
+  padding-top: 0.2cm;
+}
+label:first-child{
+  text-align:left;
+}
+label:second-child{
+  text-align:center;
+}
+label:last-child{
+  text-align:right;
+}

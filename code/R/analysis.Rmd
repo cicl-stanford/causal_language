@@ -1,0 +1,3218 @@
+---
+title: "analysis"
+author: "Ari"
+date: "2023-05-17"
+output: html_document
+---
+
+# Load packages
+
+```{r load-packages, message=F}
+library("boot")
+library("scales")
+library("rsample")
+library("RSQLite")
+library("gtools")
+library("lubridate")
+library("jsonlite")
+library("rjson")
+library("tidyjson")
+library("jpeg")
+library("egg") # for geom_custom()
+library("grid")
+library("brms")
+library("Metrics")
+library("DescTools")
+library("knitr")
+library("ggrepel")
+library("Hmisc")
+library("ggtext")
+library("xtable")
+library("ggpattern")
+library("tidyverse")
+```
+
+
+```{r set-options}
+opts_chunk$set(comment = "#>",
+               fig.show = "hold")
+
+theme_set(theme_classic() + 
+            theme(text = element_text(size = 24)))
+
+options(dplyr.summarise.inform = F)
+```
+
+
+# Experiment 1
+
+## Norming Study
+
+### Load Data
+
+```{r}
+
+df_attn_check = read.csv("../../data/experiment1/verb_acceptability/verb_acceptability-attnCheckLikert.csv") %>% 
+  rename(item_num = fill_num) %>% 
+  mutate(trial_type = "filler")
+
+df_trials = read.csv("../../data/experiment1/verb_acceptability/verb_acceptability-trialDataLikert.csv") %>% 
+  rename(item_num = frame) %>% 
+  mutate(trial_type = "main")
+
+df_demo = read.csv("../../data/experiment1/verb_acceptability/verb_acceptability-participants.csv") %>% 
+  filter(!(workerid %in% c(2,4,5)))
+
+df_data = rbind(df_attn_check, df_trials) %>% 
+  select(workerid, item_num, verb, item, response, order, trial_type) %>% 
+  mutate(verb = factor(verb, levels = c("caused", "enabled", "affected"))) %>% 
+  arrange(workerid, trial_type, item_num, verb) %>% 
+  mutate(pilot_sample = workerid %in% c(2,4,5),
+         frame = str_replace(item, "affected|enabled|caused", "____"))
+
+```
+
+### Demographics
+
+#### Age
+```{r}
+df_demo %>% summarise(mean_age = round(mean(age)),
+                      sd_age = round(sd(age)))
+```
+#### Gender
+```{r}
+df_demo %>% count(gender)
+```
+
+
+#### Race
+```{r}
+df_demo %>% count(race)
+```
+
+### Attention Check
+
+```{r}
+
+df_attn_check = df_data %>% 
+  filter(trial_type == "filler",
+         !pilot_sample) %>% 
+  select(workerid, item_num, item,response) %>% 
+  mutate(check = ifelse(item_num %% 2 == 0,
+                        response >= 3,
+                        response <= 3)) %>% 
+  group_by(workerid) %>% 
+  summarise(check_correct = sum(check))
+
+inc_parts = df_attn_check %>% 
+  filter(check_correct > 3) %>% 
+  pull(workerid)
+
+df_data_clean = df_data %>% 
+  filter(workerid %in% inc_parts,
+         !pilot_sample,
+         trial_type == "main") %>% 
+  mutate(response = response + 1)
+
+```
+
+### Overall Acceptability
+
+```{r}
+df_boots = df_data_clean %>%
+  filter(!pilot_sample,
+         trial_type == "main") %>%
+  bootstraps(times = 1000,
+             strata = verb) %>% 
+  mutate(percentages = map(.x = splits,
+                           .f = ~ .x %>% 
+                             as_tibble() %>% 
+                             count(verb, response, .drop = FALSE) %>% 
+                             group_by(verb) %>%
+                             mutate(percentage = n / sum(n) * 100))) %>%
+  select(-splits) %>% 
+  unnest(cols = c(percentages)) %>% 
+  group_by(verb, response) %>% 
+  summarise(low = quantile(percentage, 0.025),
+            high = quantile(percentage, 0.975))
+```
+
+```{r fig.width=10, fig.height=4}
+df_med_resp = df_data_clean %>% 
+  group_by(verb) %>% 
+  summarise(med_resp = median(response))
+
+df_to_show = df_data_clean %>%
+  count(verb, response, .drop = FALSE) %>% 
+  group_by(verb) %>%
+  mutate(percentage = n / sum(n) * 100) %>% 
+  ungroup() %>%
+  left_join(df_boots,
+            by = c("verb", "response")) %>%
+  left_join(df_med_resp,
+            by = "verb") %>% 
+  mutate(is_med = response == med_resp)
+
+# df_to_show = df_data %>% 
+#   filter(trial_type == "main",
+#          !pilot_sample) %>% 
+#   mutate(response = response + 1) %>% 
+#   group_by(verb) %>% 
+#   mutate(med_resp = median(response),
+#          is_med = response == med_resp)
+
+ggplot(df_to_show, 
+       mapping = aes(x = response,
+                     fill = verb)) +
+  geom_bar(mapping = aes(y = percentage,
+                         linewidth = is_med),
+           stat = "identity",
+           color="black") +
+  geom_linerange(mapping = aes(x = response,
+                               ymin = low,
+                               ymax = high)) +
+  scale_y_continuous(breaks = seq(0,100,25),
+                     labels = label_percent(scale=1),
+                     limits = c(0,100)) +
+  guides(linewidth = "none") +
+  scale_x_continuous(breaks = seq(1,7)) +
+  scale_linewidth_manual(values = c(0.5, 1.2)) +
+  scale_fill_manual(values = c(rgb(54/255, 122/255, 93/255), rgb(209/255, 144/255, 50/255), rgb(41/255, 99/255, 152/255))) +
+  scale_color_manual(values = c(rgb(54/255, 122/255, 93/255), rgb(209/255, 144/255, 50/255), rgb(41/255, 99/255, 152/255))) +
+  facet_wrap(~verb,
+             ncol = 3) +
+  theme(legend.position = "none")
+
+ggsave("../../figures/paper_figures/norming_study_verb_hist.pdf",
+       height = 4,
+       width = 10)
+```
+
+### Frames Passed
+
+```{r}
+
+df_median_responses = df_data %>% 
+  filter(trial_type == "main",
+         !pilot_sample) %>% 
+  group_by(item_num,
+           frame,
+           verb) %>% 
+  summarise(med_response = median(response)) %>% 
+  ungroup()
+
+df_exp_passed = df_median_responses %>% 
+  group_by(item_num, frame, verb) %>% 
+  summarise(passed = med_response >= 3) %>% 
+  ungroup() %>% 
+  group_by(verb) %>% 
+  summarise(num_passed = sum(passed))
+
+df_frames_passed = df_median_responses %>% 
+  group_by(item_num, frame) %>% 
+  summarise(passed = all(med_response >= 4))
+
+df_frames_num = df_frames_passed %>% 
+  select(-passed)
+
+```
+
+### Sample Frames
+
+```{r}
+
+df_temp = df_data_clean %>% 
+  filter(item_num %in% c(1,3,11)) %>%
+  mutate(item_num_verb = factor(paste(item_num, verb, sep = "_"))) %>%
+  count(item_num_verb, response, .drop = FALSE) %>%
+  group_by(item_num_verb) %>%
+  mutate(percentage = n / sum(n) * 100)
+
+```
+
+
+#### Bootstrap
+
+```{r}
+df_boots = df_data_clean %>%
+  filter(item_num %in% c(1,3,11)) %>% 
+  mutate(item_num_verb = factor(paste(item_num, verb, sep = "_"))) %>% 
+  bootstraps(times = 1000,
+             strata = item_num_verb) %>% 
+  mutate(percentages = map(.x = splits,
+                      .f = ~ .x %>% 
+                        as_tibble() %>% 
+                        count(item_num_verb, response, .drop = FALSE) %>% 
+                        group_by(item_num_verb) %>% 
+                        mutate(percentage = n / sum(n) * 100))) %>%
+  select(-splits) %>% 
+  unnest(cols = c(percentages)) %>% 
+  group_by(item_num_verb, response) %>% 
+  summarise(low = quantile(percentage, 0.025),
+            high = quantile(percentage, 0.975)) %>% 
+  separate(item_num_verb,
+           into = c("item_num", "verb"),
+           sep = "_", 
+           remove = TRUE) %>% 
+  mutate(item_num = as.numeric(item_num),
+         verb = factor(verb,
+                       levels = c("caused",
+                                  "enabled",
+                                  "affected"))) %>% 
+  arrange(item_num,
+          verb, 
+          response)
+
+
+df_temp = expand.grid(item_num = c(1,3,11),
+                      verb = factor(c("caused", "enabled", "affected"),
+                                    levels = c("caused", "enabled", "affected")),
+                      response = seq(1,7))
+
+df_boots = right_join(df_boots,
+                      df_temp,
+                      by = c("item_num", "verb", "response")) %>% 
+  arrange(item_num,
+          verb,
+          response) %>% 
+  replace_na(list(low = 0.0,
+                  high = 0.0)) %>% 
+  # mutate(response = response + 1) %>% 
+  left_join(df_frames_num,
+            by = "item_num") %>% 
+  mutate(frame = str_replace(frame, "____", "____\n"))
+```
+
+#### Visualize
+
+```{r fig.width=10, fig.height=6}
+
+df_to_show = df_data_clean %>%
+  mutate(frame = str_replace(item, "affected|enabled|caused", "____\n")) %>% 
+  filter(item_num %in% c(1,3,11))
+
+frames = df_to_show$frame %>% 
+  unique()
+
+df_to_show = df_to_show %>% 
+  mutate(frame = factor(frame, levels = frames))
+
+df_median_sample = df_to_show %>% 
+  group_by(item_num, frame, verb) %>% 
+  summarise(med_response = median(response)) %>% 
+  ungroup()
+
+df_to_show = df_to_show %>% 
+  filter(item_num %in% c(1,3,11)) %>%
+  mutate(item_num_verb = factor(paste(item_num, verb, sep = "_"))) %>%
+  count(item_num_verb, response, .drop = FALSE) %>%
+  group_by(item_num_verb) %>%
+  mutate(percentage = n / sum(n) * 100) %>% 
+  ungroup() %>%
+  separate(item_num_verb,
+           into = c("item_num", "verb"),
+           sep = "_", 
+           remove = TRUE) %>% 
+  mutate(item_num = as.numeric(item_num),
+         verb = factor(verb,
+                       levels = c("caused",
+                                  "enabled",
+                                  "affected"))) %>% 
+  right_join(df_boots,
+             by = c("item_num",
+                    "verb",
+                    "response")) %>% 
+  replace_na(list(n = 0.0,
+                  percentage = 0.0)) %>% 
+  arrange(item_num,
+          verb,
+          response) %>%
+  left_join(df_median_sample,
+            by = c("item_num",
+                   "frame",
+                   "verb")) %>%
+  mutate(is_med = response == med_response)
+
+ggplot(df_to_show,
+       mapping = aes(x = response,
+                     fill = verb)) +
+  geom_bar(mapping = aes(y = percentage,
+                         linewidth = is_med),
+           stat = "identity",
+           color = "black",
+           width = 0.8) +
+  geom_linerange(mapping = aes(x = response,
+                               ymin = low,
+                               ymax = high)) + 
+facet_grid(rows = vars(frame),
+           cols = vars(verb),
+           switch = "y") +
+  scale_y_continuous(breaks = seq(0,100,25),
+                     labels = label_percent(scale=1),
+                     limits = c(0,100),
+                     position="right") +
+  scale_x_continuous(breaks = seq(1,7)) +
+  scale_fill_manual(values = c(rgb(54/255, 122/255, 93/255), rgb(209/255, 144/255, 50/255), rgb(41/255, 99/255, 152/255))) +
+  scale_color_manual(values = c(rgb(54/255, 122/255, 93/255), rgb(209/255, 144/255, 50/255), rgb(41/255, 99/255, 152/255))) +
+  scale_linewidth_manual(values = c(0.5, 1.2)) +
+  theme(legend.position = "None",
+        strip.text.y.left = element_text(angle=0,
+                                         size=14),
+        strip.text.x = element_text(size = 12),
+        # strip.background = element_rect(fill = "light grey", color = "black"),
+        panel.spacing.y = unit(0.5, "cm"),
+        axis.text = element_text(size = 14))
+
+
+ggsave("../../figures/paper_figures/sample_frame_acceptability.pdf",
+       width = 10,
+       height = 6)
+
+```
+
+## Semantics Experiment
+
+### Raw acceptability for regression control
+```{r}
+
+df_acc = df_data %>% 
+  filter(!pilot_sample,
+         trial_type == "main") %>% 
+  left_join(df_frames_passed,
+            by = c("item_num")) %>% 
+  filter(passed) %>% 
+  group_by(item_num, verb) %>% 
+  summarise(med_acc = median(response)) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = verb,
+              values_from = med_acc) %>% 
+  mutate(frame = seq(0,9),
+         AE = enabled - affected,
+         AC = caused - affected,
+         EC = caused - enabled,
+         EA = affected - enabled,
+         CA = affected - caused,
+         CE = enabled - caused) %>% 
+  select(frame, AE, AC, EC, EA, CA, CE) %>% 
+  pivot_longer(c(AE, AC, EC, EA, CA, CE),
+               names_to = "verb_ord",
+               values_to = "acc_diff")
+
+```
+
+### Load Data
+
+```{r}
+
+df_attn_check = read.csv("../../data/experiment1/verb_implications/verb_implications-attnCheckLikert.csv") %>% 
+  rename(item_num = fill_num) %>% 
+  mutate(trial_type = "filler") %>% 
+  select(workerid, item_num, item, response, verb) %>% 
+  arrange(workerid, item_num)
+
+df_trials = read.csv("../../data/experiment1/verb_implications/verb_implications-trialDataLikert.csv") %>% 
+  rename(item_num = frame) %>% 
+  mutate(trial_type = "main")
+
+df_demo = read.csv("../../data/experiment1/verb_implications/verb_implications-participants.csv")
+
+```
+
+### Demographics
+
+#### Age
+```{r}
+df_demo %>% 
+  summarise(mean_age = round(mean(age)),
+                      sd_age = round(sd(age)))
+```
+#### Gender
+```{r}
+df_demo %>%
+  count(gender)
+```
+
+#### Race
+```{r}
+df_demo %>%
+  count(race)
+```
+
+### Attention Check
+
+```{r}
+df_attn_check = df_attn_check %>% 
+  mutate(check = ifelse(item_num %% 2 == 0,
+                        response >= 3,
+                        response <= 3)) %>% 
+  group_by(workerid) %>% 
+  summarise(sum_check = sum(check)) %>% 
+  ungroup() %>% 
+  mutate(check_passed = sum_check >= 4)
+
+inc_parts = df_attn_check %>% 
+  filter(check_passed) %>% 
+  pull(workerid)
+  
+```
+
+### Wrangle Data
+
+```{r}
+
+verb_ord_levels = c("AE", "AC", "EA", "EC", "CA", "CE")
+
+df_trials = df_trials %>% 
+  filter(workerid %in% inc_parts) %>% 
+  select(workerid, item_num, item, response, verb1, verb2) %>% 
+  arrange(workerid, item_num) %>% 
+  mutate(verb_ord = factor(paste(toupper(substr(verb1, 1, 1)),
+                                 toupper(substr(verb2, 1, 1)),
+                                 sep = ""),
+                           levels = verb_ord_levels)) %>% 
+  mutate(comp = case_when(verb_ord == "AE" | verb_ord == "EA" ~ "affected-enabled",
+                          verb_ord == "AC" | verb_ord == "CA" ~ "affected-caused",
+                          verb_ord == "EC" | verb_ord == "CE" ~ "enabled-caused"),
+         type = ifelse(verb_ord %in% c("AE", "AC", "EC"), "non-contradictory", "contradictory"),
+         type = factor(type, levels = c("contradictory", "non-contradictory")),
+         response = response + 1)
+
+df_summary = df_trials %>% 
+  group_by(verb_ord, response) %>% 
+  summarise(count = n())
+```
+
+### Bootstrap Counts
+
+```{r}
+
+set.seed(1)
+
+df_boots = df_trials %>%
+  bootstraps(times = 1000,
+             strata = verb_ord)
+
+
+df_boots_counts = df_boots %>% 
+  mutate(percentages = map(.x = splits,
+                      .f = ~ .x %>% 
+                        as_tibble() %>% 
+                        count(verb_ord, response, .drop = FALSE) %>% 
+                        group_by(verb_ord) %>% 
+                        mutate(percentage = n/sum(n) * 100))) %>% 
+  select(-splits) %>% 
+  unnest(cols = c(percentages)) %>% 
+  group_by(verb_ord, response) %>% 
+  summarise(low = quantile(percentage, 0.025),
+            high = quantile(percentage, 0.975))
+
+```
+
+### Bootstrap Means
+
+```{r}
+df_boots_mean = df_boots %>%
+  mutate(ord_mean = map(.x = splits,
+                   .f = ~ .x %>%
+                     as_tibble() %>%
+                     group_by(verb_ord) %>%
+                     summarise(ord_mean = mean(response)))) %>% 
+  select(-splits) %>% 
+  unnest(cols = c(ord_mean)) %>% 
+  group_by(verb_ord) %>%
+  summarise(low = round(quantile(ord_mean, 0.025), 2),
+            high = round(quantile(ord_mean, 0.975), 2))
+```
+
+
+```{r}
+df_sem_mean = df_trials %>% 
+  group_by(verb_ord) %>% 
+  summarise(mean_resp = round(mean(response), 2)) %>% 
+  left_join(df_boots_mean,
+            by = "verb_ord")
+
+df_sem_mean
+```
+
+### Visualize
+
+#### Overall Results
+```{r fig.width=10, fig.height=8}
+
+dodge_width = 0.44
+
+
+df_to_show = df_trials %>% 
+  count(verb_ord, comp, type, response) %>% 
+  group_by(verb_ord) %>% 
+  mutate(percentage = n / sum(n) * 100,
+         x_position = response + ifelse(type == "contradictory",
+                                        -dodge_width/2,
+                                        dodge_width/2))
+  
+df_med = df_trials %>% 
+  group_by(comp, type) %>% 
+  summarise(med = median(response))
+
+df_text = df_to_show %>% 
+  select(comp,
+         type) %>% 
+  unique() %>% 
+  mutate(x_pos = ifelse(type == "contradictory", 2.4, 5.6)) %>% 
+  arrange(comp, type)
+
+df_text["label"] = c("caused \u2192 affected",
+                     "affected \u2192 caused",
+                     "enabled \u2192 affected",
+                     "affected \u2192 enabled",
+                     "caused \u2192 enabled",
+                     "enabled \u2192 caused")
+
+# df_to_show = left_join(df_counts,
+#                        df_med,
+#                        by = c("comp", "type")) %>% 
+#   mutate(is_med = response == med)
+
+df_to_show = df_to_show %>% 
+  left_join(df_boots_counts,
+            by = c("verb_ord", "response")) %>% 
+  left_join(df_med,
+            by = c("comp", "type")) %>% 
+  mutate(is_med = response == med)
+
+ggplot(df_to_show,
+       mapping = aes(fill = type)) +
+  geom_bar_pattern(mapping = aes(x = x_position,
+                                 y = percentage,
+                                 linewidth = is_med,
+                                 pattern=type),
+                   pattern_fill = "black",
+                   pattern_color = "black",
+                   pattern_spacing = 0.028,
+                   pattern_density = 0.05,
+                   stat = "identity",
+                   color = "black",
+                   width = 0.4) +
+  geom_linerange(mapping = aes(x = response,
+                                ymin = low,
+                                ymax = high),
+                 color = "black",
+                 position = position_dodge(dodge_width*2)) +
+  geom_text(data = df_text,
+            mapping = aes(label = label,
+                          x = x_pos,
+                          color = type),
+            y = 55,
+            size = 7,
+            family = "Arial Unicode MS") +
+  geom_rect(xmin = 0.22,
+            xmax = 7.78,
+            ymin = 50,
+            ymax = 60,
+            fill = "transparent",
+            color = "black") +
+  coord_cartesian(clip = "off") +
+  guides(fill = guide_legend(title = "Sentence Type"),
+         pattern = guide_legend(title = "Sentence Type"),
+         linewidth = "none",
+         color = "none") + 
+  xlab("Response") +
+  ylab("Percentage") +
+  scale_x_continuous(breaks = seq(1,7)) +
+  scale_y_continuous(breaks = seq(0,50,10),
+                     labels = label_percent(scale=1),
+                     limits= c(0,50)) +
+  scale_fill_manual(values = c("red3",
+                               "mediumseagreen")) +
+  scale_color_manual(values = c("red3",
+                               "mediumseagreen")) +
+  scale_pattern_manual(values=c("stripe", "none")) +
+  scale_linewidth_manual(values = c(0.5, 1.2)) +
+  facet_wrap(~comp,
+             nrow = 3) +
+  theme(strip.text = element_blank(),
+        strip.background = element_blank(),
+        panel.spacing = unit(2.2, "lines"),
+        plot.margin = margin(t = 30,
+                             l = 2),
+        axis.text.y = element_text(size = 14),
+        legend.key.size = unit(1.0, "cm"))
+
+ggsave("../../figures/paper_figures/contra_vs_noncontra.pdf",
+       width = 10,
+       height = 8,
+       device = cairo_pdf)
+
+# ggsave("../../figures/paper_figures/contra_vs_noncontra.jpg",
+#        width = 10,
+#        height = 6)
+
+```
+
+#### Affected --> Enabled Frames
+
+```{r fig.height=12, fig.width=10}
+
+df_to_show = df_trials %>% 
+  filter(verb_ord == "AE") %>% 
+  mutate(item = str_replace(item, "  ", " "),
+         response = response + 1)
+
+df_med = df_to_show %>% 
+  group_by(item) %>% 
+  summarise(med_resp = median(response)) %>% 
+  mutate(count = 25)
+
+df_boots = df_to_show %>%
+  bootstraps(times = 1000,
+             strata = item) %>% 
+  mutate(counts = map(.x = splits,
+                      .f = ~ .x %>% 
+                        as_tibble() %>% 
+                        count(item, response, .drop = FALSE))) %>% 
+  select(-splits) %>% 
+  unnest(cols = c(counts)) %>% 
+  group_by(item, response) %>% 
+  summarise(low = quantile(n, 0.025),
+            high = quantile(n, 0.975))
+
+ggplot(df_to_show,
+       mapping = aes(x = response)) +
+  geom_bar(fill = "grey",
+           color = "black") +
+  geom_point(data = df_med,
+             mapping = aes(x = med_resp,
+                           y = count),
+             shape = 25,
+             fill = "red",
+             size = 3) +
+  geom_linerange(data = df_boots,
+                 mapping = aes(x = response,
+                                ymin = low,
+                                ymax = high)) +
+  scale_x_continuous(breaks = seq(1,7)) +
+  scale_linewidth_manual(values = c(0.5, 1.2)) +
+  guides(linewidth = "none") +
+  facet_wrap(~item,
+             labeller = label_wrap_gen(width = 40),
+             nrow = 5) +
+  theme(strip.text = element_text(size = 16))
+
+ggsave("../../figures/paper_figures/semantics_exp_frames_AE.pdf",
+       height = 12,
+       width = 12)
+
+```
+
+### Confirmatory Analysis
+
+#### Setup
+
+```{r}
+
+df_to_fit = df_trials %>% 
+  rename(frame = item_num) %>% 
+  mutate(response = response + 1)
+
+```
+
+#### Fit Model
+
+```{r}
+
+model = brm(response ~ 1 + verb_ord + (1|workerid) + (1|frame),
+            data = df_to_fit,
+            family = cumulative(probit),
+            file = "regression/semantics",
+            seed = 1)
+
+```
+
+```{r}
+summary(model)
+```
+
+#### Hypothesis Test
+
+```{r}
+# verb_ordAE is the reference level
+hyps = c(hyp1 = "0 - verb_ordEA > 0",
+         hyp2 = "verb_ordAC - verb_ordCA > 0",
+         hyp3 = "verb_ordEC - verb_ordCE > 0")
+
+hypothesis(model,
+           hyps,
+           # corresponds to alpha 0.05 for a one-sided test. See supplementary console output
+           alpha=0.025)
+```
+
+#### Controls
+
+##### First Verb
+
+###### Compute Acceptability
+
+```{r}
+
+df_acc = df_data %>% 
+  filter(!pilot_sample,
+         trial_type == "main") %>% 
+  left_join(df_frames_passed,
+            by = c("item_num",
+                   "frame")) %>% 
+  filter(passed) %>% 
+  mutate(response = response + 1) %>% 
+  group_by(item_num, verb) %>% 
+  summarise(med_acc = median(response)) %>% 
+  ungroup() %>% 
+  mutate(frame = rep(seq(0,9), each=3)) %>% 
+  select(frame, verb, med_acc)
+
+```
+
+###### Setup
+```{r}
+
+df_control = df_to_fit %>% 
+  rename(verb = verb1) %>% 
+  left_join(df_acc,
+            by = c("frame", "verb"))
+
+```
+
+###### Fit Model
+```{r}
+
+model = brm(response ~ 1 + verb_ord + med_acc + (1|workerid) + (1|frame),
+            data = df_control,
+            family = cumulative(probit),
+            file = "regression/semantics_control1",
+            seed = 1)
+
+```
+
+```{r}
+summary(model)
+```
+
+###### Hypothesis Test
+
+```{r}
+hyps = c(hyp1 = "0 - verb_ordEA > 0",
+         hyp2 = "verb_ordAC - verb_ordCA > 0",
+         hyp3 = "verb_ordEC - verb_ordCE > 0")
+
+hypothesis(model,
+           hyps,
+           alpha=0.025)
+```
+
+##### Verb Difference
+
+###### Compute Acceptability
+```{r}
+
+df_acc = df_data %>% 
+  left_join(df_frames_passed,
+            by = c("item_num")) %>% 
+  filter(!pilot_sample,
+         passed,
+         trial_type == "main") %>% 
+  mutate(response = response + 1) %>% 
+  group_by(item_num, verb) %>% 
+  summarise(med_acc = median(response)) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = verb,
+              values_from = med_acc) %>% 
+  mutate(item_num = seq(0,9),
+         AE = affected - enabled,
+         AC = affected - caused,
+         EA = enabled - affected,
+         EC = enabled - caused,
+         CA = caused - affected,
+         CE = caused - enabled) %>% 
+  select(-c(caused, enabled, affected)) %>% 
+  pivot_longer(cols = c(AE, AC, EA, EC, CA, CE),
+               names_to = "verb_ord",
+               values_to = "acc_diff") %>% 
+  mutate(verb_ord = factor(verb_ord,
+                           levels = verb_ord_levels)) %>% 
+  rename(frame = item_num)
+
+```
+
+###### Setup
+```{r}
+
+df_control = df_to_fit %>%
+  left_join(df_acc,
+            by = c("frame", "verb_ord"))
+
+```
+
+###### Fit Model
+```{r}
+
+model = brm(response ~ 1 + verb_ord + acc_diff + (1|workerid) + (1|frame),
+            data = df_control,
+            family = cumulative(probit),
+            file = "regression/semantics_control2",
+            seed = 1)
+
+```
+
+```{r}
+summary(model)
+```
+
+###### Hypothesis Test
+
+```{r}
+hyps = c(hyp1 = "0 - verb_ordEA > 0",
+         hyp2 = "verb_ordAC - verb_ordCA > 0",
+         hyp3 = "verb_ordEC - verb_ordCE > 0")
+
+hypothesis(model,
+           hyps,
+           alpha=0.025)
+```
+
+### Exploratory Analysis
+
+```{r}
+
+df_trials %>% 
+  mutate(response = response + 1) %>% 
+  group_by(verb_ord) %>% 
+  summarise(med_rating = median(response))
+
+```
+
+## Pragmatics Experiment
+
+### Load Data
+```{r}
+
+df_attn_check = read.csv("../../data/experiment1/verb_implicatures/verb_implicatures-attnCheckLikert.csv") %>% 
+  rename(item_num = fill_num) %>% 
+  mutate(trial_type = "filler")
+
+df_trials = read.csv("../../data/experiment1/verb_implicatures/verb_implicatures-trialDataLikert.csv") %>% 
+  rename(item_num = frame) %>% 
+  mutate(trial_type = "main")
+
+df_demo = read.csv("../../data/experiment1/verb_implicatures/verb_implicatures-participants.csv")
+
+```
+
+### Demographics
+
+#### Age
+```{r}
+df_demo %>% 
+  summarise(mean_age = round(mean(age)),
+                      sd_age = round(sd(age)))
+```
+#### Gender
+```{r}
+df_demo %>%
+  count(gender)
+```
+
+#### Race
+```{r}
+df_demo %>%
+  count(race)
+```
+
+### Wrangle data
+```{r}
+
+verb_ord_levels = c("AE", "AC", "EA", "EC", "CA", "CE")
+
+df_trials = df_trials %>% 
+  mutate(verb_ord = factor(toupper(paste(substr(verb1, 1, 1),
+                                         substr(verb2, 1, 1),
+                                         sep="")),
+                           levels = verb_ord_levels),
+         comp = case_when(verb_ord == "AE" | verb_ord == "EA" ~ "affected-enabled",
+                          verb_ord == "AC" | verb_ord == "CA" ~ "affected-caused",
+                          verb_ord == "EC" | verb_ord == "CE" ~ "enabled-caused"),
+         type = ifelse(verb_ord %in% c("AE", "AC", "EC"), "cancellation", "redundant"),
+         type = factor(type, levels = c("redundant", "cancellation")),
+         response = response + 1) %>% 
+  select(workerid, item_num, item, order, verb_ord, verb1, verb2, response, comp, type) %>% 
+  arrange(workerid, item_num, verb_ord)
+```
+
+### Bootstrap Counts
+
+```{r}
+set.seed(1)
+
+df_boots = df_trials %>%
+  bootstraps(times = 1000,
+             strata = verb_ord)
+
+
+df_boots_counts = df_boots %>% 
+  mutate(percentages = map(.x = splits,
+                      .f = ~ .x %>% 
+                        as_tibble() %>% 
+                        count(verb_ord, response, .drop = FALSE) %>% 
+                        group_by(verb_ord) %>% 
+                        mutate(percentage = n/sum(n) * 100))) %>% 
+  select(-splits) %>% 
+  unnest(cols = c(percentages)) %>% 
+  group_by(verb_ord, response) %>% 
+  summarise(low = quantile(percentage, 0.025),
+            high = quantile(percentage, 0.975))
+```
+
+### Bootstrap Means
+
+```{r}
+df_boots_mean = df_boots %>%
+  mutate(ord_mean = map(.x = splits,
+                   .f = ~ .x %>%
+                     as_tibble() %>%
+                     group_by(verb_ord) %>%
+                     summarise(ord_mean = mean(response)))) %>% 
+  select(-splits) %>% 
+  unnest(cols = c(ord_mean)) %>% 
+  group_by(verb_ord) %>%
+  summarise(low = round(quantile(ord_mean, 0.025), 2),
+            high = round(quantile(ord_mean, 0.975), 2))
+```
+
+```{r}
+df_prag_mean = df_trials %>% 
+  group_by(verb_ord) %>% 
+  summarise(mean_resp = round(mean(response), 2)) %>% 
+  left_join(df_boots_mean,
+             by = c("verb_ord"))
+
+df_prag_mean
+```
+
+### Visualize
+
+#### Overall Results
+
+```{r fig.width=10, fig.height=8}
+
+dodge_width = 0.44
+
+df_to_show = df_trials %>% 
+  count(verb_ord, comp, type, response) %>% 
+  group_by(verb_ord) %>% 
+  mutate(percentage = n / sum(n) * 100,
+         x_position = response + ifelse(type == "cancellation",
+                                        dodge_width/2,
+                                        -dodge_width/2)) %>% 
+  ungroup()
+
+df_med = df_trials %>% 
+  group_by(type, comp) %>% 
+  summarise(med_resp = median(response))
+
+df_to_show = df_to_show %>% 
+  left_join(df_boots_counts,
+            by = c("verb_ord", "response")) %>% 
+  left_join(df_med,
+            by = c("type", "comp")) %>% 
+  mutate(is_med = response == med_resp)
+
+
+df_text = df_to_show %>% 
+  select(comp,
+         type) %>% 
+  unique() %>% 
+  mutate(x_pos = ifelse(type == "redundant", 2.4, 5.6)) %>% 
+  arrange(comp, x_pos)
+
+df_text["label"] = c("caused \u2192 affected",
+                     "affected \u2192 caused",
+                     "enabled \u2192 affected",
+                     "affected \u2192 enabled",
+                     "caused \u2192 enabled",
+                     "enabled \u2192 caused")
+
+
+ggplot(df_to_show,
+       mapping = aes(x = x_position,
+                     fill = type)) +
+  geom_bar_pattern(mapping = aes(y = percentage,
+                                 linewidth = is_med,
+                                 pattern = type),
+                   pattern_fill = "black",
+                   pattern_color = "black",
+                   pattern_spacing = 0.028,
+                   pattern_density = 0.05,
+                   stat = "identity",
+                   color = "black",
+                   width = 0.4) +
+  geom_linerange(mapping = aes(x = response,
+                               ymin = low,
+                               ymax = high),
+                 color = "black",
+                 position = position_dodge(2*dodge_width)) +
+  geom_text(data = df_text,
+            mapping = aes(label = label,
+                          x = x_pos,
+                          color = type),
+            y = 55,
+            size = 7,
+            family = "Arial Unicode MS") +
+  geom_rect(xmin = 0.22,
+            xmax = 7.78,
+            ymin = 50,
+            ymax = 60,
+            fill = "transparent",
+            color = "black") +
+  
+  facet_wrap(~comp,
+             nrow = 3) +
+  guides(fill = guide_legend(title= "Sentence Type"),
+         pattern = guide_legend(title = "Sentence Type"),
+         linewidth = "none",
+         color = "none") +
+  coord_cartesian(clip = "off") +
+  scale_x_continuous(breaks = seq(1,7)) +
+  scale_y_continuous(breaks = seq(0,50,10),
+                     labels = label_percent(scale=1),
+                     limits= c(0,50)) + 
+  scale_fill_manual(values = c("red3", "mediumseagreen")) +
+  scale_color_manual(values = c("red3", "mediumseagreen")) +
+  scale_pattern_manual(values=c("stripe", "none")) +
+  scale_linewidth_manual(values = c(0.5, 1.2)) +
+  xlab("Response") +
+  ylab("Percentage") +
+  theme(strip.background = element_blank(),
+        strip.text = element_blank(),
+        panel.spacing = unit(2.2, "lines"),
+        plot.margin = margin(t = 30,
+                             l = 2),
+        axis.text.y = element_text(size = 14),
+        legend.key.size = unit(1.0, "cm"))
+
+ggsave("../../figures/paper_figures/implicature_vs_implication.pdf",
+       width = 10,
+       height = 8,
+       device = cairo_pdf)
+
+```
+#### Caused --> Enabled Frames
+
+```{r fig.height=16, fig.width=10}
+
+df_to_show = df_trials %>% 
+  filter(verb_ord == "CE") %>% 
+  mutate(response = response + 1)
+
+df_med = df_to_show %>% 
+  group_by(item) %>% 
+  summarise(med_resp = median(response)) %>% 
+  mutate(count = 28)
+
+df_boots = df_to_show %>%
+  bootstraps(times = 1000,
+             strata = item) %>% 
+  mutate(counts = map(.x = splits,
+                      .f = ~ .x %>% 
+                        as_tibble() %>% 
+                        count(item, response, .drop = FALSE))) %>% 
+  select(-splits) %>% 
+  unnest(cols = c(counts)) %>% 
+  group_by(item, response) %>% 
+  summarise(low = quantile(n, 0.025),
+            high = quantile(n, 0.975))
+
+ggplot(df_to_show,
+       mapping = aes(x = response)) + 
+  geom_bar(fill = "grey",
+           color = "black") +
+  geom_point(data = df_med,
+             mapping = aes(x = med_resp,
+                           y = count),
+             shape = 25,
+             fill = "red",
+             size = 3) +
+  geom_linerange(data = df_boots,
+                 mapping = aes(x = response,
+                               ymin = low,
+                               ymax = high)) +
+  facet_wrap(~item,
+             labeller = label_wrap_gen(width = 40),
+             ncol = 2) +
+  scale_x_continuous(breaks = seq(1,7)) +
+  scale_y_continuous(breaks = seq(0,25,5)) +
+  scale_linewidth_manual(values = c(0.5, 1.2)) +
+  guides(linewidth = "none") +
+  theme(strip.text = element_text(size = 16))
+
+ggsave("../../figures/paper_figures/pragmatics_exp_frames_CE.pdf",
+       height = 12,
+       width = 12)
+```
+
+### Confirmatory Analysis
+
+#### Acceptability for control
+```{r}
+
+df_acc = df_data %>% 
+  filter(!pilot_sample,
+         trial_type == "main") %>% 
+  left_join(df_frames_passed,
+            by = c("item_num")) %>% 
+  filter(passed) %>% 
+  group_by(item_num, verb) %>% 
+  summarise(med_acc = median(response)) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = verb,
+              values_from = med_acc) %>% 
+  mutate(frame = seq(0,9),
+         AE = enabled - affected,
+         AC = caused - affected,
+         EC = caused - enabled,
+         EA = affected - enabled,
+         CA = affected - caused,
+         CE = enabled - caused) %>% 
+  select(frame, AE, AC, EC, EA, CA, CE) %>% 
+  pivot_longer(c(AE, AC, EC, EA, CA, CE),
+               names_to = "verb_ord",
+               values_to = "acc_diff")
+
+```
+
+#### Setup
+
+```{r}
+df_to_fit = df_trials %>% 
+  rename(frame = item_num) %>% 
+  left_join(df_acc,
+            by = c("frame", "verb_ord")) %>% 
+  mutate(response = response + 1)
+```
+
+#### Fit Model
+
+```{r}
+model = brm(response ~ 1 + verb_ord + acc_diff +
+              (1 | workerid) + (1|frame),
+            data =  df_to_fit,
+            family = cumulative(probit),
+            file = "regression/pragmatics",
+            seed = 1)
+```
+
+```{r}
+summary(model)
+```
+
+#### Hypothesis Test
+
+```{r}
+
+hyps = c(hyp1 = "verb_ordAE - verb_ordEA > 0",
+         # verb_ordAC is the reference level
+         hyp2 = "0 - verb_ordCA > 0",
+         hyp3 = "verb_ordEC - verb_ordCE > 0")
+
+hypothesis(model,
+           hyps,
+           # corresponds to alpha 0.05 for a one-sided test. See supplementary console output
+           alpha = 0.025)
+```
+### Exploratory Analysis
+
+```{r}
+df_trials %>% 
+  mutate(response = response + 1) %>% 
+  group_by(verb_ord) %>% 
+  summarise(med_resp = median(response))
+```
+
+
+# Experiment 2 (Speaker)
+
+## Load Data
+```{r}
+con = dbConnect(SQLite(), dbname = "../../data/experiment2/speaker_experiment_anonymized.db");
+df_database = dbReadTable(con, "language")
+dbDisconnect(con)
+```
+
+```{r filter-to-this-study}
+# filter out incompletes 
+df_data = df_database %>%
+  filter(status %in% 3:5,
+         !str_detect(mode, "debug"),
+         codeversion %in% c("forced_choice_2"))
+```
+
+## Demographics
+
+```{r}
+df_demographics = df_data$datastring %>% 
+  spread_values(language = jstring("questiondata", "language"),
+                age = jstring("questiondata", "age"),
+                gender = jstring("questiondata", "gender"),
+                race = jstring("questiondata", "race"),
+                ethnicity = jstring("questiondata", "ethnicity"),
+                feedback = jstring("questiondata", "feedback")) %>% 
+  rename(participant = document.id) %>% 
+  mutate(time = difftime(df_data$endhit,
+                         df_data$beginhit,
+                         units = "mins"))
+```
+
+
+### Age
+```{r}
+df_demographics %>%
+  mutate(age = as.numeric(age)) %>%
+  summarise(`Mean age` = round(mean(age, na.rm = TRUE)),
+            `Age standard deviation` = sd(age, na.rm = TRUE)) 
+```
+
+### Gender
+```{r}
+df_demographics %>%
+  mutate(gender = str_replace(gender, "^[fF].*", "Female"),
+         gender = str_replace(gender, "^[mM].*", "Male"),
+         gender = str_replace(gender, "^$", NA_character_)) %>%
+  count(gender, name = "Count") %>%
+  mutate(gender = recode(gender, .missing = "No response")) 
+```
+
+### Race
+```{r}
+
+df_demographics %>% 
+  mutate(race = tolower(race)) %>% 
+  count(race, name = "Count")
+
+```
+
+
+### Language
+```{r}
+df_demographics %>%
+  mutate(language = str_replace(language, "^[eE][nN][gG].*", "English"),
+         language = str_replace(language, "^$", NA_character_)) %>%
+  count(language, name = "Count") %>%
+  mutate(language = recode(language, .missing = "No response")) 
+```
+
+## Wrangle Response Data
+
+```{r warning=FALSE}
+df_long = df_data$datastring %>% 
+  as.tbl_json() %>% 
+  enter_object("data") %>%
+  gather_array("order") %>% 
+  enter_object("trialdata") %>% 
+  gather_object("index") %>% 
+  append_values_string("value") %>% 
+  as_tibble() %>% 
+  rename(participant = document.id) %>% 
+  spread(index, value) %>% 
+  rename(trial = id) %>% 
+  mutate_at(vars(trial, time, play_count), ~ as.numeric(.)) %>% 
+  mutate(time = time / 1000) %>% 
+  select(participant, trial, description, response, time, play_count) %>% 
+  arrange(participant, trial)
+```
+
+### Attention Check
+```{r}
+df_long = df_long %>%
+  mutate(is_attention_check = trial == 30)
+
+excluded_participants = df_long %>%
+  filter(response != "no_difference" & is_attention_check) %>%
+  .$participant
+
+df_long = df_long %>%
+  filter(!(participant %in% excluded_participants))
+
+num_excluded_participants = length(excluded_participants)
+```
+
+
+### Aggregate Participant Responses
+```{r}
+df_agg = df_long %>%
+  # ignore attention check and instruction video
+  filter(trial != 30) %>% 
+  # aggregate over participants
+  group_by(trial, response) %>%
+  summarise(count = length(response)) %>%   
+  ungroup() %>% 
+  right_join(expand.grid(trial = seq(0,29),
+                         response = c("affect",
+                                      "cause",
+                                      "enable",
+                                      "no_difference")),
+             by = c("trial", "response")) %>% 
+  mutate(count = ifelse(is.na(count), 0, count),
+         response = factor(response,
+                           levels = c("no_difference",
+                                      "affect",
+                                      "enable",
+                                      "cause"))) %>% 
+  group_by(trial) %>% 
+  mutate(data_y = count/sum(count)) %>% 
+  ungroup() %>% 
+  arrange(trial, response) %>% 
+  select(trial, response, data_y)
+```
+
+
+## Load Models
+
+### Full model and no pragmatics
+```{r}
+
+df_full_model = read.csv("../python/model_performance/speaker_full_model_predictions.csv") %>% 
+  mutate(model = "full") %>% 
+  select(-X)
+
+df_sem_model = read.csv("../python/model_performance/speaker_no_pragmatics_predictions.csv") %>% 
+  mutate(model = "semantics") %>% 
+  select(-X)
+
+df_full_model_simple = read.csv("../python/model_performance/speaker_full_model_simple_predictions.csv") %>% 
+  mutate(model = "full") %>% 
+  select(-X)
+
+df_sem_model_simple = read.csv("../python/model_performance/speaker_no_pragmatics_simple_predictions.csv") %>%
+  mutate(model = "semantics") %>% 
+  select(-X)
+
+```
+
+
+
+```{r}
+df_aspects = read.csv("aspects/aspect_dataframe.csv") %>%
+  select(-X)
+
+df_full_data = df_long %>%
+  select(participant, trial, response)
+
+```
+
+### Regression
+
+#### Setup Regression Noise-Aspect-Data files for crossv
+```{r}
+
+unoise_range = c(0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6)
+
+df_long_simp = df_long %>% 
+  select(trial, participant, response)
+
+df_aspects_noise = df_aspects %>% 
+  filter(uncertainty_noise == 0.5)
+
+temp = left_join(df_aspects_noise,
+          df_long_simp,
+          by = c("trial"))
+
+for (unoise in unoise_range) {
+  
+  df_aspects_noise = df_aspects %>% 
+    filter(uncertainty_noise == unoise)
+  
+  df_aspects_noise_data = left_join(df_aspects_noise,
+                                    df_long_simp,
+                                    by = c("trial"))
+  
+  if (unoise == 1.0) {
+    unoise = "1.0"
+  }
+  
+  write.csv(df_aspects_noise_data,
+            paste("aspects/noise_", unoise, ".csv", sep = ""))
+
+}
+
+```
+
+#### Main Model
+
+##### Fit Regressions all Noises
+```{r}
+
+unoise_range = c(0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6)
+# unoise_range = c(0.5, 0.6, 0.7)
+
+# Comment out the fitting procedure
+for (unoise in unoise_range) {
+  df_aspects_noise = df_aspects %>%
+  filter(uncertainty_noise == unoise)
+
+  df_aspects_data = left_join(df_aspects_noise,
+                              df_full_data,
+                              by = "trial") %>%
+    mutate(response = factor(response,
+                             levels = c("no_difference",
+                                        "affect",
+                                        "enable",
+                                        "cause"),
+                             ordered = TRUE))
+
+   if (unoise == 1) {
+    noise_str = "1.0"
+   } else {
+    noise_str = unoise
+  }
+
+  filename = paste("regression/reg_noise_", noise_str,
+                   sep = "")
+
+  reg = brm(formula = response ~ whether + how + sufficient + + moving + unique +
+              (whether + how + sufficient + moving + unique|participant) +
+              (1|trial),
+            data = df_aspects_data,
+            family = cumulative(probit),
+            file = filename,
+            seed = 1,
+            cores=4)
+}
+
+```
+
+
+##### Determine best fitting regression
+```{r}
+
+reg_list = list()
+
+unoise_range = c(0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6)
+likelihoods = c()
+
+
+i = 1
+for (unoise in unoise_range) {
+  
+  filename = paste("regression/reg_noise_",
+                   ifelse(unoise == 1.0, "1.0", unoise),
+                   ".rds",
+                   sep = "")
+  
+  reg = readRDS(filename)
+  
+  reg_list[[i]] = reg
+  
+  i = i + 1
+  
+}
+
+df_reg = tibble(unoise = unoise_range,
+                fit = reg_list) %>%
+  mutate(likelihood = map(.x = fit,
+                          .f = ~sum(log_lik(.)))) %>%
+  mutate(likelihood = unlist(likelihood)) %>% 
+  arrange(desc(likelihood))
+
+```
+
+
+```{r}
+opt_noise = df_reg$unoise[[1]]
+top_reg = df_reg$fit[[1]] 
+df_aspect_noise = df_aspects %>% 
+  filter(uncertainty_noise == opt_noise)
+```
+
+```{r}
+opt_noise
+```
+
+
+```{r}
+top_reg
+```
+
+
+##### Extract Regression Predictions
+
+```{r}
+
+df_reg_model = as.data.frame(fitted(reg,
+                              newdata = df_aspect_noise,
+                              re_formula = NA)[1:30,1,]) %>% 
+  rename(no_difference = 1,
+         affect = 2,
+         enable = 3, 
+         cause = 4) %>% 
+  mutate(trial = seq(0,29)) %>% 
+  pivot_longer(c(no_difference,
+                 affect,
+                 enable,
+                 cause),
+               names_to = "response",
+               values_to = "model_y") %>% 
+  mutate(model = "regression")
+
+```
+
+#### Simple Model
+
+##### Fit Regressions all Noises
+```{r}
+
+unoise_range = c(0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6)
+# unoise_range = c(0.5, 0.6, 0.7)
+
+# Comment out the fitting procedure
+for (unoise in unoise_range) {
+  df_aspects_noise = df_aspects %>%
+  filter(uncertainty_noise == unoise)
+
+  df_aspects_data = left_join(df_aspects_noise,
+                              df_full_data,
+                              by = "trial") %>%
+    mutate(response = factor(response,
+                             levels = c("no_difference",
+                                        "affect",
+                                        "enable",
+                                        "cause"),
+                             ordered = TRUE))
+
+   if (unoise == 1) {
+    noise_str = "1.0"
+   } else {
+    noise_str = unoise
+  }
+
+  filename = paste("regression/reg_simple_noise_", noise_str,
+                   sep = "")
+
+  reg = brm(formula = response ~ whether + how + sufficient + 
+              (whether + how + sufficient|participant) +
+              (1|trial),
+            data = df_aspects_data,
+            family = cumulative(probit),
+            file = filename,
+            seed = 1,
+            cores=4)
+}
+
+```
+
+
+##### Determine best fitting regression
+```{r}
+
+reg_list = list()
+
+unoise_range = c(0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6)
+likelihoods = c()
+
+
+i = 1
+for (unoise in unoise_range) {
+  
+  filename = paste("regression/reg_simple_noise_",
+                   ifelse(unoise == 1.0, "1.0", unoise),
+                   ".rds",
+                   sep = "")
+  
+  reg = readRDS(filename)
+  
+  reg_list[[i]] = reg
+  
+  i = i + 1
+  
+}
+
+df_reg = tibble(unoise = unoise_range,
+                fit = reg_list) %>%
+  mutate(likelihood = map(.x = fit,
+                          .f = ~sum(log_lik(.)))) %>%
+  mutate(likelihood = unlist(likelihood)) %>% 
+  arrange(desc(likelihood))
+
+```
+
+
+```{r}
+opt_noise = df_reg$unoise[[1]]
+top_reg = df_reg$fit[[1]] 
+df_aspect_noise = df_aspects %>% 
+  filter(uncertainty_noise == opt_noise)
+```
+
+```{r}
+opt_noise
+```
+
+
+```{r}
+top_reg
+```
+
+
+##### Extract Regression Predictions
+
+```{r}
+
+df_reg_model_simple = as.data.frame(fitted(reg,
+                              newdata = df_aspect_noise,
+                              re_formula = NA)[1:30,1,]) %>% 
+  rename(no_difference = 1,
+         affect = 2,
+         enable = 3, 
+         cause = 4) %>% 
+  mutate(trial = seq(0,29)) %>% 
+  pivot_longer(c(no_difference,
+                 affect,
+                 enable,
+                 cause),
+               names_to = "response",
+               values_to = "model_y") %>% 
+  mutate(model = "regression")
+
+```
+
+### Combine Models
+```{r}
+
+df_top_models = rbind(df_full_model,
+                      df_sem_model,
+                      df_reg_model)
+
+df_top_models_simple = rbind(df_full_model_simple,
+                             df_sem_model_simple,
+                             df_reg_model_simple)
+
+```
+
+## Visualize Model Performance
+
+### Add confidence intervals
+```{r}
+
+count_with_ci = function(df, var) {
+  y = df %>%
+    group_by(trial, description) %>%
+    count({{var}}, name = y, .drop = FALSE)
+  resampled_counts =
+    map_dfr(1:100,
+            function(i) {
+              df %>%
+                mutate(response = sample({{var}}, replace = TRUE)) %>%
+                count(response, .drop = FALSE)
+            }) %>%
+    group_by(trial, description, response) %>%
+    summarise(ymin = quantile(n, probs = 0.025),
+              ymax = quantile(n, probs = 0.975))
+}
+
+df_actual =
+  df_long %>%
+  mutate(response = factor(response,
+                           levels = c("no_difference",
+                                      "affect",
+                                      "enable",
+                                      "cause"))) %>% 
+  filter(trial != 30)
+
+df_agg = map_dfr(1:1000,
+                 function(i) {
+                   df_actual %>%
+                     group_by(trial) %>%
+                     mutate(response = sample(response, replace = TRUE)) %>%
+                     count(response, .drop = FALSE) %>%
+                     mutate(n = n / sum(n))}) %>%
+  group_by(trial, response) %>%
+  summarise(data_ymin = quantile(n, probs = 0.025),
+            data_ymax = quantile(n, probs = 0.975)) %>%
+  left_join(df_actual %>%
+              group_by(trial) %>%
+              count(response, name = "data_y", .drop = FALSE) %>%
+              mutate(data_y = data_y / sum(data_y)),
+            by = c("trial", "response")) %>%
+  ungroup()
+
+write.csv(df_agg, "../../data/experiment2/participant_means.csv")
+```
+
+### Create Latex Table
+```{r}
+print_table = function(data, format = "html", digits = 2){
+  if(format == "html"){
+    data %>% 
+      kable(digits = digits) %>% 
+      kable_styling()
+  }else if(format == "latex"){
+    data %>% 
+      xtable(digits = digits,
+             caption = "Caption",
+             label = "tab:table") %>%
+      print(include.rownames = F,
+            booktabs = T,
+            sanitize.colnames.function = identity,
+            caption.placement = "top")
+  }
+}
+```
+
+```{r}
+df_agg_rounded = df_agg %>% 
+  mutate_if(is.numeric, ~round(., digits = 2)) %>% 
+  mutate(trial = trial + 1) %>% 
+  select(trial, response, data_y) %>% 
+  mutate(response = factor(response,
+                           levels = c("cause",
+                                      "enable",
+                                      "affect",
+                                      "no_difference"),
+                           labels = c("Caused",
+                                      "Enabled",
+                                      "Affected",
+                                      "No Difference"))) %>%
+  arrange(trial, response) %>%
+  mutate(trial = as.character(trial)) %>% 
+  rename(Scenario = trial) %>% 
+  pivot_wider(id_cols = c(Scenario),
+              names_from = "response",
+              values_from = "data_y")
+
+print_table(df_agg_rounded, format="latex")
+```
+
+
+### Simple Model
+
+#### Scatter Plots
+
+```{r fig.width=20, fig.height=5}
+
+best_models_all = left_join(df_top_models_simple, df_agg, by = c("trial", "response"))
+
+df.plot = best_models_all %>%
+  rename(Model = model) %>%
+  mutate(Model = factor(Model,
+                        levels = c("full", "semantics", "regression"),
+                        labels = c("Full Model", "No Pragmatics", "No Semantics and No Pragmatics"))) %>% 
+  mutate(response = factor(response,
+                           levels = c("no_difference", "affect", "enable", "cause"),
+                           labels = c("no difference", "affected", "enabled", "caused")))
+
+df.text = df.plot %>% 
+  group_by(Model) %>% 
+  summarise(r = cor(data_y, model_y),
+            RMSE = sqrt(mean((data_y - model_y)^2))) %>% 
+  ungroup() %>% 
+  pivot_longer(cols = -Model) %>% 
+  mutate_if(is.numeric, ~ round(., 2)) %>% 
+  mutate(data_y = rep(c(0.9, 1), 3),
+         model_y = 0,
+         label = str_c(name, " = ", value),
+         label = ifelse(name == "r", 
+                        str_replace(label, "0.", "."),
+                        label))
+
+# "dodgerblue1",  "mediumpurple2", "hotpink"
+
+ggplot(data = df.plot,
+       mapping = aes(x = model_y,
+                     y = data_y)) +
+  geom_smooth(method = "lm",
+              se = T,
+              color = "black",
+              show.legend = F) +
+  geom_abline(slope = 1,
+              intercept = 0,
+              linetype = 2) +
+  geom_text(data = df.text,
+            mapping = aes(label = label),
+            hjust = 0,
+            size = 8) + 
+  geom_errorbar(mapping = aes(ymin = data_ymin,
+                              ymax = data_ymax),
+                alpha = 0.6,
+                width = 0,
+                show.legend = FALSE) +
+  geom_point(mapping = aes(fill = response,
+                           shape = response),
+             alpha = 1.0,
+             size = 4) +
+  facet_grid(cols = vars(Model)) +
+  scale_shape_manual(values = 21:24) + 
+  scale_fill_manual(values = c("slategray2", rgb(41/255, 99/255, 152/255), rgb(209/255, 144/255, 50/255), rgb(54/255, 122/255, 93/255))) +
+  scale_x_continuous(breaks = seq(0,1,0.25),
+                     labels = c("0%", "25%", "50%", "75%", "100%")) +
+  scale_y_continuous(breaks = seq(0,1,0.25),
+                     labels = c("0%", "25%", "50%", "75%", "100%")) +
+  labs(x = "Model Prediction",
+       y = "Proportion of Responses") +
+  theme(legend.position = c(0.27, 0.2),
+        # axis.title.x = element_text(hjust = 0.12),
+        panel.spacing.x = unit(1, "cm"),
+        legend.text = element_text(size = 14),
+        legend.title = element_text(size=14),
+        strip.text = element_text(size = 24),
+        legend.box.background = element_rect(color = "black",
+                                             linewidth = 1.5)) +
+  guides(fill = guide_legend(title = "response: "),
+         shape = guide_legend(title = "response: "))
+
+ggsave("../../figures/paper_figures/speaker_simple_scatter.pdf",
+       width = 20,
+       height = 6.5)
+
+```
+
+
+### Model with Softeners
+
+#### Sample Cases
+```{r fig.width=13, fig.height=10}
+sample_cases = c(12, 18, 4, 29, 5, 7, 15, 14, 6, 9)
+words = c("no_difference", "affect", "enable", "cause")
+labels = c("N", "A", "E", "C")
+df.plot = df_agg %>%
+  filter(trial %in% sample_cases) %>%
+  mutate(trial = factor(trial, levels = sample_cases),
+         Clip = factor(trial, labels = 1:length(sample_cases)),
+         response = factor(response,
+                           levels = words,
+                           labels = labels))
+df.model = df_top_models %>% 
+  filter(trial %in% sample_cases) %>%
+  mutate(Model = model,
+         trial = factor(trial, levels = sample_cases),
+         Clip = factor(trial, labels = 1:length(sample_cases)),
+         response = factor(response,
+                           levels = words,
+                           labels = labels),
+         Model = factor(Model, 
+                        levels = c("full", "semantics", "regression"),
+                        labels = c("Full", "No Pragmatics", "No Pragmatics and No Semantics")))
+func_load_image = function(clip){
+  readJPEG(str_c("../../figures/trial_schematics/trial", clip, ".jpeg"))
+}
+df.clips = df.plot %>% 
+  distinct(trial, Clip) %>% 
+  arrange(Clip) %>% 
+  mutate(grob = map(.x = trial, .f = ~ func_load_image(clip = .x)))
+
+df.text = df.clips %>% 
+  select(Clip) %>% 
+  distinct() %>% 
+  mutate(x = 0.75,
+         y = 1.73)
+
+ggplot(data = df.plot,
+           mapping = aes(x = response, y = data_y)) +
+  geom_bar(stat = "identity",
+           fill = "lightgray",
+           color = "black") +
+  geom_point(data = df.model,
+             mapping = aes(x = response,
+                           y = model_y,
+                           shape = Model,
+                           fill = Model),
+             size = 3,
+             position = position_dodge(0.8),
+             color = "black") +
+  geom_errorbar(
+    mapping = aes(ymin = data_ymin, ymax = data_ymax),
+    width = 0
+  ) +
+  geom_custom(data = df.clips,
+              mapping = aes(data = grob, x = 2.5, y = Inf),
+              grob_fun = function(x) rasterGrob(x,
+                                                interpolate = T,
+                                                vjust = 0)) +
+  geom_text(data = df.text,
+            mapping = aes(x = x,
+                          y = y,
+                          label = Clip),
+            hjust = 0,
+            size = 11,
+            color = "gray40") +
+  facet_wrap(~Clip,
+             nrow = 2,
+             labeller = "label_both",
+             scales = "free_x") +
+  scale_fill_brewer(palette = "Dark2", name="") +
+  scale_shape_manual(name = "",
+                     values = 21:23) + 
+  scale_y_continuous(breaks = seq(0, 1, 0.25), 
+                     labels = str_c(seq(0, 100, 25), "%")) + 
+  labs(y = "Proportion of Responses",
+       caption = "N: no difference, A: affected, E: enabled, C: caused") +
+  coord_cartesian(clip = "off",
+                  ylim = c(0, 1)) + 
+  theme(legend.text.align = 0,
+        panel.grid = element_blank(),
+        legend.position = "bottom",
+        axis.title.x = element_blank(),
+        legend.text = element_text(size = 16),
+        plot.caption = element_text(size = 16, color = "gray20", hjust = 0.5),
+        plot.margin = margin(t = 4.5, l = 0.2, r = 0.2, b = 0.1, unit = "cm"),
+        panel.spacing.y = unit(5, "cm"),
+        strip.background = element_blank(),
+        strip.text = element_blank()) +
+  guides(fill = guide_legend(override.aes = list(size = 6)))
+
+ggsave("../../figures/paper_figures/speaker_sample_cases.pdf",
+       width = 13,
+       height = 10)
+```
+
+
+#### Scatter Plots
+
+```{r fig.width=20, fig.height=5}
+
+best_models_all = left_join(df_top_models, df_agg, by = c("trial", "response"))
+
+df.plot = best_models_all %>%
+  rename(Model = model) %>%
+  mutate(Model = factor(Model,
+                        levels = c("full", "semantics", "regression"),
+                        labels = c("Full Model", "No Pragmatics", "No Semantics and No Pragmatics"))) %>% 
+  mutate(response = factor(response,
+                           levels = c("no_difference", "affect", "enable", "cause"),
+                           labels = c("no difference", "affected", "enabled", "caused")))
+
+df.text = df.plot %>% 
+  group_by(Model) %>% 
+  summarise(r = cor(data_y, model_y),
+            RMSE = sqrt(mean((data_y - model_y)^2))) %>% 
+  ungroup() %>% 
+  pivot_longer(cols = -Model) %>% 
+  mutate_if(is.numeric, ~ round(., 2)) %>% 
+  mutate(data_y = rep(c(0.9, 1), 3),
+         model_y = 0,
+         label = str_c(name, " = ", value),
+         label = ifelse(name == "r", 
+                        str_replace(label, "0.", "."),
+                        label))
+
+# "dodgerblue1",  "mediumpurple2", "hotpink"
+
+ggplot(data = df.plot,
+       mapping = aes(x = model_y,
+                     y = data_y)) +
+  geom_smooth(method = "lm",
+              se = T,
+              color = "black",
+              show.legend = F) +
+  geom_abline(slope = 1,
+              intercept = 0,
+              linetype = 2) +
+  geom_text(data = df.text,
+            mapping = aes(label = label),
+            hjust = 0,
+            size = 8) + 
+  geom_errorbar(mapping = aes(ymin = data_ymin,
+                              ymax = data_ymax),
+                alpha = 0.6,
+                width = 0,
+                show.legend = FALSE) +
+  geom_point(mapping = aes(fill = response,
+                           shape = response),
+             alpha = 1.0,
+             size = 4) +
+  facet_grid(cols = vars(Model)) +
+  scale_shape_manual(values = 21:24) + 
+  scale_fill_manual(values = c("slategray2", rgb(41/255, 99/255, 152/255), rgb(209/255, 144/255, 50/255), rgb(54/255, 122/255, 93/255))) +
+  scale_x_continuous(breaks = seq(0,1,0.25),
+                     labels = c("0%", "25%", "50%", "75%", "100%")) +
+  scale_y_continuous(breaks = seq(0,1,0.25),
+                     labels = c("0%", "25%", "50%", "75%", "100%")) +
+  labs(x = "Model Prediction",
+       y = "Proportion of Responses") +
+  theme(legend.position = c(0.28, 0.2),
+        # axis.title.x = element_text(hjust = 0.12),
+        panel.spacing.x = unit(1, "cm"),
+        legend.text = element_text(size = 14),
+        legend.title = element_text(size=14),
+        strip.text = element_text(size = 24),
+        legend.box.background = element_rect(color = "black",
+                                             linewidth = 1.5)) +
+  guides(fill = guide_legend(title = "response: "),
+         shape = guide_legend(title = "response: "))
+
+ggsave("../../figures/paper_figures/speaker_scatter.pdf",
+       width = 20,
+       height = 6.5)
+
+```
+
+
+```{r fig.width=8, fig.height=6}
+sample_cases = c(16, 25)
+words = c("no_difference", "affect", "enable", "cause")
+labels = c("N", "A", "E", "C")
+df.plot = df_agg %>%
+  filter(trial %in% sample_cases) %>%
+  mutate(trial = factor(trial, levels = sample_cases),
+         Clip = factor(trial, labels = 1:length(sample_cases)),
+         response = factor(response,
+                           levels = words,
+                           labels = labels))
+
+df_alt_models = tibble(trial = c(16, 16, 16, 16, 
+                                 25, 25, 25, 25, 
+                                 16, 16, 16, 16, 
+                                 25, 25, 25, 25),
+                       response = c("cause", "enable", "affect", "no_difference", 
+                                    "cause", "enable", "affect", "no_difference", 
+                                    "cause", "enable", "affect", "no_difference", 
+                                    "cause", "enable", "affect", "no_difference"),
+                       model_y = c(0, 1, 0, 0,
+                                   0, 1, 0, 0,
+                                   0, 1, 0, 0,
+                                   0, 1, 0, 0),
+                       model = c("Mental Models", "Mental Models", "Mental Models", "Mental Models",
+                                 "Mental Models", "Mental Models", "Mental Models", "Mental Models",
+                                 "Causal Models", "Causal Models", "Causal Models", "Causal Models", 
+                                 "Causal Models", "Causal Models", "Causal Models", "Causal Models"))
+
+df.model = df_top_models %>% 
+  filter(trial %in% sample_cases,
+         model == "full") %>%
+  rbind(df_alt_models) %>%
+  mutate(Model = model,
+         trial = factor(trial, levels = sample_cases),
+         Clip = factor(trial, labels = 1:length(sample_cases)),
+         response = factor(response,
+                           levels = words,
+                           labels = labels),
+         Model = factor(Model, 
+                        levels = c("full", "Mental Models", "Causal Models"),
+                        labels = c("CSM", "Mental Models", "Causal Models")))
+func_load_image = function(clip){
+  readJPEG(str_c("../../figures/trial_schematics/trial", clip, ".jpeg"))
+}
+df.clips = df.plot %>% 
+  distinct(trial, Clip) %>% 
+  arrange(Clip) %>% 
+  mutate(grob = map(.x = trial, .f = ~ func_load_image(clip = .x)))
+
+df.text = df.clips %>% 
+  select(Clip) %>% 
+  distinct() %>% 
+  mutate(x = 0.75,
+         y = 1.93)
+
+ggplot(data = df.plot,
+           mapping = aes(x = response, y = data_y)) +
+  geom_bar(stat = "identity",
+           fill = "lightgray",
+           color = "black") +
+  geom_errorbar(
+    mapping = aes(ymin = data_ymin, ymax = data_ymax),
+    width = 0
+  ) +
+  geom_point(data = df.model,
+             mapping = aes(x = response,
+                           y = model_y,
+                           shape = Model,
+                           fill = Model),
+             size = 3,
+             position = position_dodge(0.8),
+             color = "black") +
+  geom_custom(data = df.clips,
+              mapping = aes(data = grob, x = 2.5, y = Inf),
+              grob_fun = function(x) rasterGrob(x,
+                                                interpolate = T,
+                                                vjust = 0)) +
+  # geom_text(data = df.text,
+  #           mapping = aes(x = x,
+  #                         y = y,
+  #                         label = Clip),
+  #           hjust = 0,
+  #           size = 11,
+  #           color = "gray40") +
+  facet_wrap(~Clip,
+             nrow = 1,
+             labeller = "label_both",
+             scales = "free_x") +
+  scale_fill_brewer(palette = "Dark2", name="") +
+  scale_shape_manual(name = "",
+                     values = 21:23) + 
+  scale_y_continuous(breaks = seq(0, 1, 0.25), 
+                     labels = str_c(seq(0, 100, 25), "%")) + 
+  labs(y = "Proportion of Responses",
+       caption = "N: no difference, A: affected, E: enabled, C: caused") +
+  coord_cartesian(clip = "off",
+                  ylim = c(0, 1)) + 
+  theme(legend.text.align = 0,
+        panel.grid = element_blank(),
+        legend.position = "bottom",
+        axis.title.x = element_blank(),
+        legend.text = element_text(size = 16),
+        plot.caption = element_text(size = 16, color = "gray20", hjust = 0.5),
+        plot.margin = margin(t = 6, l = 0.2, r = 0.2, b = 0.1, unit = "cm"),
+        panel.spacing.x = unit(2, "cm"),
+        panel.spacing.y = unit(5, "cm"),
+        strip.background = element_blank(),
+        strip.text = element_blank()) +
+  guides(fill = guide_legend(override.aes = list(size = 6)))
+
+ggsave("../../figures/paper_figures/causal_model_comp_cases.pdf",
+       width = 8,
+       height = 6)
+```
+
+
+## Cross Validation
+
+### Main Model
+
+#### Load Models
+
+```{r}
+
+df_cv_full = read.csv("../python/model_performance/cv_speaker_full_model.csv") %>% 
+  mutate(model = "full") %>% 
+  select(split,
+         trial,
+         verb,
+         model_pred,
+         data_val,
+         use,
+         model)
+
+df_cv_sem = read.csv("../python/model_performance/cv_speaker_no_pragmatics.csv") %>% 
+  mutate(model = "semantic") %>% 
+  select(split,
+         trial,
+         verb,
+         model_pred,
+         data_val,
+         use,
+         model)
+
+
+df_cv_reg = tibble(split = 1:100,
+                   model = "regression") %>% 
+  mutate(data = map(.x = split,
+                    .f = ~ read.csv(sprintf("splits/split%03d.csv", .)))) %>% 
+  unnest(cols = data)
+```
+
+```{r}
+df_cv_reg_update = df_cv_reg %>% 
+  select(split,
+         trial,
+         response,
+         model_y,
+         data_y,
+         half,
+         model) %>% 
+  rename(verb = response,
+         model_pred = model_y,
+         data_val = data_y,
+         use = half) %>% 
+  mutate(split = split - 1)
+
+
+df_cv = rbind(df_cv_full,
+              df_cv_sem,
+              df_cv_reg_update) %>% 
+  mutate(use = factor(use,
+                      levels = c("train",
+                                 "test")),
+         model = factor(model,
+                        levels = c("full",
+                                   "semantic",
+                                   "regression")),
+         verb = ifelse(verb == "didn't affect", "no_difference", verb))
+
+```
+
+#### Evaluate
+```{r}
+
+df_cv_perf = df_cv %>% 
+  group_by(model, split, use) %>% 
+  summarise(sum_sq_err = sum((model_pred - data_val)^2),
+            split_r = cor(model_pred, data_val),
+            split_rmse = rmse(model_pred, data_val))
+
+```
+
+
+#### Visualize
+
+```{r fig.width=10, fig.height=3}
+
+df_to_show = df_cv_perf %>% 
+  filter(use == "test")
+
+ggplot(df_cv_perf,
+       mapping = aes(x = sum_sq_err,
+                     fill = model)) +
+  geom_histogram(position = "identity",
+                 color = "black",
+                 alpha = 0.6) +
+  facet_wrap(~use,
+             ncol = 2,
+             scales = "free_x")
+```
+
+#### Summarize r and rmse
+```{r}
+df_cv_perf %>% 
+  filter(use == "test") %>% 
+  group_by(use, model) %>% 
+  summarise(median_r = round(median(split_r), digits=2),
+            lower_r = round(quantile(split_r, probs = 0.05), digits=2),
+            upper_r = round(quantile(split_r, probs = 0.95), digits=2),
+            median_rmse = round(median(split_rmse), digits=2),
+            lower_rmse = round(quantile(split_rmse, probs = 0.05), digits=2),
+            upper_rmse = round(quantile(split_rmse, probs = 0.95), digits=2))
+```
+
+#### Summarize model differences
+```{r}
+df_cv_perf %>% 
+  pivot_wider(id_cols = c(split, use),
+              names_from = model,
+              values_from = c(split_r, split_rmse)) %>% 
+  ungroup() %>% 
+  filter(use == "test") %>% 
+  mutate(diff_sem_r = split_r_full - split_r_semantic,
+         diff_sem_rmse = split_rmse_semantic - split_rmse_full,
+         diff_reg_r = split_r_full - split_r_regression,
+         diff_reg_rmse = split_rmse_regression - split_rmse_full) %>%
+  select(split,
+         diff_sem_r,
+         diff_sem_rmse,
+         diff_reg_r,
+         diff_reg_rmse) %>% 
+  pivot_longer(cols = c(diff_sem_r,
+                        diff_sem_rmse,
+                        diff_reg_r,
+                        diff_reg_rmse),
+               names_to = c("model_comp", "metric"),
+               names_pattern = "diff_(.*)_(.*)",
+               values_to = "val") %>% 
+  group_by(metric, model_comp) %>% 
+  summarise(med = round(median(val), digits = 2),
+            lower = round(quantile(val, probs=0.05), digits = 2),
+            upper = round(quantile(val, probs=0.95), digits = 2)) %>% 
+  mutate(model_comp = factor(model_comp,
+                             levels = c("sem", "reg")),
+         metric = factor(metric,
+                         levels = c("r", "rmse")))
+```
+
+### Simple Model
+
+#### Load Models
+```{r}
+df_cv_simple_full = read.csv("../python/model_performance/cv_speaker_full_model_simple.csv") %>% 
+  mutate(model = "full") %>% 
+  select(split,
+         trial,
+         verb,
+         model_pred,
+         data_val,
+         use,
+         model)
+
+df_cv_simple_sem = read.csv("../python/model_performance/cv_speaker_no_pragmatics_simple.csv") %>%
+  mutate(model = "semantic") %>% 
+  select(split,
+         trial,
+         verb,
+         model_pred,
+         data_val,
+         use,
+         model)
+
+df_cv_simple_reg = tibble(split = 1:100,
+                   model = "regression") %>% 
+  mutate(data = map(.x = split,
+                    .f = ~ read.csv(sprintf("splits/split%03d_simple.csv", .)))) %>% 
+  unnest(cols = data) %>% 
+  select(-X)
+```
+
+```{r}
+df_cv_simple_reg_update = df_cv_simple_reg %>% 
+  select(split,
+         trial,
+         response,
+         model_y,
+         data_y,
+         half,
+         model) %>% 
+  rename(verb = response,
+         model_pred = model_y,
+         data_val = data_y,
+         use = half) %>% 
+  mutate(split = split - 1)
+
+df_cv_simple = rbind(df_cv_simple_full,
+                     df_cv_simple_sem,
+                     df_cv_simple_reg_update) %>% 
+  mutate(use = factor(use,
+                      levels = c("train",
+                                 "test")),
+         model = factor(model,
+                        levels = c("full",
+                                   "semantic",
+                                   "regression")),
+         verb = ifelse(verb == "didn't affect", "no_difference", verb))
+```
+
+#### Evaluate
+```{r}
+df_cv_simple_perf = df_cv_simple %>% 
+  group_by(model, split, use) %>% 
+  summarise(sum_sq_err = sum((model_pred - data_val)^2),
+            split_r = cor(model_pred, data_val),
+            split_rmse = rmse(model_pred, data_val))
+```
+
+#### Visualize
+```{r fig.width=10, fig.height=3}
+ggplot(df_cv_simple_perf,
+       mapping = aes(x = sum_sq_err,
+                     fill = model)) +
+  geom_histogram(position = "identity",
+                 color = "black",
+                 alpha = 0.6) +
+  facet_wrap(~use,
+             ncol = 2,
+             scales = "free_x")
+```
+#### Summarize r and rmse
+```{r}
+df_cv_simple_perf %>% 
+  filter(use == "test") %>% 
+  group_by(use, model) %>% 
+  summarise(median_r = round(median(split_r), digits=2),
+            lower_r = round(quantile(split_r, probs = 0.05), digits=2),
+            upper_r = round(quantile(split_r, probs = 0.95), digits=2),
+            median_rmse = round(median(split_rmse), digits=2),
+            lower_rmse = round(quantile(split_rmse, probs = 0.05), digits=2),
+            upper_rmse = round(quantile(split_rmse, probs = 0.95), digits=2))
+```
+
+```{r}
+df_cv_simple_perf %>% 
+  pivot_wider(id_cols = c(split, use),
+              names_from = model,
+              values_from = c(split_r, split_rmse)) %>% 
+  ungroup() %>% 
+  filter(use == "test") %>% 
+  mutate(diff_sem_r = split_r_full - split_r_semantic,
+         diff_sem_rmse = split_rmse_semantic - split_rmse_full,
+         diff_reg_r = split_r_full - split_r_regression,
+         diff_reg_rmse = split_rmse_regression - split_rmse_full) %>%
+  select(split,
+         diff_sem_r,
+         diff_sem_rmse,
+         diff_reg_r,
+         diff_reg_rmse) %>% 
+  pivot_longer(cols = c(diff_sem_r,
+                        diff_sem_rmse,
+                        diff_reg_r,
+                        diff_reg_rmse),
+               names_to = c("model_comp", "metric"),
+               names_pattern = "diff_(.*)_(.*)",
+               values_to = "val") %>% 
+  group_by(metric, model_comp) %>% 
+  summarise(med = round(median(val), digits = 2),
+            lower = round(quantile(val, probs=0.05), digits = 2),
+            upper = round(quantile(val, probs=0.95), digits = 2)) %>% 
+  mutate(model_comp = factor(model_comp,
+                             levels = c("sem", "reg")),
+         metric = factor(metric,
+                         levels = c("r", "rmse")))
+```
+
+### Main Simple Comparison
+
+```{r}
+df_cv_full_comp = df_cv_full %>% 
+  mutate(model = "full_main") %>% 
+  rbind(df_cv_simple_full %>% 
+              mutate(model = "full_simple"))
+
+df_cv_full_comp_perf = df_cv_full_comp %>% 
+  group_by(model, split, use) %>% 
+  summarise(sum_sq_err = sum((model_pred - data_val)^2),
+            split_r = cor(model_pred, data_val),
+            split_rmse = rmse(model_pred, data_val))
+```
+
+```{r}
+df_cv_full_comp_perf %>% 
+  filter(use == "test") %>% 
+  group_by(use, model) %>% 
+  summarise(median_r = round(median(split_r), digits=2),
+            lower_r = round(quantile(split_r, probs = 0.05), digits=2),
+            upper_r = round(quantile(split_r, probs = 0.95), digits=2),
+            median_rmse = round(median(split_rmse), digits=2),
+            lower_rmse = round(quantile(split_rmse, probs = 0.05), digits=2),
+            upper_rmse = round(quantile(split_rmse, probs = 0.95), digits=2))
+```
+```{r}
+df_cv_full_comp_perf %>% 
+  pivot_wider(id_cols = c(split, use),
+              names_from = model,
+              values_from = c(split_r, split_rmse)) %>% 
+  ungroup() %>% 
+  filter(use == "test") %>% 
+  mutate(diff_r = split_r_full_main - split_r_full_simple,
+         diff_rmse = split_rmse_full_simple - split_rmse_full_main) %>%
+  select(split,
+         diff_r,
+         diff_rmse) %>% 
+  summarise(med_diff_r = round(median(diff_r), digits = 2),
+            lower_diff_r = round(quantile(diff_r, probs=0.05), digits = 2),
+            upper_diff_r = round(quantile(diff_r, probs=0.95), digits = 2),
+            med_diff_rmse = round(median(diff_rmse), digits = 2),
+            lower_diff_rmse = round(quantile(diff_rmse, probs=0.05), digits = 2),
+            upper_diff_rmse = round(quantile(diff_rmse, probs=0.95), digits = 2))
+```
+
+# Experiment 3 (Listener)
+
+## Read in Data
+
+## Load Data
+```{r}
+con = dbConnect(SQLite(), dbname = "../../data/experiment3/listener_experiment_anonymized.db");
+df_database = dbReadTable(con, "language")
+dbDisconnect(con)
+```
+
+```{r}
+df_data = df_database %>%
+  filter(status %in% 3:5) %>%
+  filter(!str_detect(mode, "debug")) %>%
+  filter(codeversion %in% c("words_to_clips_2"))
+```
+
+## Demographics
+
+```{r}
+df_demographics = df_data$datastring %>% 
+  spread_values(language = jstring("questiondata", "language"),
+                age = jstring("questiondata", "age"),
+                gender = jstring("questiondata", "gender"),
+                race = jstring("questiondata", "race"),
+                ethnicity = jstring("questiondata", "ethnicity"),
+                feedback = jstring("questiondata", "feedback")) %>% 
+  rename(participant = document.id) %>% 
+  mutate(time = difftime(df_data$endhit,
+                         df_data$beginhit,
+                         units = "mins"))
+```
+
+### Age
+
+```{r}
+df_demographics %>%
+  mutate(age = as.numeric(age)) %>%
+  summarise(`Mean age` = round(mean(age, na.rm = TRUE)),
+            `Age standard deviation` = round(sd(age, na.rm = TRUE)))
+```
+
+### Gender
+
+```{r}
+df_demographics %>%
+  mutate(gender = str_replace(gender, "^[fF].*", "Female"),
+         gender = str_replace(gender, "^[mM].*", "Male"),
+         gender = str_replace(gender, "^$", NA_character_)) %>%
+  count(gender, name = "Count") %>%
+  mutate(gender = recode(gender, .missing = "No response"))
+```
+
+### Race
+
+```{r}
+df_demographics %>% 
+  mutate(race = ifelse(grepl("asian", race, ignore.case = TRUE), "Asian", race),
+         race = ifelse(grepl("black", race, ignore.case = TRUE), "Black", race),
+         race = ifelse(grepl("caucasian", race, ignore.case = TRUE), "White", race),
+         race = ifelse(grepl("native", race, ignore.case = TRUE), "Native American", race),
+         race = ifelse(grepl("white", race, ignore.case = TRUE), "White", race)
+         ) %>% 
+  count(race, name = "Count") %>% 
+  mutate(race = recode(race, .missing = "No response"))
+```
+### Ethnicity
+
+```{r}
+df_demographics %>% 
+  count(ethnicity, name = "Count") %>% 
+  mutate(ethnicity = recode(ethnicity, .missing = "No response"),
+         Count = round(Count/sum(Count), digits=2)) 
+```
+
+### Language
+
+```{r}
+df_demographics %>%
+  mutate(language = str_replace(language, "^[eE][nN][gG].*", "English"),
+         language = str_replace(language, "^$", NA_character_)) %>%
+  count(language, name = "Count") %>%
+  mutate(language = recode(language, .missing = "No response"))
+```
+
+### Time
+
+```{r}
+df_demographics %>%
+  summarise(ave_time = round(mean(time, na.rm = TRUE)),
+            sd_time = round(sd(time)))
+```
+
+## Wrangle Data
+
+### Separate Train, Test, Attenion Check
+
+```{r}
+df_training_and_test = df_data$datastring %>% 
+  as.tbl_json() %>% 
+  enter_object("data") %>%
+  gather_array("order") %>% 
+  enter_object("trialdata") %>% 
+  gather_object("index") %>% 
+  append_values_string("value") %>% 
+  as_tibble() %>% 
+  rename(participant = document.id) %>% 
+  spread(index, value)
+
+df_train = df_training_and_test %>%
+  filter(!is.na(training_clip_number)) %>% 
+  select_if(~sum(!is.na(.)) > 0)
+
+df_test = df_training_and_test %>% 
+  filter(is.na(training_clip_number)) %>% 
+  select_if(~sum(!is.na(.)) > 0) %>%
+  mutate(response = as.numeric(response)/100,
+         left_video = as.numeric(left_video),
+         right_video = as.numeric(right_video),
+         flip_vid = left_video > right_video,
+         video_a = pmin(left_video, right_video),
+         video_b = pmax(left_video, right_video),
+         flip_response = ifelse(flip_vid, 1-response, response))
+
+df_attention_check = df_test %>% 
+  filter(str_detect(df_test$trial, "attn")) %>% 
+  arrange(participant, trial) %>% 
+  select(participant, trial, utterance, video_a, video_b, flip_response) %>% 
+  mutate(check = ifelse(utterance == "caused", flip_response < 0.5, flip_response > 0.5)) %>% 
+  group_by(participant) %>% 
+  summarise(check_passed = all(check))
+
+df_long = df_test %>%
+  filter(!str_detect(df_test$trial, "attn")) %>% 
+  mutate(response = flip_response,
+         trial = as.numeric(trial)) %>% 
+  left_join(df_attention_check, by=c("participant")) %>% 
+  arrange(participant, trial) %>% 
+  filter(check_passed) %>% 
+  select(participant, trial, order, utterance, video_a, video_b, response)
+  
+```
+
+### Video play count
+```{r}
+
+combined_play_count = as.numeric(c(df_test$left_play_count,
+                                   df_test$right_play_count))
+
+round(mean(combined_play_count), digits=2)
+round(sd(combined_play_count), digits=2)
+
+# df_test %>%
+#   summarise(left_play_mean = round(mean(as.numeric(left_play_count)), digits=2),
+#             left_play_sd = round(sd(left_play_count), digits=2),
+#             right_play_mean = round(mean(as.numeric(right_play_count)), digits=2),
+#             right_play_sd = round(sd(right_play_count), digits = 2))
+
+```
+
+```{r}
+sum(df_attention_check$check_passed)
+```
+
+
+### Data Descriptives
+
+```{r}
+df_long %>% 
+  group_by(trial,
+           utterance,
+           video_a,
+           video_b) %>% 
+  summarise(mean_resp = round(mean(response), digits=2),
+            sd_resp = round(sd(response), digits=2)) %>%
+  mutate(trial = trial + 1,
+         video_a = video_a + 1,
+         video_b = video_b + 1)
+```
+
+### Aggregate Participant Responses
+
+```{r participant-mean-ratings}
+
+df_agg = df_long %>%
+  group_by(trial,
+           utterance,
+           video_a,
+           video_b) %>% 
+  do(data.frame(rbind(smean.cl.boot(.$response))))
+
+write.csv(df_agg, "../../data/experiment3/participant_means.csv")
+
+```
+
+## Load Models
+
+```{r}
+
+df_full_model = read.csv("../python/model_performance/listener_full_model_predictions.csv") %>% 
+  mutate(model_version = "Full Model")
+
+df_sem_model = read.csv("../python/model_performance/listener_no_pragmatics_predictions.csv") %>% 
+  mutate(model_version = "No Pragmatics")
+
+df_reg_model = read.csv("../python/model_performance/listener_regression_predictions.csv") %>% 
+  mutate(model_version = "No Semantics and No Pragmatics")
+
+df_model_comparison = rbind(df_full_model,
+                            df_sem_model,
+                            df_reg_model) %>% 
+  mutate(model_version = factor(model_version,
+                                levels = c("Full Model",
+                                           "No Pragmatics",
+                                           "No Semantics and No Pragmatics")))
+
+```
+
+
+```{r}
+left_join(df_model_comparison,
+          df_agg,
+          by = c("trial",
+                 "utterance",
+                 "video_a",
+                 "video_b")) %>% 
+  mutate(sq_err = (video_b_prob - Mean)^2) %>% 
+  group_by(model_version) %>% 
+  summarise(sum_sq_err = round(sum(sq_err), digits=2))
+```
+
+
+## Visualizations
+
+### Trial Performance
+```{r fig.height=40, fig.width=6}
+
+df_to_show =  df_long %>%
+  select(participant, trial, utterance, video_a, video_b, response) %>%
+  mutate(label = str_c(video_a, "-", video_b),
+         trial = str_c(trial, ": ", utterance),
+         trial = as.factor(trial),
+         trial = factor(trial, levels = mixedsort(levels(trial))))
+
+df_model = df_model_comparison %>% 
+  mutate(model_val = video_b_prob,
+         label = str_c(video_a, "-", video_b),
+         trial = str_c(trial, ": ", utterance),
+         trial = as.factor(trial),
+         trial = factor(trial, levels = mixedsort(levels(trial)))) %>% 
+  filter(model_version != "people")
+
+df_figures =  df_to_show %>%
+  filter(participant == 2) %>%
+  select(trial, label, video_a, video_b) %>%
+  mutate(
+    video_a_fig = map(
+      .x = video_a,
+      .f = ~ readJPEG(str_c(
+        "../../figures/trial_schematics/trial", .x, ".jpeg"
+      )) %>%
+        rasterGrob(interpolate = T,
+                   hjust = 1)
+    ),
+    video_b_fig = map(
+      .x = video_b,
+      .f = ~ readJPEG(str_c(
+        "../../figures/trial_schematics/trial", .x, ".jpeg"
+      )) %>%
+        rasterGrob(interpolate = T,
+                   hjust = 0)
+    )
+  )
+
+
+
+ggplot(data = df_to_show,
+       mapping = aes(x = 1,
+                     y = response)) +
+  stat_summary(geom = "pointrange",
+               fun.data = "mean_cl_boot") +
+  geom_hline(yintercept = c(0,1),
+             color = "gray60") +
+  geom_hline(yintercept = c(0.5),
+             color = "gray60",
+             alpha = 0.5) +
+  geom_point(alpha = 0.1,
+             position = position_jitter(width = 0.2,
+                                        height = 0)) +
+  geom_point(
+    data = df_model,
+    mapping = aes(y = model_val,
+                  fill = model_version,
+                  shape = model_version),
+    size = 2,
+    alpha = 0.75) +
+  facet_wrap(~trial,
+             ncol = 1) +
+  scale_fill_brewer(palette = "Dark2", name = "") +
+  scale_shape_manual(name = "",
+                     values = 21:23) + 
+  geom_custom(data = df_figures,
+              mapping = aes(data = video_a_fig,
+                            x = 1,
+                            y = -Inf),
+              grob_fun = "identity") +
+  geom_custom(data = df_figures,
+              mapping = aes(data = video_b_fig,
+                            x = 1,
+                            y = Inf),
+              grob_fun = "identity") +
+  geom_text(data = df_figures,
+            mapping = aes(x = 1,
+                          y = -0.05,
+                          label = video_a)) +
+  geom_text(data = df_figures,
+            mapping = aes(x = 1,
+                          y = 1.05,
+                          label = video_b)) +
+  coord_flip(clip = "off") +
+  theme_void() +
+  theme(panel.spacing.y = unit(1, "cm"),
+        legend.position = "bottom",
+        plot.margin = margin(l = 2.2,
+                             r = 2.2,
+                             unit = "cm"))
+
+
+ggsave("figures/listener_all_trials.jpg",
+       width = 6,
+       height = 40)
+
+```
+
+### Sample Trials
+
+```{r fig.width=8, fig.height=8}
+
+# trial_set = c(0, 17, 22, 32, 33)
+trial_set = c(16, 33, 2, 21)
+
+descriptions = c(
+  "Ball A <b>caused</b> Ball B to go through the gate.",
+  "Ball A <b>enabled</b> Ball B to go through the gate.",
+  "Ball A <b>affected</b> Ball B's going through the gate.",
+  "Ball A <b>made no difference</b> to Ball B's going through the gate."
+)
+
+trial_label = c("A", "B", "C", "D")
+
+df_text = tibble("trial" = trial_label,
+                 "descriptions" = descriptions)
+
+
+df_to_show =  df_long %>%
+  select(participant, trial, utterance, video_a, video_b, response) %>%
+  filter(trial %in% trial_set) %>% 
+  mutate(trial = factor(trial,
+                        levels = trial_set,
+                        labels = trial_label),
+         label = str_c(video_a, "-", video_b),
+         utterance = ifelse(utterance == "no_difference",
+                            "no difference",
+                            utterance),
+         # trial = str_c(trial, ": ", utterance),
+         trial = as.factor(trial))
+
+df_model = df_model_comparison %>% 
+  filter(trial %in% trial_set) %>% 
+  mutate(trial = factor(trial,
+                        levels = trial_set,
+                        labels = trial_label),
+         label = str_c(video_a, "-", video_b),
+         utterance = ifelse(utterance == "no_difference",
+                            "no difference",
+                            utterance),
+         # trial = str_c(trial, ": ", utterance),
+         trial = as.factor(trial),
+         model_val = video_b_prob)
+
+df_figures =  df_to_show %>%
+  filter(participant == 2) %>%
+  select(trial, label, video_a, video_b) %>%
+  mutate(
+    video_a_fig = map(
+      .x = video_a,
+      .f = ~ readJPEG(str_c(
+        "../../figures/trial_schematics/trial", .x, ".jpeg"
+      )) %>%
+        rasterGrob(interpolate = T,
+                   hjust = 1)
+    ),
+    video_b_fig = map(
+      .x = video_b,
+      .f = ~ readJPEG(str_c(
+        "../../figures/trial_schematics/trial", .x, ".jpeg"
+      )) %>%
+        rasterGrob(interpolate = T,
+                   hjust = 0)
+    )
+  )
+
+
+
+ggplot(data = df_to_show,
+       mapping = aes(x = 1,
+                     y = response)) +
+  stat_summary(geom = "pointrange",
+               fun.data = "mean_cl_boot") +
+  geom_hline(yintercept = c(0,1),
+             color = "gray60") +
+  geom_hline(yintercept = c(0.5),
+             color = "gray60",
+             alpha = 0.5) +
+  geom_point(alpha = 0.1,
+             position = position_jitter(width = 0.2,
+                                        height = 0)) +
+  geom_point(
+    data = df_model,
+    mapping = aes(y = model_val,
+                  fill = model_version,
+                  shape = model_version),
+    size = 2,
+    alpha = 0.75) +
+  facet_wrap(~trial,
+             ncol = 1) +
+  scale_fill_brewer(palette = "Dark2", name = "") +
+  scale_shape_manual(name = "",
+                     values = 21:23) + 
+  geom_custom(data = df_figures,
+              mapping = aes(data = video_a_fig,
+                            x = 1,
+                            y = -Inf),
+              grob_fun = "identity") +
+  geom_custom(data = df_figures,
+              mapping = aes(data = video_b_fig,
+                            x = 1,
+                            y = Inf),
+              grob_fun = "identity") +
+  geom_text(data = df_text,
+            mapping = aes(label = trial),
+            x = 1.26,
+            y = -0.64,
+            size = 6,
+            fontface="bold") + 
+  geom_richtext(data = df_text,
+            mapping = aes(label = descriptions),
+            x = 1.26,
+            y = 0.5,
+            size = 5,
+            label.size = NA,
+            fill = alpha("white", 0)) +
+  coord_flip(clip = "off") +
+  theme_void() +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 14),
+        strip.text = element_blank(),
+        panel.spacing = unit(2, "line"),
+        plot.margin = margin(l = 6,
+                             r = 6,
+                             b = 0.5,
+                             t = 0.9,
+                             unit = "cm"))
+
+
+ggsave("../../figures/paper_figures/listener_sample_cases.pdf",
+       height = 8,
+       width = 8,
+       device = cairo_pdf)
+
+```
+
+### Scatter Plot
+```{r fig.width=15, fig.height=5}
+
+df_to_show = df_agg %>% 
+  left_join(df_model_comparison, by = c("trial",
+                                        "utterance",
+                                        "video_a",
+                                        "video_b")) %>% 
+  filter(model_version != "people")
+
+df_to_show$utterance = recode_factor(df_to_show$utterance,
+                                     no_difference = "no difference")
+
+df_to_show$utterance = fct_relevel(df_to_show$utterance,
+                                   "no difference",
+                                   "affected",
+                                   "enabled",
+                                   "caused")
+
+df_text = df_to_show %>% 
+  group_by(model_version) %>% 
+  summarise(r = cor(Mean, video_b_prob),
+            RMSE = rmse(Mean, video_b_prob)) %>% 
+  ungroup() %>% 
+  pivot_longer(cols = -model_version) %>% 
+  mutate_if(is.numeric, ~ round(., 2)) %>% 
+  mutate(Mean = rep(c(0.9, 1), length(unique(model_version))),
+         video_b_prob = 0,
+         label = str_c(name, " = ", value),
+         label = ifelse(name == "r", 
+                        str_replace(label, "0.", "."),
+                        label))
+
+ggplot(data = df_to_show,
+       mapping = aes(x=video_b_prob, y=Mean)) +
+  geom_smooth(method = "lm",
+              se = T,
+              color = "black",
+              show.legend = F) +
+  geom_abline(slope = 1,
+              intercept = 0,
+              linetype = 2) +
+  geom_errorbar(mapping = aes(ymin = Lower,
+                              ymax = Upper),
+                alpha = 0.6,
+                width = 0,
+                show.legend = F) +
+  geom_text(data = df_text,
+            mapping = aes(label = label),
+            hjust = 0,
+            size = 8) +
+  geom_point(mapping = aes(fill = utterance,
+                           shape = utterance),
+             alpha = 1.0,
+             size = 4) +
+  scale_shape_manual(values = 21:24) +
+  scale_fill_manual(values = c("slategray2", rgb(41/255, 99/255, 152/255), rgb(209/255, 144/255, 50/255), rgb(54/255, 122/255, 93/255))) +
+  xlim(0,1) +
+  ylim(0,1) +
+  labs(x = "Model Prediction",
+       y = "Mean Judgments") +
+  facet_grid(~model_version) +
+  guides(fill = guide_legend(title = "utterance: "),
+         shape = guide_legend(title = "utterance: ")) +
+  theme(legend.position = c(0.27,0.2),
+        panel.spacing.x = unit(1, "cm"),
+        legend.text = element_text(size = 14),
+        legend.title = element_text(size=14),
+        strip.text = element_text(size = 20),
+        legend.box.background = element_rect(color = "black",
+                                             linewidth = 1.5))
+
+ggsave("../../figures/paper_figures/listener_scatter.pdf",
+       width = 15,
+       height = 5)
+
+# ggsave("../../figures/paper_figures/listener_scatter.jpg",
+#        width = 15,
+#        height = 5)
+
+```
+
+## Participant Model
+
+```{r}
+
+df_part_model = read.csv("../python/model_performance/listener_part_means_predictions.csv") %>% 
+  mutate(model_version = "participant") %>% 
+  select(-X)
+
+df_part_model_vs_data = left_join(df_part_model,
+                                  df_agg,
+                                  by = c("trial",
+                                         "utterance",
+                                         "video_a",
+                                         "video_b"))
+
+df_sum_stats = df_part_model_vs_data %>% 
+  summarise(r = round(cor(video_b_prob, Mean), digits=2),
+            RMSE = round(RMSE(video_b_prob, Mean), digits=2)) %>% 
+  pivot_longer(cols = c(r, RMSE),
+               names_to = "metric",
+               values_to = "value") %>% 
+  mutate(x = c(0.05, 0.05),
+         y = c(0.9, 0.8), 
+         label = paste(metric, ": ", value, sep = ""))
+
+ggplot(df_part_model_vs_data,
+       mapping = aes(x = video_b_prob,
+                     y = Mean)) +
+  geom_smooth(method = "lm",
+              se = T,
+              color = "black",
+              show.legend = F) +
+  geom_errorbar(mapping = aes(ymin = Lower,
+                              ymax = Upper),
+                alpha = 0.6,
+                width = 0,
+                show.legend = F) +
+  geom_text(data = df_sum_stats,
+            mapping = aes(x = x,
+                          y = y,
+                          label = label),
+            hjust = 0,
+            size=6) +
+  geom_point(mapping = aes(fill = utterance,
+                           shape = utterance),
+             alpha = 1.0,
+             size = 4) +
+    scale_shape_manual(values = 21:24) +
+  xlab("Fitted Experiment 2 Predictions") +
+  ylab("Experiment 3 Means ") +
+  xlim(0,1) +
+  ylim(0,1)
+
+```
+
+
+## Cross Validation
+
+```{r}
+
+df_cv_full = read.csv("../python/model_performance/cv_listener_full.csv") %>% 
+  select(-X) 
+
+df_cv_sem = read.csv("../python/model_performance/cv_listener_no_pragmatics.csv") %>% 
+  select(-X)
+
+df_cv_reg = read.csv("../python/model_performance/cv_listener_regression.csv") %>% 
+  select(-X)
+
+df_cv = rbind(df_cv_full,
+              df_cv_sem,
+              df_cv_reg) %>% 
+  mutate(model = factor(model,
+                        levels = c("full",
+                                   "no_pragmatics",
+                                   "regression"),
+                        labels = c("Full Model",
+                                   "No Pragmatics",
+                                   "No Semantics and No Pragmatics")),
+         use = factor(use,
+                      levels = c("train",
+                                 "test"))) %>% 
+  arrange(split, model, use, trial)
+
+```
+
+
+
+### Evaluate
+```{r}
+
+df_cv_perf = df_cv %>% 
+  group_by(model, split, use) %>% 
+  summarise(sum_sq_err = sum((model_pred - data_val)^2),
+            split_r = cor(model_pred, data_val),
+            split_rmse = rmse(model_pred, data_val))
+
+```
+
+```{r}
+df_cv_perf %>% 
+  group_by(use, model) %>% 
+  summarise(mean_sse = round(mean(sum_sq_err), digits=2))
+```
+
+
+### Visualize
+
+```{r fig.width=10, fig.height=3}
+
+df_to_show = df_cv_perf %>% 
+  filter(use == "test")
+
+ggplot(df_cv_perf,
+       mapping = aes(x = sum_sq_err,
+                     fill = model)) +
+  geom_histogram(position = "identity",
+                 color = "black",
+                 alpha = 0.6) +
+  facet_wrap(~use,
+             nrow = 2)
+```
+
+### Summarize r and rmse
+```{r}
+df_cv_perf %>%
+  filter(use == "test") %>% 
+  group_by(use, model) %>% 
+  summarise(median_r = round(median(split_r), digits=2),
+            lower_r = round(quantile(split_r, probs = 0.05), digits=2),
+            upper_r = round(quantile(split_r, probs = 0.95), digits=2),
+            median_rmse = round(median(split_rmse), digits=2),
+            lower_rmse = round(quantile(split_rmse, probs = 0.05), digits=2),
+            upper_rmse = round(quantile(split_rmse, probs = 0.95), digits=2))
+```
+
+### Summarize model differences
+```{r}
+df_cv_perf %>% 
+  filter(use == "test") %>% 
+  mutate(model = factor(model,
+                        levels = c("Full Model",
+                                   "No Pragmatics",
+                                   "No Semantics and No Pragmatics"),
+                        labels = c("prag",
+                                   "sem",
+                                   "reg"))) %>% 
+  pivot_wider(id_cols = split,
+              names_from = "model",
+              values_from = c("split_r", "split_rmse")) %>% 
+  mutate(diff_r__prag_sem = split_r_prag - split_r_sem,
+         diff_r__prag_reg = split_r_prag - split_r_reg,
+         diff_rmse__prag_sem = split_rmse_sem - split_rmse_prag,
+         diff_rmse__prag_reg = split_rmse_reg - split_rmse_prag) %>% 
+  select(split, 
+         diff_r__prag_sem,
+         diff_r__prag_reg, 
+         diff_rmse__prag_sem, 
+         diff_rmse__prag_reg) %>% 
+  pivot_longer(cols = -split,
+               names_to = c("metric", "comp"),
+               names_prefix = "diff_",
+               names_sep = "__",
+               values_to = "diff") %>% 
+  group_by(metric,
+           comp) %>% 
+  summarise(med_diff = round(median(diff), digits=2),
+            lower_diff = round(quantile(diff, 0.05), digits=2),
+            upper_diff = round(quantile(diff, 0.95), digits=2))
+```
+
+# Session Info
+```{r}
+sessionInfo()
+```
+

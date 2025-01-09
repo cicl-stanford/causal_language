@@ -1,0 +1,67 @@
+,item_num,frame_num,verb1,verb2,item,trial_type
+0,0,,caused,,The lightning strike caused the fire.,filler
+1,1,,caused,,The crank caused him to open the window.,filler
+2,2,,enabled,,Receiving the loan enabled her to buy the house.,filler
+3,3,,enabled,,The cold breeze enabled him to close the window.,filler
+4,4,,affected,,The distracting noise affected his performance.,filler
+5,5,,affected,,The earthquake affected the building to fall.,filler
+0,0,0,affected,enabled,"The dry weather affected the wild fire, in fact it enabled it.",main
+1,1,0,affected,caused,"The dry weather affected the wild fire, in fact it caused it.",main
+2,2,0,enabled,affected,"The dry weather enabled the wild fire, in fact it affected it.",main
+3,3,0,enabled,caused,"The dry weather enabled the wild fire, in fact it caused it.",main
+4,4,0,caused,affected,"The dry weather caused the wild fire, in fact it affected it.",main
+5,5,0,caused,enabled,"The dry weather caused the wild fire, in fact it enabled it.",main
+6,6,1,affected,enabled,"The CEO's decision affected the outcome, in fact it enabled it.",main
+7,7,1,affected,caused,"The CEO's decision affected the outcome, in fact it caused it.",main
+8,8,1,enabled,affected,"The CEO's decision enabled the outcome, in fact it affected it.",main
+9,9,1,enabled,caused,"The CEO's decision enabled the outcome, in fact it caused it.",main
+10,10,1,caused,affected,"The CEO's decision caused the outcome, in fact it affected it.",main
+11,11,1,caused,enabled,"The CEO's decision caused the outcome, in fact it enabled it.",main
+12,12,2,affected,enabled,"The new technology affected the change, in fact it enabled it.",main
+13,13,2,affected,caused,"The new technology affected the change, in fact it caused it.",main
+14,14,2,enabled,affected,"The new technology enabled the change, in fact it affected it.",main
+15,15,2,enabled,caused,"The new technology enabled the change, in fact it caused it.",main
+16,16,2,caused,affected,"The new technology caused the change, in fact it affected it.",main
+17,17,2,caused,enabled,"The new technology caused the change, in fact it enabled it.",main
+18,18,3,affected,enabled,"The Sacklers' greed affected the opioid epidemic, in fact it enabled it.",main
+19,19,3,affected,caused,"The Sacklers' greed affected the opioid epidemic, in fact it caused it.",main
+20,20,3,enabled,affected,"The Sacklers' greed enabled the opioid epidemic, in fact it affected it.",main
+21,21,3,enabled,caused,"The Sacklers' greed enabled the opioid epidemic, in fact it caused it.",main
+22,22,3,caused,affected,"The Sacklers' greed caused the opioid epidemic, in fact it affected it.",main
+23,23,3,caused,enabled,"The Sacklers' greed caused the opioid epidemic, in fact it enabled it.",main
+24,24,4,affected,enabled,"The sunny weather affected the tree's growth, in fact it enabled it.",main
+25,25,4,affected,caused,"The sunny weather affected the tree's growth, in fact it caused it.",main
+26,26,4,enabled,affected,"The sunny weather enabled the tree's growth, in fact it affected it.",main
+27,27,4,enabled,caused,"The sunny weather enabled the tree's growth, in fact it caused it.",main
+28,28,4,caused,affected,"The sunny weather caused the tree's growth, in fact it affected it.",main
+29,29,4,caused,enabled,"The sunny weather caused the tree's growth, in fact it enabled it.",main
+30,30,5,affected,enabled,"More stipends affected the increase in student admissions, in fact they enabled it.",main
+31,31,5,affected,caused,"More stipends affected the increase in student admissions, in fact they caused it.",main
+32,32,5,enabled,affected,"More stipends enabled the increase in student admissions, in fact they affected it.",main
+33,33,5,enabled,caused,"More stipends enabled the increase in student admissions, in fact they caused it.",main
+34,34,5,caused,affected,"More stipends caused the increase in student admissions, in fact they affected it.",main
+35,35,5,caused,enabled,"More stipends caused the increase in student admissions, in fact they enabled it.",main
+36,36,6,affected,enabled,"The sun affected the drying of the clothes, in fact it enabled it.",main
+37,37,6,affected,caused,"The sun affected the drying of the clothes, in fact it caused it.",main
+38,38,6,enabled,affected,"The sun enabled the drying of the clothes, in fact it affected it.",main
+39,39,6,enabled,caused,"The sun enabled the drying of the clothes, in fact it caused it.",main
+40,40,6,caused,affected,"The sun caused the drying of the clothes, in fact it affected it.",main
+41,41,6,caused,enabled,"The sun caused the drying of the clothes, in fact it enabled it.",main
+42,42,7,affected,enabled,"Metastasis affected cell growth, in fact it enabled it.",main
+43,43,7,affected,caused,"Metastasis affected cell growth, in fact it caused it.",main
+44,44,7,enabled,affected,"Metastasis enabled cell growth, in fact it affected it.",main
+45,45,7,enabled,caused,"Metastasis enabled cell growth, in fact it caused it.",main
+46,46,7,caused,affected,"Metastasis caused cell growth, in fact it affected it.",main
+47,47,7,caused,enabled,"Metastasis caused cell growth, in fact it enabled it.",main
+48,48,8,affected,enabled,"Diversification affected new monetary policies, in fact it enabled them.",main
+49,49,8,affected,caused,"Diversification affected new monetary policies, in fact it caused them.",main
+50,50,8,enabled,affected,"Diversification enabled new monetary policies, in fact it affected them.",main
+51,51,8,enabled,caused,"Diversification enabled new monetary policies, in fact it caused them.",main
+52,52,8,caused,affected,"Diversification caused new monetary policies, in fact it affected them.",main
+53,53,8,caused,enabled,"Diversification caused new monetary policies, in fact it enabled them.",main
+54,54,9,affected,enabled,"The algae buildup in the ocean affected the migration of certain species of fish, in fact it enabled it.",main
+55,55,9,affected,caused,"The algae buildup in the ocean affected the migration of certain species of fish, in fact it caused it.",main
+56,56,9,enabled,affected,"The algae buildup in the ocean enabled the migration of certain species of fish, in fact it affected it.",main
+57,57,9,enabled,caused,"The algae buildup in the ocean enabled the migration of certain species of fish, in fact it caused it.",main
+58,58,9,caused,affected,"The algae buildup in the ocean caused the migration of certain species of fish, in fact it affected it.",main
+59,59,9,caused,enabled,"The algae buildup in the ocean caused the migration of certain species of fish, in fact it enabled it.",main

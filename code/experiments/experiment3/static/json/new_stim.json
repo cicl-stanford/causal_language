@@ -1,0 +1,302 @@
+{
+  "training": [
+    {
+      "training_number": 0
+    },
+    {
+      "training_number": 1
+    },
+    {
+      "training_number": 2
+    },
+    {
+      "training_number": 3
+    }
+  ],
+  "stim": [
+    {
+      "trial": 0,
+      "utterance": "affected",
+      "bin": "low",
+      "clip_1": 16,
+      "clip_2": 27
+    },
+    {
+      "trial": 1,
+      "utterance": "affected",
+      "bin": "low",
+      "clip_1": 14,
+      "clip_2": 15
+    },
+    {
+      "trial": 2,
+      "utterance": "affected",
+      "bin": "low",
+      "clip_1": 4,
+      "clip_2": 6
+    },
+    {
+      "trial": 3,
+      "utterance": "affected",
+      "bin": "med",
+      "clip_1": 13,
+      "clip_2": 20
+    },
+    {
+      "trial": 4,
+      "utterance": "affected",
+      "bin": "med",
+      "clip_1": 24,
+      "clip_2": 25
+    },
+    {
+      "trial": 5,
+      "utterance": "affected",
+      "bin": "med",
+      "clip_1": 6,
+      "clip_2": 22
+    },
+    {
+      "trial": 6,
+      "utterance": "affected",
+      "bin": "high",
+      "clip_1": 17,
+      "clip_2": 23
+    },
+    {
+      "trial": 7,
+      "utterance": "affected",
+      "bin": "high",
+      "clip_1": 17,
+      "clip_2": 22
+    },
+    {
+      "trial": 8,
+      "utterance": "affected",
+      "bin": "high",
+      "clip_1": 17,
+      "clip_2": 29
+    },
+    {
+      "trial": 9,
+      "utterance": "caused",
+      "bin": "low",
+      "clip_1": 9,
+      "clip_2": 16
+    },
+    {
+      "trial": 10,
+      "utterance": "caused",
+      "bin": "low",
+      "clip_1": 3,
+      "clip_2": 8
+    },
+    {
+      "trial": 11,
+      "utterance": "caused",
+      "bin": "low",
+      "clip_1": 9,
+      "clip_2": 15
+    },
+    {
+      "trial": 12,
+      "utterance": "caused",
+      "bin": "med",
+      "clip_1": 1,
+      "clip_2": 13
+    },
+    {
+      "trial": 13,
+      "utterance": "caused",
+      "bin": "med",
+      "clip_1": 9,
+      "clip_2": 19
+    },
+    {
+      "trial": 14,
+      "utterance": "caused",
+      "bin": "med",
+      "clip_1": 14,
+      "clip_2": 15
+    },
+    {
+      "trial": 15,
+      "utterance": "caused",
+      "bin": "high",
+      "clip_1": 5,
+      "clip_2": 29
+    },
+    {
+      "trial": 16,
+      "utterance": "caused",
+      "bin": "high",
+      "clip_1": 12,
+      "clip_2": 18
+    },
+    {
+      "trial": 17,
+      "utterance": "caused",
+      "bin": "high",
+      "clip_1": 12,
+      "clip_2": 24
+    },
+    {
+      "trial": 18,
+      "utterance": "no_difference",
+      "bin": "low",
+      "clip_1": 2,
+      "clip_2": 28
+    },
+    {
+      "trial": 19,
+      "utterance": "no_difference",
+      "bin": "low",
+      "clip_1": 22,
+      "clip_2": 29
+    },
+    {
+      "trial": 20,
+      "utterance": "no_difference",
+      "bin": "low",
+      "clip_1": 4,
+      "clip_2": 28
+    },
+    {
+      "trial": 21,
+      "utterance": "no_difference",
+      "bin": "med",
+      "clip_1": 2,
+      "clip_2": 11
+    },
+    {
+      "trial": 22,
+      "utterance": "no_difference",
+      "bin": "med",
+      "clip_1": 2,
+      "clip_2": 13
+    },
+    {
+      "trial": 23,
+      "utterance": "no_difference",
+      "bin": "med",
+      "clip_1": 4,
+      "clip_2": 6
+    },
+    {
+      "trial": 24,
+      "utterance": "no_difference",
+      "bin": "high",
+      "clip_1": 7,
+      "clip_2": 23
+    },
+    {
+      "trial": 25,
+      "utterance": "no_difference",
+      "bin": "high",
+      "clip_1": 0,
+      "clip_2": 20
+    },
+    {
+      "trial": 26,
+      "utterance": "no_difference",
+      "bin": "high",
+      "clip_1": 0,
+      "clip_2": 26
+    },
+    {
+      "trial": 27,
+      "utterance": "enabled",
+      "bin": "low",
+      "clip_1": 1,
+      "clip_2": 18
+    },
+    {
+      "trial": 28,
+      "utterance": "enabled",
+      "bin": "low",
+      "clip_1": 14,
+      "clip_2": 21
+    },
+    {
+      "trial": 29,
+      "utterance": "enabled",
+      "bin": "low",
+      "clip_1": 11,
+      "clip_2": 21
+    },
+    {
+      "trial": 30,
+      "utterance": "enabled",
+      "bin": "med",
+      "clip_1": 0,
+      "clip_2": 21
+    },
+    {
+      "trial": 31,
+      "utterance": "enabled",
+      "bin": "med",
+      "clip_1": 11,
+      "clip_2": 28
+    },
+    {
+      "trial": 32,
+      "utterance": "enabled",
+      "bin": "med",
+      "clip_1": 10,
+      "clip_2": 25
+    },
+    {
+      "trial": 33,
+      "utterance": "enabled",
+      "bin": "high",
+      "clip_1": 12,
+      "clip_2": 18
+    },
+    {
+      "trial": 34,
+      "utterance": "enabled",
+      "bin": "high",
+      "clip_1": 7,
+      "clip_2": 23
+    },
+    {
+      "trial": 35,
+      "utterance": "enabled",
+      "bin": "high",
+      "clip_1": 3,
+      "clip_2": 25
+    },
+    {
+      "trial": "attn_check_1",
+      "utterance": "caused",
+      "bin": null,
+      "clip_1": 0,
+      "clip_2": 1
+    },
+    {
+      "trial": "attn_check_2",
+      "utterance": "no_difference",
+      "bin": null,
+      "clip_1": 2,
+      "clip_2": 3
+    }
+  ],
+  "sentences": [
+    {
+      "sentence": "Ball A <b>caused</b> Ball B to go through the gate.",
+      "word": "caused"
+    },
+    {
+      "sentence": "Ball A <b>enabled</b> Ball B to go through the gate.",
+      "word": "enabled"
+    },
+    {
+      "sentence": "Ball A <b>affected</b> Ball B's going through the gate.",
+      "word": "affected"
+    },
+    {
+      "sentence": "Ball A <b>made no difference</b> to Ball B's going through the gate.",
+      "word": "no_difference"
+    }
+  ]
+}

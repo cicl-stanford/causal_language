@@ -1,0 +1,1752 @@
+[2021-02-15 16:55:29 -0800] [36708] [DEBUG] Current configuration:
+  config: None
+  bind: ['0.0.0.0:22362']
+  backlog: 2048
+  workers: 17
+  worker_class: sync
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 0
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /Users/abeller/Documents/CICL/causal_language/code/experiments/experiment_forced_choice2
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 502
+  group: 20
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: server.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: unix:///var/run/syslog
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  statsd_prefix: 
+  proc_name: psiturk_experiment_server_c93142431322
+  default_proc_name: gunicorn
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7fb218312c20>
+  on_reload: <function OnReload.on_reload at 0x7fb218312d40>
+  when_ready: <function WhenReady.when_ready at 0x7fb218312e60>
+  pre_fork: <function Prefork.pre_fork at 0x7fb218312f80>
+  post_fork: <function Postfork.post_fork at 0x7fb21832a0e0>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7fb21832a200>
+  worker_int: <function WorkerInt.worker_int at 0x7fb21832a320>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7fb21832a440>
+  pre_exec: <function PreExec.pre_exec at 0x7fb21832a560>
+  pre_request: <function PreRequest.pre_request at 0x7fb21832a680>
+  post_request: <function PostRequest.post_request at 0x7fb21832a710>
+  child_exit: <function ChildExit.child_exit at 0x7fb21832a830>
+  worker_exit: <function WorkerExit.worker_exit at 0x7fb21832a950>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7fb21832aa70>
+  on_exit: <function ExperimentServer.load_user_config.<locals>.on_exit at 0x7fb1f8164a70>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: TLSv1
+  raw_paste_global_conf: []
+[2021-02-15 16:55:29 -0800] [36708] [INFO] Starting gunicorn 19.9.0
+[2021-02-15 16:55:29 -0800] [36708] [DEBUG] Arbiter booted
+[2021-02-15 16:55:29 -0800] [36708] [INFO] Listening at: http://0.0.0.0:22362 (36708)
+[2021-02-15 16:55:29 -0800] [36708] [INFO] Using worker: sync
+[2021-02-15 16:55:29 -0800] [36711] [INFO] Booting worker with pid: 36711
+[2021-02-15 16:55:29 -0800] [36712] [INFO] Booting worker with pid: 36712
+[2021-02-15 16:55:29 -0800] [36713] [INFO] Booting worker with pid: 36713
+[2021-02-15 16:55:29 -0800] [36714] [INFO] Booting worker with pid: 36714
+[2021-02-15 16:55:29 -0800] [36715] [INFO] Booting worker with pid: 36715
+[2021-02-15 16:55:29 -0800] [36716] [INFO] Booting worker with pid: 36716
+[2021-02-15 16:55:29 -0800] [36717] [INFO] Booting worker with pid: 36717
+[2021-02-15 16:55:29 -0800] [36718] [INFO] Booting worker with pid: 36718
+[2021-02-15 16:55:29 -0800] [36719] [INFO] Booting worker with pid: 36719
+[2021-02-15 16:55:29 -0800] [36720] [INFO] Booting worker with pid: 36720
+[2021-02-15 16:55:29 -0800] [36721] [INFO] Booting worker with pid: 36721
+[2021-02-15 16:55:29 -0800] [36722] [INFO] Booting worker with pid: 36722
+[2021-02-15 16:55:30 -0800] [36723] [INFO] Booting worker with pid: 36723
+[2021-02-15 16:55:30 -0800] [36724] [INFO] Booting worker with pid: 36724
+[2021-02-15 16:55:30 -0800] [36725] [INFO] Booting worker with pid: 36725
+[2021-02-15 16:55:30 -0800] [36726] [INFO] Booting worker with pid: 36726
+[2021-02-15 16:55:30 -0800] [36727] [INFO] Booting worker with pid: 36727
+[2021-02-15 16:55:30 -0800] [36708] [DEBUG] 17 workers
+2021-02-15 16:55:30,409 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:30,422 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 16:55:30,709 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:30,734 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 16:55:30,932 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:30,944 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:30,951 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 16:55:30,958 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:30,971 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 16:55:30,985 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2021-02-15 16:55:31 -0800] [36711] [DEBUG] Closing connection. 
+2021-02-15 16:55:31,101 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:31,117 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 16:55:31,149 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:31,160 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 16:55:31,166 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:31,182 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 16:55:31,267 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:31,271 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:31,279 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 16:55:31,281 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 16:55:31,287 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:31,299 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 16:55:31,305 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:31,313 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 16:55:31,339 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:31,344 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:31,348 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 16:55:31,353 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 16:55:31,368 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:31,374 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 16:55:31,410 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:31,415 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 16:55:31,428 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 16:55:31,433 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2021-02-15 16:55:35 -0800] [36726] [DEBUG] GET /ad
+[2021-02-15 16:55:35 -0800] [36713] [DEBUG] Closing connection. 
+[2021-02-15 16:55:36 -0800] [36727] [DEBUG] GET /consent
+[2021-02-15 16:55:36 -0800] [36712] [DEBUG] GET /ad
+[2021-02-15 16:55:36 -0800] [36724] [DEBUG] GET /static/js/utils.js
+[2021-02-15 16:55:36 -0800] [36723] [DEBUG] GET /static/css/general.css
+[2021-02-15 16:55:37 -0800] [36712] [DEBUG] GET /exp
+2021-02-15 16:55:37,868 Accessing /exp: debugFGZ4CA debugPIQYKG debugIKNA71 
+2021-02-15 16:55:37,875 given Counter({(0, 0): 2}) chose (0, 0)
+[2021-02-15 16:55:37 -0800] [36716] [DEBUG] GET /static/lib/seedrandom.js
+[2021-02-15 16:55:37 -0800] [36719] [DEBUG] GET /static/lib/underscore-min.js
+[2021-02-15 16:55:37 -0800] [36726] [DEBUG] GET /static/lib/jquery.min.js
+[2021-02-15 16:55:37 -0800] [36716] [DEBUG] GET /static/css/jquery-ui.min.css
+[2021-02-15 16:55:37 -0800] [36725] [DEBUG] GET /static/lib/backbone-min.js
+[2021-02-15 16:55:37 -0800] [36717] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2021-02-15 16:55:37 -0800] [36713] [DEBUG] GET /static/js/psiturk.js
+[2021-02-15 16:55:37 -0800] [36717] [DEBUG] GET /static/lib/mustache.js
+[2021-02-15 16:55:37 -0800] [36724] [DEBUG] GET /static/js/config.js
+[2021-02-15 16:55:37 -0800] [36725] [DEBUG] GET /static/js/task.js
+[2021-02-15 16:55:37 -0800] [36724] [DEBUG] GET /static/json/stim.json
+[2021-02-15 16:55:37 -0800] [36714] [DEBUG] GET /sync/debugIKNA71%3AdebugPIQYKG
+2021-02-15 16:55:37,991 GET /sync route with id: debugIKNA71:debugPIQYKG
+[2021-02-15 16:55:38 -0800] [36719] [DEBUG] GET /trial.html
+[2021-02-15 16:55:38 -0800] [36724] [DEBUG] GET /static/images/example_scene.png
+[2021-02-15 16:55:38 -0800] [36725] [DEBUG] GET /static/images/bot_questions/challenge1.png
+[2021-02-15 16:55:38 -0800] [36715] [DEBUG] GET /static/videos/inst_video.mp4
+[2021-02-15 16:55:47 -0800] [36715] [DEBUG] GET /static/css/general.css
+[2021-02-15 16:55:47 -0800] [36722] [DEBUG] GET /static/css/jquery-ui.min.css
+[2021-02-15 16:55:47 -0800] [36715] [DEBUG] GET /static/lib/underscore-min.map
+[2021-02-15 17:00:09 -0800] [36719] [DEBUG] Closing connection. 
+[2021-02-15 17:00:09 -0800] [36718] [DEBUG] Closing connection. 
+[2021-02-15 17:00:09 -0800] [36718] [DEBUG] GET /ppid
+[2021-02-15 17:00:09 -0800] [36719] [INFO] Parent changed, shutting down: <Worker 36719>
+[2021-02-15 17:00:09 -0800] [36716] [INFO] Parent changed, shutting down: <Worker 36716>
+[2021-02-15 17:00:09 -0800] [36727] [INFO] Parent changed, shutting down: <Worker 36727>
+[2021-02-15 17:00:09 -0800] [36714] [INFO] Parent changed, shutting down: <Worker 36714>
+[2021-02-15 17:00:09 -0800] [36726] [DEBUG] Closing connection. 
+[2021-02-15 17:00:09 -0800] [36711] [INFO] Parent changed, shutting down: <Worker 36711>
+[2021-02-15 17:00:09 -0800] [36725] [INFO] Parent changed, shutting down: <Worker 36725>
+[2021-02-15 17:00:09 -0800] [36716] [INFO] Worker exiting (pid: 36716)
+[2021-02-15 17:00:09 -0800] [36719] [INFO] Worker exiting (pid: 36719)
+[2021-02-15 17:00:09 -0800] [36711] [INFO] Worker exiting (pid: 36711)
+[2021-02-15 17:00:09 -0800] [36726] [INFO] Parent changed, shutting down: <Worker 36726>
+[2021-02-15 17:00:09 -0800] [36727] [INFO] Worker exiting (pid: 36727)
+[2021-02-15 17:00:09 -0800] [36725] [INFO] Worker exiting (pid: 36725)
+[2021-02-15 17:00:09 -0800] [36726] [INFO] Worker exiting (pid: 36726)
+[2021-02-15 17:00:09 -0800] [36718] [INFO] Parent changed, shutting down: <Worker 36718>
+[2021-02-15 17:00:09 -0800] [36714] [INFO] Worker exiting (pid: 36714)
+[2021-02-15 17:00:09 -0800] [36718] [INFO] Worker exiting (pid: 36718)
+[2021-02-15 17:00:09 -0800] [36721] [INFO] Parent changed, shutting down: <Worker 36721>
+[2021-02-15 17:00:09 -0800] [36723] [INFO] Parent changed, shutting down: <Worker 36723>
+[2021-02-15 17:00:09 -0800] [36717] [DEBUG] Closing connection. 
+[2021-02-15 17:00:09 -0800] [36722] [INFO] Parent changed, shutting down: <Worker 36722>
+[2021-02-15 17:00:09 -0800] [36720] [INFO] Parent changed, shutting down: <Worker 36720>
+[2021-02-15 17:00:09 -0800] [36721] [INFO] Worker exiting (pid: 36721)
+[2021-02-15 17:00:09 -0800] [36722] [INFO] Worker exiting (pid: 36722)
+[2021-02-15 17:00:09 -0800] [36717] [INFO] Parent changed, shutting down: <Worker 36717>
+[2021-02-15 17:00:09 -0800] [36720] [INFO] Worker exiting (pid: 36720)
+[2021-02-15 17:00:09 -0800] [36723] [INFO] Worker exiting (pid: 36723)
+[2021-02-15 17:00:09 -0800] [36717] [INFO] Worker exiting (pid: 36717)
+[2021-02-15 17:00:10 -0800] [36712] [INFO] Parent changed, shutting down: <Worker 36712>
+[2021-02-15 17:00:10 -0800] [36724] [DEBUG] Closing connection. 
+[2021-02-15 17:00:10 -0800] [36713] [INFO] Parent changed, shutting down: <Worker 36713>
+[2021-02-15 17:00:10 -0800] [36715] [INFO] Parent changed, shutting down: <Worker 36715>
+[2021-02-15 17:00:10 -0800] [36712] [INFO] Worker exiting (pid: 36712)
+[2021-02-15 17:00:10 -0800] [36724] [INFO] Parent changed, shutting down: <Worker 36724>
+[2021-02-15 17:00:10 -0800] [36713] [INFO] Worker exiting (pid: 36713)
+[2021-02-15 17:00:10 -0800] [36715] [INFO] Worker exiting (pid: 36715)
+[2021-02-15 17:00:10 -0800] [36724] [INFO] Worker exiting (pid: 36724)
+[2021-02-15 17:00:11 -0800] [36882] [DEBUG] Current configuration:
+  config: None
+  bind: ['0.0.0.0:22362']
+  backlog: 2048
+  workers: 17
+  worker_class: sync
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 0
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /Users/abeller/Documents/CICL/causal_language/code/experiments/experiment_forced_choice2
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 502
+  group: 20
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: server.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: unix:///var/run/syslog
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  statsd_prefix: 
+  proc_name: psiturk_experiment_server_c93142431322
+  default_proc_name: gunicorn
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7fb6902c2c20>
+  on_reload: <function OnReload.on_reload at 0x7fb6902c2d40>
+  when_ready: <function WhenReady.when_ready at 0x7fb6902c2e60>
+  pre_fork: <function Prefork.pre_fork at 0x7fb6902c2f80>
+  post_fork: <function Postfork.post_fork at 0x7fb6902da0e0>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7fb6902da200>
+  worker_int: <function WorkerInt.worker_int at 0x7fb6902da320>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7fb6902da440>
+  pre_exec: <function PreExec.pre_exec at 0x7fb6902da560>
+  pre_request: <function PreRequest.pre_request at 0x7fb6902da680>
+  post_request: <function PostRequest.post_request at 0x7fb6902da710>
+  child_exit: <function ChildExit.child_exit at 0x7fb6902da830>
+  worker_exit: <function WorkerExit.worker_exit at 0x7fb6902da950>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7fb6902daa70>
+  on_exit: <function ExperimentServer.load_user_config.<locals>.on_exit at 0x7fb678164a70>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: TLSv1
+  raw_paste_global_conf: []
+[2021-02-15 17:00:11 -0800] [36882] [INFO] Starting gunicorn 19.9.0
+[2021-02-15 17:00:11 -0800] [36882] [DEBUG] Arbiter booted
+[2021-02-15 17:00:11 -0800] [36882] [INFO] Listening at: http://0.0.0.0:22362 (36882)
+[2021-02-15 17:00:11 -0800] [36882] [INFO] Using worker: sync
+[2021-02-15 17:00:11 -0800] [36885] [INFO] Booting worker with pid: 36885
+[2021-02-15 17:00:11 -0800] [36886] [INFO] Booting worker with pid: 36886
+[2021-02-15 17:00:11 -0800] [36887] [INFO] Booting worker with pid: 36887
+[2021-02-15 17:00:11 -0800] [36888] [INFO] Booting worker with pid: 36888
+[2021-02-15 17:00:11 -0800] [36889] [INFO] Booting worker with pid: 36889
+[2021-02-15 17:00:11 -0800] [36890] [INFO] Booting worker with pid: 36890
+[2021-02-15 17:00:11 -0800] [36891] [INFO] Booting worker with pid: 36891
+[2021-02-15 17:00:11 -0800] [36892] [INFO] Booting worker with pid: 36892
+[2021-02-15 17:00:11 -0800] [36893] [INFO] Booting worker with pid: 36893
+[2021-02-15 17:00:11 -0800] [36894] [INFO] Booting worker with pid: 36894
+[2021-02-15 17:00:11 -0800] [36895] [INFO] Booting worker with pid: 36895
+[2021-02-15 17:00:11 -0800] [36896] [INFO] Booting worker with pid: 36896
+2021-02-15 17:00:11,714 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:11,734 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2021-02-15 17:00:11 -0800] [36897] [INFO] Booting worker with pid: 36897
+[2021-02-15 17:00:11 -0800] [36898] [INFO] Booting worker with pid: 36898
+2021-02-15 17:00:11,903 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:11,925 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2021-02-15 17:00:11 -0800] [36899] [INFO] Booting worker with pid: 36899
+[2021-02-15 17:00:12 -0800] [36900] [INFO] Booting worker with pid: 36900
+2021-02-15 17:00:12,029 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:12,039 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2021-02-15 17:00:12 -0800] [36901] [INFO] Booting worker with pid: 36901
+[2021-02-15 17:00:12 -0800] [36882] [DEBUG] 17 workers
+2021-02-15 17:00:12,410 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:12,431 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:00:12,545 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:12,566 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2021-02-15 17:00:12 -0800] [36885] [DEBUG] Closing connection. 
+2021-02-15 17:00:12,619 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:12,641 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:00:12,649 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:12,665 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:00:12,704 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:12,718 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:00:12,844 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:12,855 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:00:12,869 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:12,880 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:00:12,904 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:12,913 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:12,915 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:00:12,922 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:00:12,957 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:12,964 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:00:12,975 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:12,980 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:00:13,001 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:13,007 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:00:13,023 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:13,029 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:00:13,048 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:00:13,053 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2021-02-15 17:00:14 -0800] [36887] [DEBUG] Closing connection. 
+[2021-02-15 17:00:14 -0800] [36899] [DEBUG] GET /ad
+[2021-02-15 17:00:15 -0800] [36901] [DEBUG] GET /consent
+[2021-02-15 17:00:15 -0800] [36898] [DEBUG] GET /ad
+[2021-02-15 17:00:15 -0800] [36888] [DEBUG] GET /static/js/utils.js
+[2021-02-15 17:00:15 -0800] [36887] [DEBUG] GET /static/css/general.css
+[2021-02-15 17:00:17 -0800] [36898] [DEBUG] GET /exp
+2021-02-15 17:00:17,015 Accessing /exp: debugB7VICY debug6VR96S debug2JUYHM 
+2021-02-15 17:00:17,024 given Counter({(0, 0): 3}) chose (0, 0)
+[2021-02-15 17:00:17 -0800] [36900] [DEBUG] GET /static/lib/seedrandom.js
+[2021-02-15 17:00:17 -0800] [36897] [DEBUG] GET /static/lib/jquery.min.js
+[2021-02-15 17:00:17 -0800] [36887] [DEBUG] GET /static/lib/underscore-min.js
+[2021-02-15 17:00:17 -0800] [36900] [DEBUG] GET /static/lib/backbone-min.js
+[2021-02-15 17:00:17 -0800] [36895] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2021-02-15 17:00:17 -0800] [36898] [DEBUG] GET /static/js/psiturk.js
+[2021-02-15 17:00:17 -0800] [36887] [DEBUG] GET /static/css/jquery-ui.min.css
+[2021-02-15 17:00:17 -0800] [36888] [DEBUG] GET /static/lib/mustache.js
+[2021-02-15 17:00:17 -0800] [36897] [DEBUG] GET /static/js/config.js
+[2021-02-15 17:00:17 -0800] [36897] [DEBUG] GET /static/js/task.js
+[2021-02-15 17:00:17 -0800] [36896] [DEBUG] GET /static/json/stim.json
+[2021-02-15 17:00:17 -0800] [36888] [DEBUG] GET /sync/debug2JUYHM%3Adebug6VR96S
+2021-02-15 17:00:17,143 GET /sync route with id: debug2JUYHM:debug6VR96S
+[2021-02-15 17:00:17 -0800] [36892] [DEBUG] GET /trial.html
+[2021-02-15 17:00:17 -0800] [36892] [DEBUG] GET /static/images/example_scene.png
+[2021-02-15 17:00:17 -0800] [36894] [DEBUG] GET /static/images/bot_questions/challenge5.png
+[2021-02-15 17:00:17 -0800] [36901] [DEBUG] GET /static/videos/inst_video.mp4
+[2021-02-15 17:02:03 -0800] [36892] [DEBUG] Closing connection. 
+[2021-02-15 17:02:03 -0800] [36887] [DEBUG] Closing connection. 
+[2021-02-15 17:02:03 -0800] [36887] [DEBUG] GET /ppid
+[2021-02-15 17:02:03 -0800] [36891] [INFO] Parent changed, shutting down: <Worker 36891>
+[2021-02-15 17:02:03 -0800] [36885] [INFO] Parent changed, shutting down: <Worker 36885>
+[2021-02-15 17:02:03 -0800] [36892] [INFO] Parent changed, shutting down: <Worker 36892>
+[2021-02-15 17:02:03 -0800] [36886] [INFO] Parent changed, shutting down: <Worker 36886>
+[2021-02-15 17:02:03 -0800] [36894] [INFO] Parent changed, shutting down: <Worker 36894>
+[2021-02-15 17:02:03 -0800] [36887] [DEBUG] Closing connection. 
+[2021-02-15 17:02:03 -0800] [36885] [INFO] Worker exiting (pid: 36885)
+[2021-02-15 17:02:03 -0800] [36886] [INFO] Worker exiting (pid: 36886)
+[2021-02-15 17:02:03 -0800] [36891] [INFO] Worker exiting (pid: 36891)
+[2021-02-15 17:02:03 -0800] [36892] [INFO] Worker exiting (pid: 36892)
+[2021-02-15 17:02:03 -0800] [36894] [INFO] Worker exiting (pid: 36894)
+[2021-02-15 17:02:03 -0800] [36887] [INFO] Parent changed, shutting down: <Worker 36887>
+[2021-02-15 17:02:03 -0800] [36887] [INFO] Worker exiting (pid: 36887)
+[2021-02-15 17:02:03 -0800] [36899] [INFO] Parent changed, shutting down: <Worker 36899>
+[2021-02-15 17:02:03 -0800] [36901] [DEBUG] Closing connection. 
+[2021-02-15 17:02:03 -0800] [36893] [INFO] Parent changed, shutting down: <Worker 36893>
+[2021-02-15 17:02:03 -0800] [36896] [INFO] Parent changed, shutting down: <Worker 36896>
+[2021-02-15 17:02:03 -0800] [36898] [INFO] Parent changed, shutting down: <Worker 36898>
+[2021-02-15 17:02:03 -0800] [36888] [INFO] Parent changed, shutting down: <Worker 36888>
+[2021-02-15 17:02:03 -0800] [36893] [INFO] Worker exiting (pid: 36893)
+[2021-02-15 17:02:03 -0800] [36901] [INFO] Parent changed, shutting down: <Worker 36901>
+[2021-02-15 17:02:03 -0800] [36899] [INFO] Worker exiting (pid: 36899)
+[2021-02-15 17:02:03 -0800] [36888] [INFO] Worker exiting (pid: 36888)
+[2021-02-15 17:02:03 -0800] [36896] [INFO] Worker exiting (pid: 36896)
+[2021-02-15 17:02:03 -0800] [36898] [INFO] Worker exiting (pid: 36898)
+[2021-02-15 17:02:03 -0800] [36901] [INFO] Worker exiting (pid: 36901)
+[2021-02-15 17:02:04 -0800] [36900] [INFO] Parent changed, shutting down: <Worker 36900>
+[2021-02-15 17:02:04 -0800] [36895] [INFO] Parent changed, shutting down: <Worker 36895>
+[2021-02-15 17:02:04 -0800] [36890] [INFO] Parent changed, shutting down: <Worker 36890>
+[2021-02-15 17:02:04 -0800] [36889] [DEBUG] Closing connection. 
+[2021-02-15 17:02:04 -0800] [36897] [INFO] Parent changed, shutting down: <Worker 36897>
+[2021-02-15 17:02:04 -0800] [36890] [INFO] Worker exiting (pid: 36890)
+[2021-02-15 17:02:04 -0800] [36900] [INFO] Worker exiting (pid: 36900)
+[2021-02-15 17:02:04 -0800] [36897] [INFO] Worker exiting (pid: 36897)
+[2021-02-15 17:02:04 -0800] [36889] [INFO] Parent changed, shutting down: <Worker 36889>
+[2021-02-15 17:02:04 -0800] [36895] [INFO] Worker exiting (pid: 36895)
+[2021-02-15 17:02:04 -0800] [36889] [INFO] Worker exiting (pid: 36889)
+[2021-02-15 17:26:18 -0800] [37639] [DEBUG] Current configuration:
+  config: None
+  bind: ['0.0.0.0:22362']
+  backlog: 2048
+  workers: 17
+  worker_class: sync
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 0
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /Users/abeller/Documents/CICL/causal_language/code/experiments/experiment_forced_choice2
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 502
+  group: 20
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: server.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: unix:///var/run/syslog
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  statsd_prefix: 
+  proc_name: psiturk_experiment_server_c93142431322
+  default_proc_name: gunicorn
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f8520192c20>
+  on_reload: <function OnReload.on_reload at 0x7f8520192d40>
+  when_ready: <function WhenReady.when_ready at 0x7f8520192e60>
+  pre_fork: <function Prefork.pre_fork at 0x7f8520192f80>
+  post_fork: <function Postfork.post_fork at 0x7f85201aa0e0>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f85201aa200>
+  worker_int: <function WorkerInt.worker_int at 0x7f85201aa320>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f85201aa440>
+  pre_exec: <function PreExec.pre_exec at 0x7f85201aa560>
+  pre_request: <function PreRequest.pre_request at 0x7f85201aa680>
+  post_request: <function PostRequest.post_request at 0x7f85201aa710>
+  child_exit: <function ChildExit.child_exit at 0x7f85201aa830>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f85201aa950>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f85201aaa70>
+  on_exit: <function ExperimentServer.load_user_config.<locals>.on_exit at 0x7f84f04bca70>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: TLSv1
+  raw_paste_global_conf: []
+[2021-02-15 17:26:18 -0800] [37639] [INFO] Starting gunicorn 19.9.0
+[2021-02-15 17:26:18 -0800] [37639] [DEBUG] Arbiter booted
+[2021-02-15 17:26:18 -0800] [37639] [INFO] Listening at: http://0.0.0.0:22362 (37639)
+[2021-02-15 17:26:18 -0800] [37639] [INFO] Using worker: sync
+[2021-02-15 17:26:18 -0800] [37642] [INFO] Booting worker with pid: 37642
+[2021-02-15 17:26:18 -0800] [37643] [INFO] Booting worker with pid: 37643
+[2021-02-15 17:26:18 -0800] [37644] [INFO] Booting worker with pid: 37644
+[2021-02-15 17:26:18 -0800] [37645] [INFO] Booting worker with pid: 37645
+[2021-02-15 17:26:19 -0800] [37646] [INFO] Booting worker with pid: 37646
+[2021-02-15 17:26:19 -0800] [37647] [INFO] Booting worker with pid: 37647
+[2021-02-15 17:26:19 -0800] [37648] [INFO] Booting worker with pid: 37648
+[2021-02-15 17:26:19 -0800] [37649] [INFO] Booting worker with pid: 37649
+[2021-02-15 17:26:19 -0800] [37650] [INFO] Booting worker with pid: 37650
+[2021-02-15 17:26:19 -0800] [37651] [INFO] Booting worker with pid: 37651
+[2021-02-15 17:26:19 -0800] [37652] [INFO] Booting worker with pid: 37652
+[2021-02-15 17:26:19 -0800] [37653] [INFO] Booting worker with pid: 37653
+[2021-02-15 17:26:19 -0800] [37654] [INFO] Booting worker with pid: 37654
+[2021-02-15 17:26:19 -0800] [37655] [INFO] Booting worker with pid: 37655
+[2021-02-15 17:26:19 -0800] [37656] [INFO] Booting worker with pid: 37656
+[2021-02-15 17:26:19 -0800] [37657] [INFO] Booting worker with pid: 37657
+[2021-02-15 17:26:19 -0800] [37658] [INFO] Booting worker with pid: 37658
+2021-02-15 17:26:19,770 Secret key: 'this is my secret key which is hard to guess, i should change this'
+[2021-02-15 17:26:19 -0800] [37639] [DEBUG] 17 workers
+2021-02-15 17:26:19,810 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:26:19,834 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:19,860 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:26:19,870 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:19,896 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:26:20,127 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:20,146 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:26:20,359 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:20,378 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2021-02-15 17:26:20 -0800] [37642] [DEBUG] Closing connection. 
+2021-02-15 17:26:20,504 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:20,519 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:26:20,585 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:20,604 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:26:20,638 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:20,652 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:26:20,677 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:20,686 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:26:20,723 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:20,736 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:26:20,757 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:20,765 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:26:20,767 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:20,776 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:26:20,793 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:20,803 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:26:20,818 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:20,825 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:26:20,832 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:20,837 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:26:20,846 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:20,852 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:26:20,868 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:26:20,874 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2021-02-15 17:26:21 -0800] [37644] [DEBUG] Closing connection. 
+[2021-02-15 17:26:21 -0800] [37657] [DEBUG] GET /ad
+[2021-02-15 17:26:23 -0800] [37655] [DEBUG] GET /consent
+[2021-02-15 17:26:23 -0800] [37654] [DEBUG] GET /ad
+[2021-02-15 17:26:23 -0800] [37648] [DEBUG] GET /static/js/utils.js
+[2021-02-15 17:26:23 -0800] [37658] [DEBUG] GET /static/css/general.css
+[2021-02-15 17:26:24 -0800] [37658] [DEBUG] GET /exp
+2021-02-15 17:26:24,681 Accessing /exp: debug2WSU8U debugEID229 debugS2LF90 
+2021-02-15 17:26:24,692 given Counter({(0, 0): 4}) chose (0, 0)
+[2021-02-15 17:26:24 -0800] [37646] [DEBUG] GET /static/lib/seedrandom.js
+[2021-02-15 17:26:24 -0800] [37651] [DEBUG] GET /static/lib/jquery.min.js
+[2021-02-15 17:26:24 -0800] [37658] [DEBUG] GET /static/lib/underscore-min.js
+[2021-02-15 17:26:24 -0800] [37646] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2021-02-15 17:26:24 -0800] [37655] [DEBUG] GET /static/lib/backbone-min.js
+[2021-02-15 17:26:24 -0800] [37656] [DEBUG] GET /static/lib/mustache.js
+[2021-02-15 17:26:24 -0800] [37646] [DEBUG] GET /static/css/jquery-ui.min.css
+[2021-02-15 17:26:24 -0800] [37655] [DEBUG] GET /static/js/psiturk.js
+[2021-02-15 17:26:24 -0800] [37650] [DEBUG] GET /static/js/config.js
+[2021-02-15 17:26:24 -0800] [37649] [DEBUG] GET /static/js/task.js
+[2021-02-15 17:26:24 -0800] [37657] [DEBUG] GET /static/json/stim.json
+[2021-02-15 17:26:24 -0800] [37647] [DEBUG] GET /sync/debugS2LF90%3AdebugEID229
+2021-02-15 17:26:24,809 GET /sync route with id: debugS2LF90:debugEID229
+[2021-02-15 17:26:24 -0800] [37655] [DEBUG] GET /trial.html
+[2021-02-15 17:26:24 -0800] [37658] [DEBUG] GET /static/images/bot_questions/challenge6.png
+[2021-02-15 17:26:24 -0800] [37655] [DEBUG] GET /static/images/example_scene.png
+[2021-02-15 17:26:24 -0800] [37652] [DEBUG] GET /static/videos/inst_video.mp4
+[2021-02-15 17:26:53 -0800] [37642] [DEBUG] GET /static/videos/mp4/clip7.mp4
+[2021-02-15 17:28:33 -0800] [37650] [DEBUG] GET /consent
+[2021-02-15 17:28:33 -0800] [37648] [DEBUG] GET /ad
+[2021-02-15 17:28:33 -0800] [37654] [DEBUG] GET /static/js/utils.js
+[2021-02-15 17:28:33 -0800] [37654] [DEBUG] GET /static/css/general.css
+[2021-02-15 17:28:34 -0800] [37645] [DEBUG] GET /exp
+2021-02-15 17:28:34,355 Accessing /exp: debug2WSU8U debugEID229 debugS2LF90 
+[2021-02-15 17:28:34 -0800] [37650] [DEBUG] GET /static/lib/seedrandom.js
+[2021-02-15 17:28:34 -0800] [37650] [DEBUG] GET /static/lib/jquery.min.js
+[2021-02-15 17:28:34 -0800] [37656] [DEBUG] GET /static/lib/underscore-min.js
+[2021-02-15 17:28:34 -0800] [37648] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2021-02-15 17:28:34 -0800] [37643] [DEBUG] GET /static/lib/backbone-min.js
+[2021-02-15 17:28:34 -0800] [37644] [DEBUG] GET /static/js/psiturk.js
+[2021-02-15 17:28:34 -0800] [37649] [DEBUG] GET /static/css/jquery-ui.min.css
+[2021-02-15 17:28:34 -0800] [37656] [DEBUG] GET /static/js/config.js
+[2021-02-15 17:28:34 -0800] [37653] [DEBUG] GET /static/lib/mustache.js
+[2021-02-15 17:28:34 -0800] [37648] [DEBUG] GET /static/js/task.js
+[2021-02-15 17:28:34 -0800] [37647] [DEBUG] GET /static/json/stim.json
+[2021-02-15 17:28:34 -0800] [37646] [DEBUG] GET /sync/debugS2LF90%3AdebugEID229
+2021-02-15 17:28:34,472 GET /sync route with id: debugS2LF90:debugEID229
+[2021-02-15 17:28:34 -0800] [37642] [DEBUG] GET /trial.html
+[2021-02-15 17:28:34 -0800] [37648] [DEBUG] GET /static/images/example_scene.png
+[2021-02-15 17:28:34 -0800] [37654] [DEBUG] GET /static/images/bot_questions/challenge6.png
+[2021-02-15 17:28:34 -0800] [37648] [DEBUG] GET /static/videos/inst_video.mp4
+[2021-02-15 17:28:57 -0800] [37648] [DEBUG] GET /static/videos/mp4/clip7.mp4
+[2021-02-15 17:34:52 -0800] [37654] [DEBUG] Closing connection. 
+[2021-02-15 17:34:52 -0800] [37657] [DEBUG] Closing connection. 
+[2021-02-15 17:34:52 -0800] [37657] [DEBUG] GET /ppid
+[2021-02-15 17:34:52 -0800] [37650] [INFO] Parent changed, shutting down: <Worker 37650>
+[2021-02-15 17:34:52 -0800] [37657] [INFO] Parent changed, shutting down: <Worker 37657>
+[2021-02-15 17:34:52 -0800] [37652] [INFO] Parent changed, shutting down: <Worker 37652>
+[2021-02-15 17:34:52 -0800] [37642] [INFO] Parent changed, shutting down: <Worker 37642>
+[2021-02-15 17:34:52 -0800] [37648] [DEBUG] Closing connection. 
+[2021-02-15 17:34:52 -0800] [37651] [INFO] Parent changed, shutting down: <Worker 37651>
+[2021-02-15 17:34:52 -0800] [37653] [INFO] Parent changed, shutting down: <Worker 37653>
+[2021-02-15 17:34:52 -0800] [37642] [INFO] Worker exiting (pid: 37642)
+[2021-02-15 17:34:52 -0800] [37650] [INFO] Worker exiting (pid: 37650)
+[2021-02-15 17:34:52 -0800] [37652] [INFO] Worker exiting (pid: 37652)
+[2021-02-15 17:34:52 -0800] [37657] [INFO] Worker exiting (pid: 37657)
+[2021-02-15 17:34:52 -0800] [37651] [INFO] Worker exiting (pid: 37651)
+[2021-02-15 17:34:52 -0800] [37653] [INFO] Worker exiting (pid: 37653)
+[2021-02-15 17:34:52 -0800] [37648] [INFO] Parent changed, shutting down: <Worker 37648>
+[2021-02-15 17:34:52 -0800] [37648] [INFO] Worker exiting (pid: 37648)
+[2021-02-15 17:34:53 -0800] [37646] [INFO] Parent changed, shutting down: <Worker 37646>
+[2021-02-15 17:34:53 -0800] [37645] [INFO] Parent changed, shutting down: <Worker 37645>
+[2021-02-15 17:34:53 -0800] [37649] [INFO] Parent changed, shutting down: <Worker 37649>
+[2021-02-15 17:34:53 -0800] [37647] [INFO] Parent changed, shutting down: <Worker 37647>
+[2021-02-15 17:34:53 -0800] [37654] [DEBUG] Closing connection. 
+[2021-02-15 17:34:53 -0800] [37656] [INFO] Parent changed, shutting down: <Worker 37656>
+[2021-02-15 17:34:53 -0800] [37645] [INFO] Worker exiting (pid: 37645)
+[2021-02-15 17:34:53 -0800] [37649] [INFO] Worker exiting (pid: 37649)
+[2021-02-15 17:34:53 -0800] [37647] [INFO] Worker exiting (pid: 37647)
+[2021-02-15 17:34:53 -0800] [37646] [INFO] Worker exiting (pid: 37646)
+[2021-02-15 17:34:53 -0800] [37656] [INFO] Worker exiting (pid: 37656)
+[2021-02-15 17:34:53 -0800] [37654] [INFO] Parent changed, shutting down: <Worker 37654>
+[2021-02-15 17:34:53 -0800] [37654] [INFO] Worker exiting (pid: 37654)
+[2021-02-15 17:34:53 -0800] [37658] [INFO] Parent changed, shutting down: <Worker 37658>
+[2021-02-15 17:34:53 -0800] [37643] [INFO] Parent changed, shutting down: <Worker 37643>
+[2021-02-15 17:34:53 -0800] [37644] [DEBUG] Closing connection. 
+[2021-02-15 17:34:53 -0800] [37655] [INFO] Parent changed, shutting down: <Worker 37655>
+[2021-02-15 17:34:53 -0800] [37655] [INFO] Worker exiting (pid: 37655)
+[2021-02-15 17:34:53 -0800] [37643] [INFO] Worker exiting (pid: 37643)
+[2021-02-15 17:34:53 -0800] [37658] [INFO] Worker exiting (pid: 37658)
+[2021-02-15 17:34:53 -0800] [37644] [INFO] Parent changed, shutting down: <Worker 37644>
+[2021-02-15 17:34:53 -0800] [37644] [INFO] Worker exiting (pid: 37644)
+[2021-02-15 17:45:04 -0800] [38036] [DEBUG] Current configuration:
+  config: None
+  bind: ['0.0.0.0:22362']
+  backlog: 2048
+  workers: 17
+  worker_class: sync
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 0
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /Users/abeller/Documents/CICL/causal_language/code/experiments/experiment_forced_choice2
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 502
+  group: 20
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: server.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: unix:///var/run/syslog
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  statsd_prefix: 
+  proc_name: psiturk_experiment_server_c93142431322
+  default_proc_name: gunicorn
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7ff3e811ac20>
+  on_reload: <function OnReload.on_reload at 0x7ff3e811ad40>
+  when_ready: <function WhenReady.when_ready at 0x7ff3e811ae60>
+  pre_fork: <function Prefork.pre_fork at 0x7ff3e811af80>
+  post_fork: <function Postfork.post_fork at 0x7ff3e81320e0>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7ff3e8132200>
+  worker_int: <function WorkerInt.worker_int at 0x7ff3e8132320>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7ff3e8132440>
+  pre_exec: <function PreExec.pre_exec at 0x7ff3e8132560>
+  pre_request: <function PreRequest.pre_request at 0x7ff3e8132680>
+  post_request: <function PostRequest.post_request at 0x7ff3e8132710>
+  child_exit: <function ChildExit.child_exit at 0x7ff3e8132830>
+  worker_exit: <function WorkerExit.worker_exit at 0x7ff3e8132950>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7ff3e8132a70>
+  on_exit: <function ExperimentServer.load_user_config.<locals>.on_exit at 0x7ff3c82dca70>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: TLSv1
+  raw_paste_global_conf: []
+[2021-02-15 17:45:04 -0800] [38036] [INFO] Starting gunicorn 19.9.0
+[2021-02-15 17:45:04 -0800] [38036] [DEBUG] Arbiter booted
+[2021-02-15 17:45:04 -0800] [38036] [INFO] Listening at: http://0.0.0.0:22362 (38036)
+[2021-02-15 17:45:04 -0800] [38036] [INFO] Using worker: sync
+[2021-02-15 17:45:04 -0800] [38039] [INFO] Booting worker with pid: 38039
+[2021-02-15 17:45:04 -0800] [38040] [INFO] Booting worker with pid: 38040
+[2021-02-15 17:45:05 -0800] [38041] [INFO] Booting worker with pid: 38041
+[2021-02-15 17:45:05 -0800] [38042] [INFO] Booting worker with pid: 38042
+[2021-02-15 17:45:05 -0800] [38043] [INFO] Booting worker with pid: 38043
+[2021-02-15 17:45:05 -0800] [38044] [INFO] Booting worker with pid: 38044
+[2021-02-15 17:45:05 -0800] [38045] [INFO] Booting worker with pid: 38045
+[2021-02-15 17:45:05 -0800] [38046] [INFO] Booting worker with pid: 38046
+[2021-02-15 17:45:05 -0800] [38047] [INFO] Booting worker with pid: 38047
+[2021-02-15 17:45:05 -0800] [38048] [INFO] Booting worker with pid: 38048
+2021-02-15 17:45:05,459 Secret key: 'this is my secret key which is hard to guess, i should change this'
+[2021-02-15 17:45:05 -0800] [38049] [INFO] Booting worker with pid: 38049
+2021-02-15 17:45:05,468 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2021-02-15 17:45:05 -0800] [38050] [INFO] Booting worker with pid: 38050
+[2021-02-15 17:45:05 -0800] [38051] [INFO] Booting worker with pid: 38051
+2021-02-15 17:45:05,680 Secret key: 'this is my secret key which is hard to guess, i should change this'
+[2021-02-15 17:45:05 -0800] [38052] [INFO] Booting worker with pid: 38052
+2021-02-15 17:45:05,701 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2021-02-15 17:45:05 -0800] [38053] [INFO] Booting worker with pid: 38053
+[2021-02-15 17:45:05 -0800] [38054] [INFO] Booting worker with pid: 38054
+[2021-02-15 17:45:05 -0800] [38055] [INFO] Booting worker with pid: 38055
+[2021-02-15 17:45:05 -0800] [38036] [DEBUG] 17 workers
+2021-02-15 17:45:06,028 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:45:06,051 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:45:06,281 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:45:06,296 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2021-02-15 17:45:06 -0800] [38040] [DEBUG] Closing connection. 
+2021-02-15 17:45:06,448 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:45:06,460 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:45:06,606 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:45:06,624 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:45:06,678 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:45:06,687 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:45:06,688 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:45:06,698 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:45:06,700 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:45:06,712 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:45:06,712 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:45:06,721 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:45:06,752 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:45:06,760 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:45:06,787 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:45:06,796 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:45:06,819 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:45:06,826 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:45:06,848 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:45:06,855 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:45:06,856 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:45:06,859 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:45:06,863 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:45:06,866 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2021-02-15 17:45:06,879 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2021-02-15 17:45:06,886 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2021-02-15 17:45:09 -0800] [38055] [DEBUG] GET /ad
+[2021-02-15 17:45:09 -0800] [38041] [DEBUG] Closing connection. 
+[2021-02-15 17:45:10 -0800] [38054] [DEBUG] GET /consent
+[2021-02-15 17:45:10 -0800] [38051] [DEBUG] GET /ad
+[2021-02-15 17:45:10 -0800] [38044] [DEBUG] GET /static/js/utils.js
+[2021-02-15 17:45:10 -0800] [38044] [DEBUG] GET /static/css/general.css
+[2021-02-15 17:45:12 -0800] [38049] [DEBUG] GET /exp
+2021-02-15 17:45:12,059 Accessing /exp: debugKHSGB0 debugHYMP8G debugOF69LS 
+2021-02-15 17:45:12,070 given Counter({(0, 0): 5}) chose (0, 0)
+[2021-02-15 17:45:12 -0800] [38042] [DEBUG] GET /static/lib/seedrandom.js
+[2021-02-15 17:45:12 -0800] [38049] [DEBUG] GET /static/lib/jquery.min.js
+[2021-02-15 17:45:12 -0800] [38039] [DEBUG] GET /static/lib/underscore-min.js
+[2021-02-15 17:45:12 -0800] [38053] [DEBUG] GET /static/lib/backbone-min.js
+[2021-02-15 17:45:12 -0800] [38054] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2021-02-15 17:45:12 -0800] [38042] [DEBUG] GET /static/js/psiturk.js
+[2021-02-15 17:45:12 -0800] [38045] [DEBUG] GET /static/css/jquery-ui.min.css
+[2021-02-15 17:45:12 -0800] [38049] [DEBUG] GET /static/lib/mustache.js
+[2021-02-15 17:45:12 -0800] [38053] [DEBUG] GET /static/js/config.js
+[2021-02-15 17:45:12 -0800] [38040] [DEBUG] GET /static/js/task.js
+[2021-02-15 17:45:12 -0800] [38054] [DEBUG] GET /static/json/stim.json
+[2021-02-15 17:45:12 -0800] [38040] [DEBUG] GET /sync/debugOF69LS%3AdebugHYMP8G
+2021-02-15 17:45:12,190 GET /sync route with id: debugOF69LS:debugHYMP8G
+[2021-02-15 17:45:12 -0800] [38040] [DEBUG] GET /trial.html
+[2021-02-15 17:45:12 -0800] [38050] [DEBUG] GET /static/images/example_scene.png
+[2021-02-15 17:45:12 -0800] [38049] [DEBUG] GET /static/images/bot_questions/challenge5.png
+[2021-02-15 17:45:12 -0800] [38050] [DEBUG] GET /static/videos/inst_video.mp4
+[2021-02-15 17:45:30 -0800] [38039] [DEBUG] Closing connection. 
+[2021-02-15 17:45:30 -0800] [38047] [DEBUG] Closing connection. 
+[2021-02-15 17:45:30 -0800] [38043] [DEBUG] GET /ppid
+[2021-02-15 17:45:30 -0800] [38055] [INFO] Parent changed, shutting down: <Worker 38055>
+[2021-02-15 17:45:30 -0800] [38045] [INFO] Parent changed, shutting down: <Worker 38045>
+[2021-02-15 17:45:30 -0800] [38044] [INFO] Parent changed, shutting down: <Worker 38044>
+[2021-02-15 17:45:30 -0800] [38052] [DEBUG] Closing connection. 
+[2021-02-15 17:45:30 -0800] [38040] [INFO] Parent changed, shutting down: <Worker 38040>
+[2021-02-15 17:45:30 -0800] [38041] [INFO] Parent changed, shutting down: <Worker 38041>
+[2021-02-15 17:45:30 -0800] [38044] [INFO] Worker exiting (pid: 38044)
+[2021-02-15 17:45:30 -0800] [38055] [INFO] Worker exiting (pid: 38055)
+[2021-02-15 17:45:30 -0800] [38047] [INFO] Parent changed, shutting down: <Worker 38047>
+[2021-02-15 17:45:30 -0800] [38040] [INFO] Worker exiting (pid: 38040)
+[2021-02-15 17:45:30 -0800] [38052] [INFO] Parent changed, shutting down: <Worker 38052>
+[2021-02-15 17:45:30 -0800] [38041] [INFO] Worker exiting (pid: 38041)
+[2021-02-15 17:45:30 -0800] [38047] [INFO] Worker exiting (pid: 38047)
+[2021-02-15 17:45:30 -0800] [38052] [INFO] Worker exiting (pid: 38052)
+[2021-02-15 17:45:30 -0800] [38045] [INFO] Worker exiting (pid: 38045)
+[2021-02-15 17:45:31 -0800] [38043] [INFO] Parent changed, shutting down: <Worker 38043>
+[2021-02-15 17:45:31 -0800] [38053] [INFO] Parent changed, shutting down: <Worker 38053>
+[2021-02-15 17:45:31 -0800] [38050] [INFO] Parent changed, shutting down: <Worker 38050>
+[2021-02-15 17:45:31 -0800] [38051] [INFO] Parent changed, shutting down: <Worker 38051>
+[2021-02-15 17:45:31 -0800] [38039] [DEBUG] Closing connection. 
+[2021-02-15 17:45:31 -0800] [38051] [INFO] Worker exiting (pid: 38051)
+[2021-02-15 17:45:31 -0800] [38043] [INFO] Worker exiting (pid: 38043)
+[2021-02-15 17:45:31 -0800] [38050] [INFO] Worker exiting (pid: 38050)
+[2021-02-15 17:45:31 -0800] [38053] [INFO] Worker exiting (pid: 38053)
+[2021-02-15 17:45:31 -0800] [38039] [INFO] Parent changed, shutting down: <Worker 38039>
+[2021-02-15 17:45:31 -0800] [38039] [INFO] Worker exiting (pid: 38039)
+[2021-02-15 17:45:31 -0800] [38054] [INFO] Parent changed, shutting down: <Worker 38054>
+[2021-02-15 17:45:31 -0800] [38049] [INFO] Parent changed, shutting down: <Worker 38049>
+[2021-02-15 17:45:31 -0800] [38042] [INFO] Parent changed, shutting down: <Worker 38042>
+[2021-02-15 17:45:31 -0800] [38046] [DEBUG] Closing connection. 
+[2021-02-15 17:45:31 -0800] [38048] [INFO] Parent changed, shutting down: <Worker 38048>
+[2021-02-15 17:45:31 -0800] [38054] [INFO] Worker exiting (pid: 38054)
+[2021-02-15 17:45:31 -0800] [38042] [INFO] Worker exiting (pid: 38042)
+[2021-02-15 17:45:31 -0800] [38049] [INFO] Worker exiting (pid: 38049)
+[2021-02-15 17:45:31 -0800] [38046] [INFO] Parent changed, shutting down: <Worker 38046>
+[2021-02-15 17:45:31 -0800] [38048] [INFO] Worker exiting (pid: 38048)
+[2021-02-15 17:45:31 -0800] [38046] [INFO] Worker exiting (pid: 38046)
+[2023-03-20 13:34:14 -0700] [1181] [DEBUG] Current configuration:
+  config: None
+  bind: ['0.0.0.0:22362']
+  backlog: 2048
+  workers: 17
+  worker_class: sync
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 0
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /Users/abeller/Documents/CICL/causal_language/code/experiments/experiment_forced_choice2
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 502
+  group: 20
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: server.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: unix:///var/run/syslog
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  statsd_prefix: 
+  proc_name: psiturk_experiment_server_c93142431322
+  default_proc_name: gunicorn
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f96101cdcb0>
+  on_reload: <function OnReload.on_reload at 0x7f96101cddd0>
+  when_ready: <function WhenReady.when_ready at 0x7f96101cdef0>
+  pre_fork: <function Prefork.pre_fork at 0x7f96101e4050>
+  post_fork: <function Postfork.post_fork at 0x7f96101e4170>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f96101e4290>
+  worker_int: <function WorkerInt.worker_int at 0x7f96101e43b0>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f96101e44d0>
+  pre_exec: <function PreExec.pre_exec at 0x7f96101e45f0>
+  pre_request: <function PreRequest.pre_request at 0x7f96101e4710>
+  post_request: <function PostRequest.post_request at 0x7f96101e47a0>
+  child_exit: <function ChildExit.child_exit at 0x7f96101e48c0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f96101e49e0>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f96101e4b00>
+  on_exit: <function ExperimentServer.load_user_config.<locals>.on_exit at 0x7f960067aa70>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: TLSv1
+  raw_paste_global_conf: []
+[2023-03-20 13:34:14 -0700] [1181] [INFO] Starting gunicorn 19.9.0
+[2023-03-20 13:34:14 -0700] [1181] [DEBUG] Arbiter booted
+[2023-03-20 13:34:14 -0700] [1181] [INFO] Listening at: http://0.0.0.0:22362 (1181)
+[2023-03-20 13:34:14 -0700] [1181] [INFO] Using worker: sync
+[2023-03-20 13:34:14 -0700] [1184] [INFO] Booting worker with pid: 1184
+[2023-03-20 13:34:14 -0700] [1185] [INFO] Booting worker with pid: 1185
+[2023-03-20 13:34:14 -0700] [1186] [INFO] Booting worker with pid: 1186
+[2023-03-20 13:34:14 -0700] [1187] [INFO] Booting worker with pid: 1187
+[2023-03-20 13:34:14 -0700] [1188] [INFO] Booting worker with pid: 1188
+[2023-03-20 13:34:14 -0700] [1189] [INFO] Booting worker with pid: 1189
+[2023-03-20 13:34:14 -0700] [1190] [INFO] Booting worker with pid: 1190
+[2023-03-20 13:34:14 -0700] [1191] [INFO] Booting worker with pid: 1191
+2023-03-20 13:34:14,632 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:14,641 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2023-03-20 13:34:14 -0700] [1192] [INFO] Booting worker with pid: 1192
+[2023-03-20 13:34:14 -0700] [1193] [INFO] Booting worker with pid: 1193
+[2023-03-20 13:34:14 -0700] [1194] [INFO] Booting worker with pid: 1194
+[2023-03-20 13:34:14 -0700] [1195] [INFO] Booting worker with pid: 1195
+[2023-03-20 13:34:14 -0700] [1196] [INFO] Booting worker with pid: 1196
+[2023-03-20 13:34:14 -0700] [1197] [INFO] Booting worker with pid: 1197
+[2023-03-20 13:34:14 -0700] [1198] [INFO] Booting worker with pid: 1198
+[2023-03-20 13:34:14 -0700] [1199] [INFO] Booting worker with pid: 1199
+2023-03-20 13:34:14,908 Secret key: 'this is my secret key which is hard to guess, i should change this'
+[2023-03-20 13:34:14 -0700] [1200] [INFO] Booting worker with pid: 1200
+2023-03-20 13:34:14,932 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2023-03-20 13:34:14 -0700] [1181] [DEBUG] 17 workers
+2023-03-20 13:34:15,200 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:15,219 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-03-20 13:34:15,372 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:15,393 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-03-20 13:34:15,559 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:15,574 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2023-03-20 13:34:15 -0700] [1184] [DEBUG] Closing connection. 
+2023-03-20 13:34:15,627 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:15,645 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-03-20 13:34:15,803 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:15,816 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-03-20 13:34:15,896 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:15,918 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-03-20 13:34:15,949 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:15,954 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:15,960 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-03-20 13:34:15,969 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:15,971 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-03-20 13:34:15,979 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:15,980 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-03-20 13:34:15,987 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:15,988 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-03-20 13:34:15,996 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-03-20 13:34:16,000 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:16,001 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:16,006 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:16,008 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-03-20 13:34:16,010 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-03-20 13:34:16,013 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-03-20 13:34:16,032 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-03-20 13:34:16,038 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2023-03-20 13:34:17 -0700] [1200] [DEBUG] Closing connection. 
+[2023-03-20 13:34:17 -0700] [1200] [DEBUG] GET /ad
+[2023-03-20 13:34:17 -0700] [1184] [DEBUG] GET /favicon.ico
+[2023-03-20 13:34:19 -0700] [1200] [DEBUG] GET /consent
+[2023-03-20 13:34:19 -0700] [1199] [DEBUG] GET /ad
+[2023-03-20 13:34:19 -0700] [1200] [DEBUG] GET /static/js/utils.js
+[2023-03-20 13:34:19 -0700] [1198] [DEBUG] GET /static/css/general.css
+[2023-03-20 13:34:20 -0700] [1200] [DEBUG] GET /exp
+2023-03-20 13:34:20,714 Accessing /exp: debug2HMZ44 debugHRPY73 debugIZ8MBB 
+2023-03-20 13:34:20,722 given Counter({(0, 0): 2}) chose (0, 0)
+[2023-03-20 13:34:20 -0700] [1199] [DEBUG] GET /static/lib/seedrandom.js
+[2023-03-20 13:34:20 -0700] [1200] [DEBUG] GET /static/lib/jquery.min.js
+[2023-03-20 13:34:20 -0700] [1186] [DEBUG] GET /static/lib/backbone-min.js
+[2023-03-20 13:34:20 -0700] [1185] [DEBUG] GET /static/lib/underscore-min.js
+[2023-03-20 13:34:20 -0700] [1187] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2023-03-20 13:34:20 -0700] [1190] [DEBUG] GET /static/lib/mustache.js
+[2023-03-20 13:34:20 -0700] [1190] [DEBUG] GET /static/css/jquery-ui.min.css
+[2023-03-20 13:34:20 -0700] [1193] [DEBUG] GET /static/js/config.js
+[2023-03-20 13:34:20 -0700] [1191] [DEBUG] GET /static/js/task.js
+[2023-03-20 13:34:20 -0700] [1184] [DEBUG] GET /static/js/psiturk.js
+[2023-03-20 13:34:20 -0700] [1193] [DEBUG] GET /static/json/stim.json
+[2023-03-20 13:34:20 -0700] [1194] [DEBUG] GET /sync/debugIZ8MBB%3AdebugHRPY73
+2023-03-20 13:34:20,830 GET /sync route with id: debugIZ8MBB:debugHRPY73
+[2023-03-20 13:34:20 -0700] [1199] [DEBUG] GET /trial.html
+[2023-03-20 13:34:20 -0700] [1188] [DEBUG] GET /static/images/example_scene.png
+[2023-03-20 13:34:20 -0700] [1195] [DEBUG] GET /static/images/bot_questions/challenge5.png
+[2023-03-20 13:34:20 -0700] [1197] [DEBUG] GET /static/videos/inst_video.mp4
+[2023-03-20 13:35:14 -0700] [1199] [DEBUG] GET /static/videos/mp4/clip25.mp4
+[2023-03-20 13:35:48 -0700] [1195] [DEBUG] GET /static/videos/mp4/clip2.mp4
+[2023-03-20 13:36:12 -0700] [1196] [DEBUG] GET /static/videos/mp4/clip7.mp4
+[2023-03-20 13:36:18 -0700] [1184] [DEBUG] GET /consent
+[2023-03-20 13:36:18 -0700] [1197] [DEBUG] GET /ad
+[2023-03-20 13:36:18 -0700] [1190] [DEBUG] GET /static/js/utils.js
+[2023-03-20 13:36:18 -0700] [1188] [DEBUG] GET /static/css/general.css
+[2023-03-20 13:36:20 -0700] [1186] [DEBUG] GET /exp
+2023-03-20 13:36:20,833 Accessing /exp: debug2HMZ44 debugHRPY73 debugIZ8MBB 
+[2023-03-20 13:36:20 -0700] [1187] [DEBUG] GET /static/lib/seedrandom.js
+[2023-03-20 13:36:20 -0700] [1200] [DEBUG] GET /static/js/psiturk.js
+[2023-03-20 13:36:20 -0700] [1187] [DEBUG] GET /static/lib/backbone-min.js
+[2023-03-20 13:36:20 -0700] [1193] [DEBUG] GET /static/lib/underscore-min.js
+[2023-03-20 13:36:20 -0700] [1186] [DEBUG] GET /static/lib/jquery.min.js
+[2023-03-20 13:36:20 -0700] [1189] [DEBUG] GET /static/css/jquery-ui.min.css
+[2023-03-20 13:36:20 -0700] [1196] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2023-03-20 13:36:20 -0700] [1200] [DEBUG] GET /static/lib/mustache.js
+[2023-03-20 13:36:20 -0700] [1196] [DEBUG] GET /static/js/config.js
+[2023-03-20 13:36:20 -0700] [1187] [DEBUG] GET /static/js/task.js
+[2023-03-20 13:36:20 -0700] [1199] [DEBUG] GET /static/json/stim.json
+[2023-03-20 13:36:20 -0700] [1190] [DEBUG] GET /sync/debugIZ8MBB%3AdebugHRPY73
+2023-03-20 13:36:20,937 GET /sync route with id: debugIZ8MBB:debugHRPY73
+[2023-03-20 13:36:20 -0700] [1200] [DEBUG] GET /trial.html
+[2023-03-20 13:36:20 -0700] [1199] [DEBUG] GET /static/images/bot_questions/challenge5.png
+[2023-03-20 13:36:20 -0700] [1200] [DEBUG] GET /static/images/example_scene.png
+[2023-03-20 13:36:20 -0700] [1189] [DEBUG] GET /static/videos/inst_video.mp4
+[2023-03-20 13:39:02 -0700] [1185] [DEBUG] GET /consent
+[2023-03-20 13:39:02 -0700] [1196] [DEBUG] GET /ad
+[2023-03-20 13:39:02 -0700] [1192] [DEBUG] GET /static/js/utils.js
+[2023-03-20 13:39:02 -0700] [1186] [DEBUG] GET /static/css/general.css
+[2023-03-20 13:39:03 -0700] [1189] [DEBUG] GET /exp
+2023-03-20 13:39:03,127 Accessing /exp: debug2HMZ44 debugHRPY73 debugIZ8MBB 
+[2023-03-20 13:39:03 -0700] [1198] [DEBUG] GET /static/lib/seedrandom.js
+[2023-03-20 13:39:03 -0700] [1190] [DEBUG] GET /static/lib/underscore-min.js
+[2023-03-20 13:39:03 -0700] [1195] [DEBUG] GET /static/lib/jquery.min.js
+[2023-03-20 13:39:03 -0700] [1200] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2023-03-20 13:39:03 -0700] [1188] [DEBUG] GET /static/lib/backbone-min.js
+[2023-03-20 13:39:03 -0700] [1198] [DEBUG] GET /static/js/psiturk.js
+[2023-03-20 13:39:03 -0700] [1184] [DEBUG] GET /static/css/jquery-ui.min.css
+[2023-03-20 13:39:03 -0700] [1190] [DEBUG] GET /static/lib/mustache.js
+[2023-03-20 13:39:03 -0700] [1200] [DEBUG] GET /static/js/task.js
+[2023-03-20 13:39:03 -0700] [1195] [DEBUG] GET /static/js/config.js
+[2023-03-20 13:39:03 -0700] [1188] [DEBUG] GET /static/json/stim.json
+[2023-03-20 13:39:03 -0700] [1198] [DEBUG] GET /sync/debugIZ8MBB%3AdebugHRPY73
+2023-03-20 13:39:03,227 GET /sync route with id: debugIZ8MBB:debugHRPY73
+[2023-03-20 13:39:03 -0700] [1193] [DEBUG] GET /trial.html
+[2023-03-20 13:39:03 -0700] [1196] [DEBUG] GET /static/images/bot_questions/challenge5.png
+[2023-03-20 13:39:03 -0700] [1193] [DEBUG] GET /static/images/example_scene.png
+[2023-03-20 13:39:03 -0700] [1186] [DEBUG] GET /static/videos/inst_video.mp4
+[2023-03-20 13:39:50 -0700] [1186] [DEBUG] GET /static/videos/inst_video.mp4
+[2023-03-20 13:42:44 -0700] [1187] [DEBUG] GET /static/videos/mp4/clip25.mp4
+[2023-03-20 13:45:22 -0700] [1200] [DEBUG] Closing connection. 
+[2023-03-20 13:45:22 -0700] [1190] [DEBUG] Closing connection. 
+[2023-03-20 13:45:22 -0700] [1190] [DEBUG] GET /ppid
+[2023-03-20 13:45:22 -0700] [1184] [INFO] Parent changed, shutting down: <Worker 1184>
+[2023-03-20 13:45:22 -0700] [1190] [INFO] Parent changed, shutting down: <Worker 1190>
+[2023-03-20 13:45:22 -0700] [1186] [DEBUG] Closing connection. 
+[2023-03-20 13:45:22 -0700] [1193] [INFO] Parent changed, shutting down: <Worker 1193>
+[2023-03-20 13:45:22 -0700] [1195] [INFO] Parent changed, shutting down: <Worker 1195>
+[2023-03-20 13:45:22 -0700] [1185] [INFO] Parent changed, shutting down: <Worker 1185>
+[2023-03-20 13:45:22 -0700] [1184] [INFO] Worker exiting (pid: 1184)
+[2023-03-20 13:45:22 -0700] [1190] [INFO] Worker exiting (pid: 1190)
+[2023-03-20 13:45:22 -0700] [1186] [INFO] Parent changed, shutting down: <Worker 1186>
+[2023-03-20 13:45:22 -0700] [1195] [INFO] Worker exiting (pid: 1195)
+[2023-03-20 13:45:22 -0700] [1193] [INFO] Worker exiting (pid: 1193)
+[2023-03-20 13:45:22 -0700] [1185] [INFO] Worker exiting (pid: 1185)
+[2023-03-20 13:45:22 -0700] [1186] [INFO] Worker exiting (pid: 1186)
+[2023-03-20 13:45:23 -0700] [1192] [DEBUG] Closing connection. 
+[2023-03-20 13:45:23 -0700] [1188] [INFO] Parent changed, shutting down: <Worker 1188>
+[2023-03-20 13:45:23 -0700] [1191] [INFO] Parent changed, shutting down: <Worker 1191>
+[2023-03-20 13:45:23 -0700] [1191] [INFO] Worker exiting (pid: 1191)
+[2023-03-20 13:45:23 -0700] [1188] [INFO] Worker exiting (pid: 1188)
+[2023-03-20 13:45:23 -0700] [1192] [INFO] Parent changed, shutting down: <Worker 1192>
+[2023-03-20 13:45:23 -0700] [1192] [INFO] Worker exiting (pid: 1192)
+[2023-03-20 13:45:23 -0700] [1196] [DEBUG] Closing connection. 
+[2023-03-20 13:45:23 -0700] [1189] [INFO] Parent changed, shutting down: <Worker 1189>
+[2023-03-20 13:45:23 -0700] [1198] [INFO] Parent changed, shutting down: <Worker 1198>
+[2023-03-20 13:45:23 -0700] [1200] [INFO] Parent changed, shutting down: <Worker 1200>
+[2023-03-20 13:45:23 -0700] [1187] [INFO] Parent changed, shutting down: <Worker 1187>
+[2023-03-20 13:45:23 -0700] [1197] [INFO] Parent changed, shutting down: <Worker 1197>
+[2023-03-20 13:45:23 -0700] [1198] [INFO] Worker exiting (pid: 1198)
+[2023-03-20 13:45:23 -0700] [1189] [INFO] Worker exiting (pid: 1189)
+[2023-03-20 13:45:23 -0700] [1196] [INFO] Parent changed, shutting down: <Worker 1196>
+[2023-03-20 13:45:23 -0700] [1200] [INFO] Worker exiting (pid: 1200)
+[2023-03-20 13:45:23 -0700] [1187] [INFO] Worker exiting (pid: 1187)
+[2023-03-20 13:45:23 -0700] [1196] [INFO] Worker exiting (pid: 1196)
+[2023-03-20 13:45:23 -0700] [1197] [INFO] Worker exiting (pid: 1197)
+[2023-03-20 13:45:24 -0700] [1199] [DEBUG] Closing connection. 
+[2023-03-20 13:45:24 -0700] [1194] [INFO] Parent changed, shutting down: <Worker 1194>
+[2023-03-20 13:45:24 -0700] [1194] [INFO] Worker exiting (pid: 1194)
+[2023-03-20 13:45:24 -0700] [1199] [INFO] Parent changed, shutting down: <Worker 1199>
+[2023-03-20 13:45:24 -0700] [1199] [INFO] Worker exiting (pid: 1199)
+[2023-04-25 17:32:08 -0700] [29215] [DEBUG] Current configuration:
+  config: None
+  bind: ['0.0.0.0:22362']
+  backlog: 2048
+  workers: 17
+  worker_class: sync
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 0
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /Users/abeller/Documents/CICL/causal_language_paper_public/code/experiments/speaker
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 502
+  group: 20
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: server.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: unix:///var/run/syslog
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  statsd_prefix: 
+  proc_name: psiturk_experiment_server_28d2d26f1863
+  default_proc_name: gunicorn
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7fce48125cb0>
+  on_reload: <function OnReload.on_reload at 0x7fce48125dd0>
+  when_ready: <function WhenReady.when_ready at 0x7fce48125ef0>
+  pre_fork: <function Prefork.pre_fork at 0x7fce4813d050>
+  post_fork: <function Postfork.post_fork at 0x7fce4813d170>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7fce4813d290>
+  worker_int: <function WorkerInt.worker_int at 0x7fce4813d3b0>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7fce4813d4d0>
+  pre_exec: <function PreExec.pre_exec at 0x7fce4813d5f0>
+  pre_request: <function PreRequest.pre_request at 0x7fce4813d710>
+  post_request: <function PostRequest.post_request at 0x7fce4813d7a0>
+  child_exit: <function ChildExit.child_exit at 0x7fce4813d8c0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7fce4813d9e0>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7fce4813db00>
+  on_exit: <function ExperimentServer.load_user_config.<locals>.on_exit at 0x7fce48192a70>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: TLSv1
+  raw_paste_global_conf: []
+[2023-04-25 17:32:08 -0700] [29215] [INFO] Starting gunicorn 19.9.0
+[2023-04-25 17:32:08 -0700] [29215] [DEBUG] Arbiter booted
+[2023-04-25 17:32:08 -0700] [29215] [INFO] Listening at: http://0.0.0.0:22362 (29215)
+[2023-04-25 17:32:08 -0700] [29215] [INFO] Using worker: sync
+[2023-04-25 17:32:08 -0700] [29218] [INFO] Booting worker with pid: 29218
+[2023-04-25 17:32:08 -0700] [29219] [INFO] Booting worker with pid: 29219
+[2023-04-25 17:32:08 -0700] [29220] [INFO] Booting worker with pid: 29220
+[2023-04-25 17:32:08 -0700] [29221] [INFO] Booting worker with pid: 29221
+[2023-04-25 17:32:08 -0700] [29222] [INFO] Booting worker with pid: 29222
+[2023-04-25 17:32:08 -0700] [29223] [INFO] Booting worker with pid: 29223
+[2023-04-25 17:32:08 -0700] [29224] [INFO] Booting worker with pid: 29224
+[2023-04-25 17:32:08 -0700] [29225] [INFO] Booting worker with pid: 29225
+[2023-04-25 17:32:08 -0700] [29226] [INFO] Booting worker with pid: 29226
+[2023-04-25 17:32:08 -0700] [29227] [INFO] Booting worker with pid: 29227
+[2023-04-25 17:32:08 -0700] [29228] [INFO] Booting worker with pid: 29228
+2023-04-25 17:32:08,828 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:08,844 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2023-04-25 17:32:08 -0700] [29229] [INFO] Booting worker with pid: 29229
+[2023-04-25 17:32:08 -0700] [29230] [INFO] Booting worker with pid: 29230
+[2023-04-25 17:32:08 -0700] [29231] [INFO] Booting worker with pid: 29231
+2023-04-25 17:32:08,954 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:08,990 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2023-04-25 17:32:09 -0700] [29232] [INFO] Booting worker with pid: 29232
+[2023-04-25 17:32:09 -0700] [29233] [INFO] Booting worker with pid: 29233
+[2023-04-25 17:32:09 -0700] [29235] [INFO] Booting worker with pid: 29235
+[2023-04-25 17:32:09 -0700] [29215] [DEBUG] 17 workers
+2023-04-25 17:32:09,269 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:09,287 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:32:09,292 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:09,320 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:32:09,457 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:09,483 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:32:09,511 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:09,531 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2023-04-25 17:32:09 -0700] [29218] [DEBUG] Closing connection. 
+2023-04-25 17:32:09,761 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:09,776 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:32:09,874 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:09,885 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:32:09,910 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:09,922 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:32:09,962 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:09,972 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:32:09,973 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:09,983 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:32:10,009 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:10,018 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:32:10,046 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:10,048 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:10,053 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:32:10,055 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:32:10,084 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:10,090 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:32:10,099 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:10,101 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:32:10,106 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:32:10,108 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2023-04-25 17:32:11 -0700] [29219] [DEBUG] Closing connection. 
+[2023-04-25 17:32:11 -0700] [29233] [DEBUG] GET /ad
+[2023-04-25 17:32:11 -0700] [29235] [DEBUG] GET /favicon.ico
+[2023-04-25 17:32:14 -0700] [29219] [DEBUG] GET /consent
+[2023-04-25 17:32:14 -0700] [29221] [DEBUG] GET /ad
+[2023-04-25 17:32:14 -0700] [29219] [DEBUG] GET /static/js/utils.js
+[2023-04-25 17:32:14 -0700] [29219] [DEBUG] GET /static/css/general.css
+[2023-04-25 17:32:15 -0700] [29232] [DEBUG] GET /exp
+2023-04-25 17:32:15,659 Accessing /exp: debugO4YDV9 debugOW02L2 debug0893KE 
+2023-04-25 17:32:15,668 given Counter({(0, 0): 0}) chose (0, 0)
+[2023-04-25 17:32:15 -0700] [29221] [DEBUG] GET /static/lib/seedrandom.js
+[2023-04-25 17:32:15 -0700] [29232] [DEBUG] GET /static/lib/jquery.min.js
+[2023-04-25 17:32:15 -0700] [29219] [DEBUG] GET /static/css/jquery-ui.min.css
+[2023-04-25 17:32:15 -0700] [29232] [DEBUG] GET /static/lib/underscore-min.js
+[2023-04-25 17:32:15 -0700] [29225] [DEBUG] GET /static/lib/backbone-min.js
+[2023-04-25 17:32:15 -0700] [29227] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2023-04-25 17:32:15 -0700] [29223] [DEBUG] GET /static/lib/mustache.js
+[2023-04-25 17:32:15 -0700] [29219] [DEBUG] GET /static/js/config.js
+[2023-04-25 17:32:15 -0700] [29218] [DEBUG] GET /static/js/psiturk.js
+[2023-04-25 17:32:15 -0700] [29225] [DEBUG] GET /static/js/task.js
+[2023-04-25 17:32:15 -0700] [29231] [DEBUG] GET /static/json/stim.json
+[2023-04-25 17:32:15 -0700] [29231] [DEBUG] GET /sync/debug0893KE%3AdebugOW02L2
+2023-04-25 17:32:15,796 GET /sync route with id: debug0893KE:debugOW02L2
+[2023-04-25 17:32:15 -0700] [29231] [DEBUG] GET /trial.html
+[2023-04-25 17:32:15 -0700] [29231] [DEBUG] GET /static/images/example_scene.png
+[2023-04-25 17:32:15 -0700] [29232] [DEBUG] GET /static/images/bot_questions/challenge5.png
+[2023-04-25 17:32:15 -0700] [29231] [DEBUG] GET /static/videos/inst_video.mp4
+[2023-04-25 17:32:34 -0700] [29221] [DEBUG] Closing connection. 
+[2023-04-25 17:32:34 -0700] [29235] [DEBUG] Closing connection. 
+[2023-04-25 17:32:34 -0700] [29229] [DEBUG] GET /ppid
+[2023-04-25 17:32:34 -0700] [29221] [INFO] Parent changed, shutting down: <Worker 29221>
+[2023-04-25 17:32:34 -0700] [29229] [INFO] Parent changed, shutting down: <Worker 29229>
+[2023-04-25 17:32:34 -0700] [29222] [INFO] Parent changed, shutting down: <Worker 29222>
+[2023-04-25 17:32:34 -0700] [29218] [INFO] Parent changed, shutting down: <Worker 29218>
+[2023-04-25 17:32:34 -0700] [29224] [DEBUG] Closing connection. 
+[2023-04-25 17:32:34 -0700] [29221] [INFO] Worker exiting (pid: 29221)
+[2023-04-25 17:32:34 -0700] [29220] [INFO] Parent changed, shutting down: <Worker 29220>
+[2023-04-25 17:32:34 -0700] [29222] [INFO] Worker exiting (pid: 29222)
+[2023-04-25 17:32:34 -0700] [29229] [INFO] Worker exiting (pid: 29229)
+[2023-04-25 17:32:34 -0700] [29223] [INFO] Parent changed, shutting down: <Worker 29223>
+[2023-04-25 17:32:34 -0700] [29224] [INFO] Parent changed, shutting down: <Worker 29224>
+[2023-04-25 17:32:34 -0700] [29220] [INFO] Worker exiting (pid: 29220)
+[2023-04-25 17:32:34 -0700] [29218] [INFO] Worker exiting (pid: 29218)
+[2023-04-25 17:32:34 -0700] [29223] [INFO] Worker exiting (pid: 29223)
+[2023-04-25 17:32:34 -0700] [29224] [INFO] Worker exiting (pid: 29224)
+[2023-04-25 17:32:34 -0700] [29235] [INFO] Parent changed, shutting down: <Worker 29235>
+[2023-04-25 17:32:34 -0700] [29228] [INFO] Parent changed, shutting down: <Worker 29228>
+[2023-04-25 17:32:34 -0700] [29227] [INFO] Parent changed, shutting down: <Worker 29227>
+[2023-04-25 17:32:34 -0700] [29230] [INFO] Parent changed, shutting down: <Worker 29230>
+[2023-04-25 17:32:34 -0700] [29231] [INFO] Parent changed, shutting down: <Worker 29231>
+[2023-04-25 17:32:34 -0700] [29226] [DEBUG] Closing connection. 
+[2023-04-25 17:32:34 -0700] [29235] [INFO] Worker exiting (pid: 29235)
+[2023-04-25 17:32:34 -0700] [29230] [INFO] Worker exiting (pid: 29230)
+[2023-04-25 17:32:34 -0700] [29228] [INFO] Worker exiting (pid: 29228)
+[2023-04-25 17:32:34 -0700] [29231] [INFO] Worker exiting (pid: 29231)
+[2023-04-25 17:32:34 -0700] [29226] [INFO] Parent changed, shutting down: <Worker 29226>
+[2023-04-25 17:32:34 -0700] [29227] [INFO] Worker exiting (pid: 29227)
+[2023-04-25 17:32:34 -0700] [29226] [INFO] Worker exiting (pid: 29226)
+[2023-04-25 17:32:35 -0700] [29232] [INFO] Parent changed, shutting down: <Worker 29232>
+[2023-04-25 17:32:35 -0700] [29225] [INFO] Parent changed, shutting down: <Worker 29225>
+[2023-04-25 17:32:35 -0700] [29233] [DEBUG] Closing connection. 
+[2023-04-25 17:32:35 -0700] [29219] [INFO] Parent changed, shutting down: <Worker 29219>
+[2023-04-25 17:32:35 -0700] [29232] [INFO] Worker exiting (pid: 29232)
+[2023-04-25 17:32:35 -0700] [29225] [INFO] Worker exiting (pid: 29225)
+[2023-04-25 17:32:35 -0700] [29219] [INFO] Worker exiting (pid: 29219)
+[2023-04-25 17:32:35 -0700] [29233] [INFO] Parent changed, shutting down: <Worker 29233>
+[2023-04-25 17:32:35 -0700] [29233] [INFO] Worker exiting (pid: 29233)
+[2023-04-25 17:34:32 -0700] [29485] [DEBUG] Current configuration:
+  config: None
+  bind: ['0.0.0.0:22362']
+  backlog: 2048
+  workers: 17
+  worker_class: sync
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 0
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /Users/abeller/Documents/CICL/causal_language_paper_public/code/experiments/speaker
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 502
+  group: 20
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: server.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: unix:///var/run/syslog
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  statsd_prefix: 
+  proc_name: psiturk_experiment_server_28d2d26f1863
+  default_proc_name: gunicorn
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f9b901d5cb0>
+  on_reload: <function OnReload.on_reload at 0x7f9b901d5dd0>
+  when_ready: <function WhenReady.when_ready at 0x7f9b901d5ef0>
+  pre_fork: <function Prefork.pre_fork at 0x7f9b901ec050>
+  post_fork: <function Postfork.post_fork at 0x7f9b901ec170>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f9b901ec290>
+  worker_int: <function WorkerInt.worker_int at 0x7f9b901ec3b0>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f9b901ec4d0>
+  pre_exec: <function PreExec.pre_exec at 0x7f9b901ec5f0>
+  pre_request: <function PreRequest.pre_request at 0x7f9b901ec710>
+  post_request: <function PostRequest.post_request at 0x7f9b901ec7a0>
+  child_exit: <function ChildExit.child_exit at 0x7f9b901ec8c0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f9b901ec9e0>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f9b901ecb00>
+  on_exit: <function ExperimentServer.load_user_config.<locals>.on_exit at 0x7f9ba80caa70>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: TLSv1
+  raw_paste_global_conf: []
+[2023-04-25 17:34:32 -0700] [29485] [INFO] Starting gunicorn 19.9.0
+[2023-04-25 17:34:32 -0700] [29485] [DEBUG] Arbiter booted
+[2023-04-25 17:34:32 -0700] [29485] [INFO] Listening at: http://0.0.0.0:22362 (29485)
+[2023-04-25 17:34:32 -0700] [29485] [INFO] Using worker: sync
+[2023-04-25 17:34:32 -0700] [29488] [INFO] Booting worker with pid: 29488
+[2023-04-25 17:34:32 -0700] [29489] [INFO] Booting worker with pid: 29489
+[2023-04-25 17:34:32 -0700] [29490] [INFO] Booting worker with pid: 29490
+[2023-04-25 17:34:32 -0700] [29491] [INFO] Booting worker with pid: 29491
+[2023-04-25 17:34:32 -0700] [29492] [INFO] Booting worker with pid: 29492
+[2023-04-25 17:34:32 -0700] [29493] [INFO] Booting worker with pid: 29493
+[2023-04-25 17:34:32 -0700] [29494] [INFO] Booting worker with pid: 29494
+[2023-04-25 17:34:32 -0700] [29495] [INFO] Booting worker with pid: 29495
+[2023-04-25 17:34:32 -0700] [29496] [INFO] Booting worker with pid: 29496
+[2023-04-25 17:34:32 -0700] [29497] [INFO] Booting worker with pid: 29497
+[2023-04-25 17:34:32 -0700] [29498] [INFO] Booting worker with pid: 29498
+[2023-04-25 17:34:32 -0700] [29499] [INFO] Booting worker with pid: 29499
+[2023-04-25 17:34:32 -0700] [29500] [INFO] Booting worker with pid: 29500
+2023-04-25 17:34:33,014 Secret key: 'this is my secret key which is hard to guess, i should change this'
+[2023-04-25 17:34:33 -0700] [29501] [INFO] Booting worker with pid: 29501
+2023-04-25 17:34:33,037 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2023-04-25 17:34:33 -0700] [29502] [INFO] Booting worker with pid: 29502
+[2023-04-25 17:34:33 -0700] [29503] [INFO] Booting worker with pid: 29503
+[2023-04-25 17:34:33 -0700] [29504] [INFO] Booting worker with pid: 29504
+2023-04-25 17:34:33,084 Secret key: 'this is my secret key which is hard to guess, i should change this'
+[2023-04-25 17:34:33 -0700] [29485] [DEBUG] 17 workers
+2023-04-25 17:34:33,138 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:34:33,162 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:34:33,171 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:34:33,396 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:34:33,422 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:34:33,704 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:34:33,724 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:34:33,756 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:34:33,788 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:34:33,791 Secret key: 'this is my secret key which is hard to guess, i should change this'
+[2023-04-25 17:34:33 -0700] [29489] [DEBUG] Closing connection. 
+2023-04-25 17:34:33,821 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:34:33,852 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:34:33,867 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:34:33,927 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:34:33,944 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:34:33,971 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:34:33,983 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:34:34,042 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:34:34,045 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:34:34,051 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:34:34,054 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:34:34,087 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:34:34,093 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:34:34,118 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:34:34,119 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:34:34,120 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:34:34,121 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-04-25 17:34:34,124 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:34:34,127 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:34:34,127 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-04-25 17:34:34,128 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2023-04-25 17:34:35 -0700] [29501] [DEBUG] Closing connection. 
+[2023-04-25 17:34:35 -0700] [29500] [DEBUG] GET /ad
+[2023-04-25 17:34:37 -0700] [29501] [DEBUG] GET /consent
+[2023-04-25 17:34:37 -0700] [29502] [DEBUG] GET /static/js/utils.js
+[2023-04-25 17:34:37 -0700] [29501] [DEBUG] GET /ad
+[2023-04-25 17:34:37 -0700] [29502] [DEBUG] GET /static/css/general.css
+[2023-04-25 17:34:38 -0700] [29501] [DEBUG] GET /exp
+2023-04-25 17:34:38,944 Accessing /exp: debugFBI4MD debugSZYCFK debugFYB2ED 
+2023-04-25 17:34:38,951 given Counter({(0, 0): 0}) chose (0, 0)
+[2023-04-25 17:34:38 -0700] [29502] [DEBUG] GET /static/lib/seedrandom.js
+[2023-04-25 17:34:38 -0700] [29501] [DEBUG] GET /static/lib/jquery.min.js
+[2023-04-25 17:34:38 -0700] [29494] [DEBUG] GET /static/lib/underscore-min.js
+[2023-04-25 17:34:38 -0700] [29497] [DEBUG] GET /static/lib/backbone-min.js
+[2023-04-25 17:34:39 -0700] [29497] [DEBUG] GET /static/js/psiturk.js
+[2023-04-25 17:34:39 -0700] [29489] [DEBUG] GET /static/css/jquery-ui.min.css
+[2023-04-25 17:34:39 -0700] [29494] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2023-04-25 17:34:39 -0700] [29503] [DEBUG] GET /static/js/task.js
+[2023-04-25 17:34:39 -0700] [29491] [DEBUG] GET /static/lib/mustache.js
+[2023-04-25 17:34:39 -0700] [29492] [DEBUG] GET /static/js/config.js
+[2023-04-25 17:34:39 -0700] [29497] [DEBUG] GET /static/json/stim.json
+[2023-04-25 17:34:39 -0700] [29501] [DEBUG] GET /sync/debugFYB2ED%3AdebugSZYCFK
+2023-04-25 17:34:39,072 GET /sync route with id: debugFYB2ED:debugSZYCFK
+[2023-04-25 17:34:39 -0700] [29498] [DEBUG] GET /trial.html
+[2023-04-25 17:34:39 -0700] [29490] [DEBUG] GET /static/images/example_scene.png
+[2023-04-25 17:34:39 -0700] [29498] [DEBUG] GET /static/images/bot_questions/challenge4.png
+[2023-04-25 17:34:39 -0700] [29498] [DEBUG] GET /static/videos/inst_video.mp4
+[2023-04-25 17:35:12 -0700] [29498] [DEBUG] Closing connection. 
+[2023-04-25 17:35:12 -0700] [29499] [DEBUG] Closing connection. 
+[2023-04-25 17:35:12 -0700] [29496] [DEBUG] GET /ppid
+[2023-04-25 17:35:12 -0700] [29491] [INFO] Parent changed, shutting down: <Worker 29491>
+[2023-04-25 17:35:12 -0700] [29488] [INFO] Parent changed, shutting down: <Worker 29488>
+[2023-04-25 17:35:12 -0700] [29494] [INFO] Parent changed, shutting down: <Worker 29494>
+[2023-04-25 17:35:12 -0700] [29496] [INFO] Parent changed, shutting down: <Worker 29496>
+[2023-04-25 17:35:12 -0700] [29501] [INFO] Parent changed, shutting down: <Worker 29501>
+[2023-04-25 17:35:12 -0700] [29499] [INFO] Parent changed, shutting down: <Worker 29499>
+[2023-04-25 17:35:12 -0700] [29491] [INFO] Worker exiting (pid: 29491)
+[2023-04-25 17:35:12 -0700] [29494] [INFO] Worker exiting (pid: 29494)
+[2023-04-25 17:35:12 -0700] [29496] [INFO] Worker exiting (pid: 29496)
+[2023-04-25 17:35:12 -0700] [29501] [INFO] Worker exiting (pid: 29501)
+[2023-04-25 17:35:12 -0700] [29499] [INFO] Worker exiting (pid: 29499)
+[2023-04-25 17:35:12 -0700] [29493] [DEBUG] Closing connection. 
+[2023-04-25 17:35:12 -0700] [29488] [INFO] Worker exiting (pid: 29488)
+[2023-04-25 17:35:12 -0700] [29493] [INFO] Parent changed, shutting down: <Worker 29493>
+[2023-04-25 17:35:12 -0700] [29493] [INFO] Worker exiting (pid: 29493)
+[2023-04-25 17:35:12 -0700] [29489] [INFO] Parent changed, shutting down: <Worker 29489>
+[2023-04-25 17:35:12 -0700] [29497] [INFO] Parent changed, shutting down: <Worker 29497>
+[2023-04-25 17:35:12 -0700] [29490] [INFO] Parent changed, shutting down: <Worker 29490>
+[2023-04-25 17:35:12 -0700] [29500] [INFO] Parent changed, shutting down: <Worker 29500>
+[2023-04-25 17:35:12 -0700] [29504] [INFO] Parent changed, shutting down: <Worker 29504>
+[2023-04-25 17:35:12 -0700] [29502] [DEBUG] Closing connection. 
+[2023-04-25 17:35:12 -0700] [29498] [INFO] Parent changed, shutting down: <Worker 29498>
+[2023-04-25 17:35:12 -0700] [29497] [INFO] Worker exiting (pid: 29497)
+[2023-04-25 17:35:12 -0700] [29489] [INFO] Worker exiting (pid: 29489)
+[2023-04-25 17:35:12 -0700] [29490] [INFO] Worker exiting (pid: 29490)
+[2023-04-25 17:35:12 -0700] [29500] [INFO] Worker exiting (pid: 29500)
+[2023-04-25 17:35:12 -0700] [29504] [INFO] Worker exiting (pid: 29504)
+[2023-04-25 17:35:12 -0700] [29502] [INFO] Parent changed, shutting down: <Worker 29502>
+[2023-04-25 17:35:12 -0700] [29498] [INFO] Worker exiting (pid: 29498)
+[2023-04-25 17:35:12 -0700] [29502] [INFO] Worker exiting (pid: 29502)
+[2023-04-25 17:35:13 -0700] [29503] [INFO] Parent changed, shutting down: <Worker 29503>
+[2023-04-25 17:35:13 -0700] [29492] [INFO] Parent changed, shutting down: <Worker 29492>
+[2023-04-25 17:35:13 -0700] [29495] [DEBUG] Closing connection. 
+[2023-04-25 17:35:13 -0700] [29492] [INFO] Worker exiting (pid: 29492)
+[2023-04-25 17:35:13 -0700] [29503] [INFO] Worker exiting (pid: 29503)
+[2023-04-25 17:35:13 -0700] [29495] [INFO] Parent changed, shutting down: <Worker 29495>
+[2023-04-25 17:35:13 -0700] [29495] [INFO] Worker exiting (pid: 29495)
+[2023-05-31 14:55:43 -0700] [2209] [DEBUG] Current configuration:
+  config: None
+  bind: ['0.0.0.0:22362']
+  backlog: 2048
+  workers: 17
+  worker_class: sync
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 0
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /Users/abeller/Documents/CICL/causal_language_paper_public/code/experiments/speaker
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 502
+  group: 20
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: server.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: unix:///var/run/syslog
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  statsd_prefix: 
+  proc_name: psiturk_experiment_server_28d2d26f1863
+  default_proc_name: gunicorn
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7fb89014dcb0>
+  on_reload: <function OnReload.on_reload at 0x7fb89014ddd0>
+  when_ready: <function WhenReady.when_ready at 0x7fb89014def0>
+  pre_fork: <function Prefork.pre_fork at 0x7fb890165050>
+  post_fork: <function Postfork.post_fork at 0x7fb890165170>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7fb890165290>
+  worker_int: <function WorkerInt.worker_int at 0x7fb8901653b0>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7fb8901654d0>
+  pre_exec: <function PreExec.pre_exec at 0x7fb8901655f0>
+  pre_request: <function PreRequest.pre_request at 0x7fb890165710>
+  post_request: <function PostRequest.post_request at 0x7fb8901657a0>
+  child_exit: <function ChildExit.child_exit at 0x7fb8901658c0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7fb8901659e0>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7fb890165b00>
+  on_exit: <function ExperimentServer.load_user_config.<locals>.on_exit at 0x7fb89017aa70>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: TLSv1
+  raw_paste_global_conf: []
+[2023-05-31 14:55:43 -0700] [2209] [INFO] Starting gunicorn 19.9.0
+[2023-05-31 14:55:43 -0700] [2209] [DEBUG] Arbiter booted
+[2023-05-31 14:55:43 -0700] [2209] [INFO] Listening at: http://0.0.0.0:22362 (2209)
+[2023-05-31 14:55:43 -0700] [2209] [INFO] Using worker: sync
+[2023-05-31 14:55:43 -0700] [2212] [INFO] Booting worker with pid: 2212
+[2023-05-31 14:55:43 -0700] [2213] [INFO] Booting worker with pid: 2213
+[2023-05-31 14:55:43 -0700] [2214] [INFO] Booting worker with pid: 2214
+[2023-05-31 14:55:43 -0700] [2215] [INFO] Booting worker with pid: 2215
+[2023-05-31 14:55:43 -0700] [2216] [INFO] Booting worker with pid: 2216
+[2023-05-31 14:55:43 -0700] [2217] [INFO] Booting worker with pid: 2217
+[2023-05-31 14:55:43 -0700] [2218] [INFO] Booting worker with pid: 2218
+[2023-05-31 14:55:43 -0700] [2219] [INFO] Booting worker with pid: 2219
+[2023-05-31 14:55:43 -0700] [2220] [INFO] Booting worker with pid: 2220
+[2023-05-31 14:55:43 -0700] [2221] [INFO] Booting worker with pid: 2221
+[2023-05-31 14:55:44 -0700] [2222] [INFO] Booting worker with pid: 2222
+[2023-05-31 14:55:44 -0700] [2223] [INFO] Booting worker with pid: 2223
+[2023-05-31 14:55:44 -0700] [2224] [INFO] Booting worker with pid: 2224
+2023-05-31 14:55:44,241 Secret key: 'this is my secret key which is hard to guess, i should change this'
+[2023-05-31 14:55:44 -0700] [2225] [INFO] Booting worker with pid: 2225
+2023-05-31 14:55:44,253 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-05-31 14:55:44,331 Secret key: 'this is my secret key which is hard to guess, i should change this'
+[2023-05-31 14:55:44 -0700] [2226] [INFO] Booting worker with pid: 2226
+2023-05-31 14:55:44,348 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2023-05-31 14:55:44 -0700] [2227] [INFO] Booting worker with pid: 2227
+[2023-05-31 14:55:44 -0700] [2228] [INFO] Booting worker with pid: 2228
+[2023-05-31 14:55:44 -0700] [2209] [DEBUG] 17 workers
+2023-05-31 14:55:44,592 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-05-31 14:55:44,613 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-05-31 14:55:44,752 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-05-31 14:55:44,771 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2023-05-31 14:55:44 -0700] [2213] [DEBUG] Closing connection. 
+2023-05-31 14:55:45,011 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-05-31 14:55:45,026 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-05-31 14:55:45,186 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-05-31 14:55:45,196 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-05-31 14:55:45,350 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-05-31 14:55:45,360 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-05-31 14:55:45,376 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-05-31 14:55:45,405 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-05-31 14:55:45,476 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-05-31 14:55:45,485 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-05-31 14:55:45,490 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-05-31 14:55:45,501 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-05-31 14:55:45,507 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-05-31 14:55:45,511 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-05-31 14:55:45,520 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-05-31 14:55:45,530 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-05-31 14:55:45,560 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-05-31 14:55:45,570 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-05-31 14:55:45,581 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-05-31 14:55:45,587 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-05-31 14:55:45,587 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-05-31 14:55:45,594 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-05-31 14:55:45,611 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-05-31 14:55:45,618 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+2023-05-31 14:55:45,647 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2023-05-31 14:55:45,654 /Users/abeller/opt/miniconda3/envs/causal_language/lib/python3.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2023-05-31 14:55:48 -0700] [2228] [DEBUG] GET /ad
+[2023-05-31 14:55:48 -0700] [2213] [DEBUG] Closing connection. 
+[2023-05-31 14:55:48 -0700] [2227] [DEBUG] GET /favicon.ico
+[2023-05-31 14:55:49 -0700] [2228] [DEBUG] GET /consent
+[2023-05-31 14:55:49 -0700] [2213] [DEBUG] GET /static/js/utils.js
+[2023-05-31 14:55:49 -0700] [2212] [DEBUG] GET /ad
+[2023-05-31 14:55:49 -0700] [2213] [DEBUG] GET /static/css/general.css
+[2023-05-31 14:55:50 -0700] [2213] [DEBUG] GET /exp
+2023-05-31 14:55:50,880 Accessing /exp: debug7MLKB6 debugSGPOZO debug6HOZL4 
+2023-05-31 14:55:50,889 given Counter({(0, 0): 0}) chose (0, 0)
+[2023-05-31 14:55:50 -0700] [2226] [DEBUG] GET /static/lib/seedrandom.js
+[2023-05-31 14:55:50 -0700] [2214] [DEBUG] GET /static/lib/backbone-min.js
+[2023-05-31 14:55:50 -0700] [2219] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2023-05-31 14:55:50 -0700] [2213] [DEBUG] GET /static/lib/jquery.min.js
+[2023-05-31 14:55:50 -0700] [2228] [DEBUG] GET /static/lib/underscore-min.js
+[2023-05-31 14:55:50 -0700] [2216] [DEBUG] GET /static/css/jquery-ui.min.css
+[2023-05-31 14:55:50 -0700] [2214] [DEBUG] GET /static/lib/mustache.js
+[2023-05-31 14:55:50 -0700] [2225] [DEBUG] GET /static/js/config.js
+[2023-05-31 14:55:50 -0700] [2219] [DEBUG] GET /static/js/psiturk.js
+[2023-05-31 14:55:50 -0700] [2223] [DEBUG] GET /static/js/task.js
+[2023-05-31 14:55:50 -0700] [2219] [DEBUG] GET /static/json/stim.json
+[2023-05-31 14:55:51 -0700] [2224] [DEBUG] GET /sync/debug6HOZL4%3AdebugSGPOZO
+2023-05-31 14:55:51,008 GET /sync route with id: debug6HOZL4:debugSGPOZO
+[2023-05-31 14:55:51 -0700] [2221] [DEBUG] GET /trial.html
+[2023-05-31 14:55:51 -0700] [2215] [DEBUG] GET /static/images/example_scene.png
+[2023-05-31 14:55:51 -0700] [2218] [DEBUG] GET /static/images/bot_questions/challenge3.png
+[2023-05-31 14:55:51 -0700] [2219] [DEBUG] GET /static/videos/inst_video.mp4
+[2023-05-31 14:56:19 -0700] [2217] [DEBUG] GET /static/videos/mp4/clip28.mp4
+[2023-05-31 14:56:54 -0700] [2226] [DEBUG] GET /static/videos/mp4/clip25.mp4
+[2023-05-31 14:57:24 -0700] [2213] [DEBUG] GET /static/videos/mp4/clip17.mp4
+[2023-05-31 14:58:07 -0700] [2226] [DEBUG] GET /ad
+[2023-05-31 14:58:07 -0700] [2219] [DEBUG] Closing connection. 
+[2023-05-31 14:58:08 -0700] [2227] [DEBUG] GET /consent
+[2023-05-31 14:58:08 -0700] [2226] [DEBUG] GET /static/js/utils.js
+[2023-05-31 14:58:08 -0700] [2227] [DEBUG] GET /ad
+[2023-05-31 14:58:08 -0700] [2226] [DEBUG] GET /static/css/general.css
+[2023-05-31 14:58:09 -0700] [2215] [DEBUG] GET /exp
+2023-05-31 14:58:09,108 Accessing /exp: debugWZ2XY3 debug44Z7TP debug265FYA 
+2023-05-31 14:58:09,118 given Counter({(0, 0): 1}) chose (0, 0)
+[2023-05-31 14:58:09 -0700] [2216] [DEBUG] GET /static/lib/seedrandom.js
+[2023-05-31 14:58:09 -0700] [2215] [DEBUG] GET /static/lib/jquery.min.js
+[2023-05-31 14:58:09 -0700] [2216] [DEBUG] GET /static/lib/underscore-min.js
+[2023-05-31 14:58:09 -0700] [2213] [DEBUG] GET /static/lib/backbone-min.js
+[2023-05-31 14:58:09 -0700] [2216] [DEBUG] GET /static/js/psiturk.js
+[2023-05-31 14:58:09 -0700] [2221] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2023-05-31 14:58:09 -0700] [2213] [DEBUG] GET /static/lib/mustache.js
+[2023-05-31 14:58:09 -0700] [2221] [DEBUG] GET /static/js/task.js
+[2023-05-31 14:58:09 -0700] [2215] [DEBUG] GET /static/css/jquery-ui.min.css
+[2023-05-31 14:58:09 -0700] [2219] [DEBUG] GET /static/js/config.js
+[2023-05-31 14:58:09 -0700] [2215] [DEBUG] GET /static/json/stim.json
+[2023-05-31 14:58:09 -0700] [2221] [DEBUG] GET /sync/debug265FYA%3Adebug44Z7TP
+2023-05-31 14:58:09,261 GET /sync route with id: debug265FYA:debug44Z7TP
+[2023-05-31 14:58:09 -0700] [2223] [DEBUG] GET /trial.html
+[2023-05-31 14:58:09 -0700] [2220] [DEBUG] GET /static/images/bot_questions/challenge5.png
+[2023-05-31 14:58:09 -0700] [2226] [DEBUG] GET /static/images/example_scene.png
+[2023-05-31 14:58:09 -0700] [2226] [DEBUG] GET /static/videos/inst_video.mp4
+[2023-05-31 14:58:35 -0700] [2214] [DEBUG] GET /static/videos/mp4/clip18.mp4
+[2023-05-31 15:42:24 -0700] [2220] [DEBUG] Closing connection. 
+[2023-05-31 15:42:24 -0700] [2212] [DEBUG] Closing connection. 
+[2023-05-31 15:42:24 -0700] [2212] [DEBUG] GET /ppid
+[2023-05-31 15:42:24 -0700] [2214] [INFO] Parent changed, shutting down: <Worker 2214>
+[2023-05-31 15:42:24 -0700] [2228] [INFO] Parent changed, shutting down: <Worker 2228>
+[2023-05-31 15:42:24 -0700] [2217] [INFO] Parent changed, shutting down: <Worker 2217>
+[2023-05-31 15:42:24 -0700] [2222] [INFO] Parent changed, shutting down: <Worker 2222>
+[2023-05-31 15:42:24 -0700] [2212] [INFO] Parent changed, shutting down: <Worker 2212>
+[2023-05-31 15:42:24 -0700] [2227] [DEBUG] Closing connection. 
+[2023-05-31 15:42:24 -0700] [2218] [INFO] Parent changed, shutting down: <Worker 2218>
+[2023-05-31 15:42:24 -0700] [2217] [INFO] Worker exiting (pid: 2217)
+[2023-05-31 15:42:24 -0700] [2222] [INFO] Worker exiting (pid: 2222)
+[2023-05-31 15:42:24 -0700] [2215] [INFO] Parent changed, shutting down: <Worker 2215>
+[2023-05-31 15:42:24 -0700] [2214] [INFO] Worker exiting (pid: 2214)
+[2023-05-31 15:42:24 -0700] [2228] [INFO] Worker exiting (pid: 2228)
+[2023-05-31 15:42:24 -0700] [2227] [INFO] Parent changed, shutting down: <Worker 2227>
+[2023-05-31 15:42:24 -0700] [2218] [INFO] Worker exiting (pid: 2218)
+[2023-05-31 15:42:24 -0700] [2215] [INFO] Worker exiting (pid: 2215)
+[2023-05-31 15:42:24 -0700] [2227] [INFO] Worker exiting (pid: 2227)
+[2023-05-31 15:42:24 -0700] [2212] [INFO] Worker exiting (pid: 2212)
+[2023-05-31 15:42:24 -0700] [2213] [INFO] Parent changed, shutting down: <Worker 2213>
+[2023-05-31 15:42:24 -0700] [2213] [INFO] Worker exiting (pid: 2213)
+[2023-05-31 15:42:24 -0700] [2216] [INFO] Parent changed, shutting down: <Worker 2216>
+[2023-05-31 15:42:24 -0700] [2216] [INFO] Worker exiting (pid: 2216)
+[2023-05-31 15:42:24 -0700] [2225] [INFO] Parent changed, shutting down: <Worker 2225>
+[2023-05-31 15:42:24 -0700] [2225] [INFO] Worker exiting (pid: 2225)
+[2023-05-31 15:42:24 -0700] [2223] [INFO] Parent changed, shutting down: <Worker 2223>
+[2023-05-31 15:42:24 -0700] [2219] [INFO] Parent changed, shutting down: <Worker 2219>
+[2023-05-31 15:42:24 -0700] [2224] [INFO] Parent changed, shutting down: <Worker 2224>
+[2023-05-31 15:42:24 -0700] [2226] [DEBUG] Closing connection. 
+[2023-05-31 15:42:24 -0700] [2220] [INFO] Parent changed, shutting down: <Worker 2220>
+[2023-05-31 15:42:24 -0700] [2221] [INFO] Parent changed, shutting down: <Worker 2221>
+[2023-05-31 15:42:24 -0700] [2223] [INFO] Worker exiting (pid: 2223)
+[2023-05-31 15:42:24 -0700] [2219] [INFO] Worker exiting (pid: 2219)
+[2023-05-31 15:42:24 -0700] [2221] [INFO] Worker exiting (pid: 2221)
+[2023-05-31 15:42:24 -0700] [2226] [INFO] Parent changed, shutting down: <Worker 2226>
+[2023-05-31 15:42:24 -0700] [2220] [INFO] Worker exiting (pid: 2220)
+[2023-05-31 15:42:24 -0700] [2224] [INFO] Worker exiting (pid: 2224)
+[2023-05-31 15:42:24 -0700] [2226] [INFO] Worker exiting (pid: 2226)

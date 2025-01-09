@@ -1,0 +1,1128 @@
+[
+	{
+		"trial": 0,
+		"balls": [
+			{
+				"name": "D",
+				"position": [
+					850,
+					480
+				],
+				"velocity": [
+					-1.2,
+					0
+				]
+			},
+			{
+				"name": "A",
+				"position": [
+					1200,
+					120
+				],
+				"velocity" : [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					1600,
+					250
+				],
+				"velocity": [
+					-1.2,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "middle"
+		},
+		"description": "0_0_0_0_a"
+	},
+	{
+		"trial": 1,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					900,
+					105
+				],
+				"velocity": [
+					-1.5,
+					0.35
+				]
+			},
+			{
+				"name": "D",
+				"position": [
+					1000,
+					550
+				],
+				"velocity": [
+					-1.2,
+					-0.34]
+			},
+			{
+				"name": "B",
+				"position": [
+					1050,
+					300
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			}
+		],
+		"boxes": [
+			{
+				"name": "box",
+				"position": [
+					250,
+					300
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "bottom"
+		},
+		"description": "0_0_1_1_a"
+	},
+	{
+		"trial": 2,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					1300,
+					300
+				],
+				"velocity": [
+					-1.4,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					900,
+					300
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "top"
+		},
+		"description": "0_1_0_0.5_a"
+	},
+	{
+		"trial": 3,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					500,
+					300
+				],
+				"velocity": [
+					0,
+					0
+				]
+			},
+			{
+				"name": "D",
+				"position": [
+					1000,
+					300
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					250,
+					300
+				],
+				"velocity": [
+					0,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "top"
+		},
+		"description": "0_1_0_0.5_b"
+	},
+	{
+		"trial": 4,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					1150,
+					300
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					950,
+					300
+				],
+				"velocity": [
+					-0.8,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "top"
+		},
+		"description": "0_1_0_1_a"
+	},
+	{
+		"trial": 5,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					900,
+					100
+				],
+				"velocity": [
+					-1,
+					0.25
+				]
+			},
+			{
+				"name": "D",
+				"position": [
+					1000,
+					500
+				],
+				"velocity": [
+					-1,
+					-0.21]
+			},
+			{
+				"name": "B",
+				"position": [
+					100,
+					300
+				],
+				"velocity": [
+					0,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "bottom"
+		},
+		"description": "0_1_1_0.5_a"
+	},
+	{
+		"trial": 6,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					1000,
+					501
+				],
+				"velocity": [
+					-1,
+					-0.2
+				]
+			},
+			{
+				"name": "D",
+				"position": [
+					1000,
+					99
+				],
+				"velocity": [
+					-1,
+					0.2
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					100,
+					300
+				],
+				"velocity": [
+					0,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "top"
+		},
+		"description": "0_1_1_0.5_b"
+	},
+	{
+		"trial": 7,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					850,
+					120
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "D",
+				"position": [
+					1200,
+					120
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					1600,
+					300
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "middle"
+		},
+		"description": "0.5_0_1_1_a"
+	},
+	{
+		"trial": 8,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					1050,
+					420
+				],
+				"velocity": [
+					-1.2,
+					-0.2
+				]
+			},
+			{
+				"name": "D",
+				"position": [
+					900,
+					198
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					400,
+					220
+				],
+				"velocity": [
+					0,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "bottom"
+		},
+		"description": "0.5_1_0_1_b"
+	},
+	{
+		"trial": 9,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					1050,
+					150
+				],
+				"velocity": [
+					-1.2,
+					0.2
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					900,
+					465
+				],
+				"velocity": [
+					-1,
+					-0.3
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "top"
+		},
+		"description": "0.5_1_1_1_b"
+	},
+	{
+		"trial": 10,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					900,
+					100
+				],
+				"velocity": [
+					-1,
+					0.35
+				]
+			},
+			{
+				"name": "D",
+				"position": [
+					900,
+					500
+				],
+				"velocity": [
+					-1,
+					-0.35
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					400,
+					300
+				],
+				"velocity": [
+					0,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "top"
+		},
+		"description": "1_1_0_1_a"
+	},
+	{
+		"trial": 11,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					950,
+					400
+				],
+				"velocity": [
+					-1.3,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					830,
+					50
+				],
+				"velocity": [
+					-0.8,
+					0.5
+				]
+			}
+		],
+		"boxes": [
+			{
+				"name": "box",
+				"position": [
+					500,
+					400
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "bottom"
+		},
+		"description": "1_1_0_1_b"
+	},
+		{
+		"trial": 12,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					1000,
+					300
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					400,
+					300
+				],
+				"velocity": [
+					0,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "top"
+		},
+		"description": "1_1_1_1_a"
+	},
+	{
+		"trial": 13,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					1000,
+					300
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "D",
+				"position": [
+					500,
+					300
+				],
+				"velocity": [
+					0,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					250,
+					300
+				],
+				"velocity": [
+					0,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "bottom"
+		},
+		"description": "1_1_1_1_b"
+	},
+	{
+		"trial": 14,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					395,
+					380
+				],
+				"velocity": [
+					0,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					830,
+					50
+				],
+				"velocity": [
+					-0.8,
+					0.5
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "top"
+		},
+		"description": "1_1_1_1_d"
+	},
+	{
+		"trial": 15,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					1055,
+					350
+				],
+				"velocity": [
+					-1.17,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					830,
+					50
+				],
+				"velocity": [
+					-0.8,
+					0.5
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "top"
+		},
+		"description": "1_1_1_1_e"
+	},
+	{
+		"trial": 16,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					1400,
+					300
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "D",
+				"position": [
+					900,
+					115
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					400,
+					300
+				],
+				"velocity": [
+					0,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "middle"
+		},
+		"description": "1_1_1_1_f"
+	},
+	{
+		"trial": 17,
+		"gate": {"start_pos": "top"},
+		"balls": [
+			{"position": [296, 513], "velocity": [0, 0], "name": "A"},
+			{"position": [932, 125], "velocity": [-2.236974823845598, 1.5664645451282269], "name": "B"},
+			{"position": [477, 207], "velocity": [0, 0], "name": "D"}
+		],
+		"boxes": [{"position": [96, 179], "velocity": [0, 0], "angle": 13, "exists": 1, "name": "box"}],
+		"description": "44"
+	},
+	{
+	    "trial": 18,
+	    "balls": [
+	     	{
+	     		"name": "A",
+	     		"position": [
+					850,
+					550
+	        	],
+	        "velocity": [
+	          -1.4,
+	          -0.42
+	        ]
+	      },
+	      {"name": "B",
+	        "position": [
+	          830,
+	          300
+	        ],
+	        "velocity": [
+	          -0.8,
+	          0
+	        ]
+	      }
+	    ],
+	    "boxes": [
+	      {"name": "box",
+	        "position": [
+	          150,
+	          300
+	        ]
+	      }
+	    ],
+			"gate": {"start_pos": "top"},
+	    "description": "clip3"
+  	},
+  	{
+  	"trial": 19,
+  	"gate": {"start_pos": "top"},
+  	"trial_number": 349,
+  	"balls": [
+  		{"position": [984.0885, 247.9255], "velocity": [-2.3681409422989024, 0.41790890881721104], "name": "A"},
+  		{"position": [847.47269, 57.91028], "velocity": [-0.6245448174222321, 0.31816204927919844], "name": "B"},
+  		{"position": [564, 374], "velocity": [0, 0], "name": "D"}
+  	],
+  	"description": "convoluted_causal_chain"
+  	},
+  	{
+		"trial": 20,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					850,
+					550
+				],
+				"velocity": [
+					-1,
+					-0.73
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					860,
+					300
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "top"
+		},
+		"description": "hinder_a"
+	},
+	{
+  	"trial": 21,
+  	"gate": {"start_pos": "bottom"},
+  	"balls": [
+  		{"position": [107, 327], "velocity": [0, 0], "name": "A"},
+  		{"position": [1013, 266], "velocity": [-0.8125500988226712, 0.3219741506149272], "name": "B"}
+  	],
+  	"description": "near_miss"
+  	},
+  	{
+		"trial": 22,
+		"balls": [
+			{
+				"name": "D",
+				"position": [
+					900,
+					100
+				],
+				"velocity": [
+					-1,
+					0.25
+				]
+			},
+			{
+				"name": "A",
+				"position": [
+					1000,
+					500
+				],
+				"velocity": [
+					-1,
+					-0.21]
+			},
+			{
+				"name": "B",
+				"position": [
+					100,
+					300
+				],
+				"velocity": [
+					0,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "bottom"
+		},
+		"description": "reverse_0_1_1_0.5_a"
+	},
+	{
+		"trial": 23,
+		"balls": [
+			{
+				"name": "D",
+				"position": [
+					850,
+					120
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "A",
+				"position": [
+					1200,
+					120
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					1600,
+					300
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "middle"
+		},
+		"description": "reverse_0.5_0_1_1_a"
+	},
+	{
+		"trial": 24,
+		"balls": [
+			{
+				"name": "D",
+				"position": [
+					1050,
+					420
+				],
+				"velocity": [
+					-1.2,
+					-0.2
+				]
+			},
+			{
+				"name": "A",
+				"position": [
+					900,
+					198
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					400,
+					220
+				],
+				"velocity": [
+					0,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "bottom"
+		},
+		"description": "reverse_0.5_1_0_1_b"
+	},
+	{
+		"trial": 25,
+		"balls": [
+			{
+				"name": "D",
+				"position": [
+					1400,
+					300
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "A",
+				"position": [
+					900,
+					115
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					400,
+					300
+				],
+				"velocity": [
+					0,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "middle"
+		},
+		"description": "reverse_1_1_1_1_f"
+	},
+  	{
+  	"trial": 26,
+  	"gate": {"start_pos": "top"},
+  	"trial_number": 349,
+  	"balls": [
+  		{"position": [984.0885, 247.9255], "velocity": [-2.3681409422989024, 0.41790890881721104], "name": "D"},
+  		{"position": [847.47269, 57.91028], "velocity": [-0.6245448174222321, 0.31816204927919844], "name": "B"},
+  		{"position": [564, 374], "velocity": [0, 0], "name": "A"}
+  	],
+  	"description": "reverse_convoluted_causal_chain"
+ 	},
+  	{
+		"trial": 27,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					300,
+					370
+				],
+				"velocity": [
+					0,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					900,
+					132
+				],
+				"velocity": [
+					-1,
+					0.3
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "top"
+		},
+		"description": "stationary_cause"
+	},
+	{
+		"trial": 28,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					937,
+					480
+				],
+				"velocity": [
+					-1,
+					-0.3]
+			},
+			{
+				"name": "B",
+				"position": [
+					900,
+					300
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "top"
+		},
+		"description": "almost_prevent"
+	},
+	{
+		"trial": 29,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					1200,
+					480
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					350,
+					300
+				],
+				"velocity": [
+					0,
+					0
+				]
+			},
+			{
+				"name": "D",
+				"position": [
+					870, 
+					120
+				],
+				"velocity": [
+					-1,
+					0.4
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "top"
+		},
+		"description": "no_difference"
+	},
+	{
+		"trial": 30,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					200,
+					500
+				],
+				"velocity": [
+					0,
+					0
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					300,
+					200
+				],
+				"velocity": [
+					0,
+					0
+				]
+			},
+			{
+				"name": "D",
+				"position": [
+					900,
+					100
+				],
+				"velocity": [
+					-1,
+					0.15
+				]
+			}
+		],
+		"gate": {
+			"start_pos": "top"
+		},
+		"description": "attention_check"
+	},
+	{
+		"trial": 31,
+		"balls": [
+			{
+				"name": "A",
+				"position": [
+					900,
+					400
+				],
+				"velocity": [
+					-1,
+					0.1
+				]
+			},
+			{
+				"name": "B",
+				"position": [
+					1350,
+					300
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			},
+			{
+				"name": "D",
+				"position": [
+					900,
+					120
+				],
+				"velocity": [
+					-1,
+					0
+				]
+			}
+		],
+		"boxes": [
+			{
+				"name": "box",
+				"position": [
+					400,
+					475
+				],
+				"angle": 40
+			}
+		],
+		"gate": {
+			"start_pos": "middle"
+		},
+		"description": "inst_video"
+	}
+]

@@ -1,0 +1,177 @@
+{
+	"stim": [
+		{
+			"id": 0,
+			"name": "clip0",
+			"description": "0_0_0_0_a"
+		},
+		{
+			"id": 1,
+			"name": "clip1",
+			"description": "0_0_1_1_a"
+		},
+		{
+			"id": 2,
+			"name": "clip2",
+			"description": "0_1_0_0.5_a"
+		},
+		{
+			"id": 3,
+			"name": "clip3",
+			"description": "0_1_0_0.5_b"
+		},
+		{
+			"id": 4,
+			"name": "clip4",
+			"description": "0_1_0_1_a"
+		},
+		{
+			"id": 5,
+			"name": "clip5",
+			"description": "0_1_1_0.5_a"
+		},
+		{
+			"id": 6,
+			"name": "clip6",
+			"description": "0_1_1_0.5_b"
+		},
+		{
+			"id": 7,
+			"name": "clip7",
+			"description": "0.5_0_1_1_a"
+		},
+		{
+			"id": 8,
+			"name": "clip8",
+			"description": "0.5_1_0_1_b"
+		},
+		{
+			"id": 9,
+			"name": "clip9",
+			"description": "0.5_1_1_1_b"
+		},
+		{
+			"id": 10,
+			"name": "clip10",
+			"description": "1_1_0_1_a"
+		},
+		{
+			"id": 11,
+			"name": "clip11",
+			"description": "1_1_0_1_b"
+		},
+		{
+			"id": 12,
+			"name": "clip12",
+			"description": "1_1_1_1_a"
+		},
+		{
+			"id": 13,
+			"name": "clip13",
+			"description": "1_1_1_1_b"
+		},
+		{
+			"id": 14,
+			"name": "clip14",
+			"description": "1_1_1_1_d"
+		},
+		{
+			"id": 15,
+			"name": "clip15",
+			"description": "1_1_1_1_e"
+		},
+		{
+			"id": 16,
+			"name": "clip16",
+			"description": "1_1_1_1_f"
+		},
+		{
+			"id": 17,
+			"name": "clip17",
+			"description": "44"
+		},
+		{
+			"id": 18,
+			"name": "clip18",
+			"description": "clip3"
+		},
+		{
+			"id": 19,
+			"name": "clip19",
+			"description": "convoluted_causal_chain"
+		},
+		{
+			"id": 20,
+			"name": "clip20",
+			"description": "hinder_a"
+		},
+		{
+			"id": 21,
+			"name": "clip21",
+			"description": "near_miss"
+		},
+		{
+			"id": 22,
+			"name": "clip22",
+			"description": "reverse_0_1_1_0.5_a"
+		},
+		{
+			"id": 23,
+			"name": "clip23",
+			"description": "reverse_0.5_0_1_1_a"
+		},
+		{
+			"id": 24,
+			"name": "clip24",
+			"description": "reverse_0.5_1_0_1_b"
+		},
+		{
+			"id": 25,
+			"name": "clip25",
+			"description": "reverse_1_1_1_1_f"
+		},
+		{
+			"id": 26,
+			"name": "clip26",
+			"description": "reverse_convoluted_causal_chain"
+		},
+		{
+			"id": 27,
+			"name": "clip27",
+			"description": "stationary_cause"
+		},
+		{
+			"id": 28,
+			"name": "clip28",
+			"description": "almost_prevent"
+		},
+		{
+			"id": 29,
+			"name": "clip29",
+			"description": "no_difference"
+		},
+		{
+			"id": 30,
+			"name": "clip30",
+			"description": "attention_check"
+		}
+	],
+	"sentences": [
+		{
+			"sentence": "Ball A <b>caused</b> Ball B to go through the gate.",
+			"word": "cause"
+		},
+		{
+			"sentence": "Ball A <b>enabled</b> Ball B to go through the gate.",
+			"word": "enable"
+		},
+		{
+			"sentence": "Ball A <b>affected</b> Ball B's going through the gate.",
+			"word": "affect"
+		},
+		{
+			"sentence": "Ball A <b>made no difference</b> to Ball B's going through the gate.",
+			"word": "no_difference"
+		}
+	]
+}
