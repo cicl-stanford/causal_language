@@ -1916,6 +1916,10 @@ ggplot(data = df.plot,
   geom_bar(stat = "identity",
            fill = "lightgray",
            color = "black") +
+  geom_errorbar(
+    mapping = aes(ymin = data_ymin, ymax = data_ymax),
+    width = 0
+  ) +
   geom_point(data = df.model,
              mapping = aes(x = response,
                            y = model_y,
@@ -1924,10 +1928,6 @@ ggplot(data = df.plot,
              size = 3,
              position = position_dodge(0.8),
              color = "black") +
-  geom_errorbar(
-    mapping = aes(ymin = data_ymin, ymax = data_ymax),
-    width = 0
-  ) +
   geom_custom(data = df.clips,
               mapping = aes(data = grob, x = 2.5, y = Inf),
               grob_fun = function(x) rasterGrob(x,
