@@ -28990,3 +28990,191 @@
 [2023-04-26 16:17:22 -0700] [41152] [INFO] Worker exiting (pid: 41152)
 [2023-04-26 16:17:22 -0700] [41160] [INFO] Parent changed, shutting down: <Worker 41160>
 [2023-04-26 16:17:22 -0700] [41160] [INFO] Worker exiting (pid: 41160)
+[2025-10-04 08:23:34 -0700] [78893] [DEBUG] Current configuration:
+  proxy_protocol: False
+  worker_connections: 1000
+  disable_redirect_access_to_syslog: False
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x7f89180c3b90>
+  errorlog: server.log
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 2
+  suppress_ragged_eofs: True
+  syslog_facility: user
+  when_ready: <function when_ready at 0x7f89180c39b0>
+  pre_fork: <function pre_fork at 0x7f89180c3aa0>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  sendfile: None
+  reuse_port: False
+  worker_tmp_dir: None
+  group: 20
+  umask: 0
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  workers: 21
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  proc_name: psiturk_experiment_server_f37fb848b2ae
+  pre_exec: <function pre_exec at 0x7f89180c3f50>
+  limit_request_fields: 100
+  pythonpath: None
+  on_exit: <function on_exit at 0x7f893882a140>
+  logconfig: None
+  logconfig_dict: {}
+  config: None
+  pidfile: None
+  check_config: False
+  statsd_prefix: 
+  on_reload: <function on_reload at 0x7f89180c38c0>
+  reload_extra_files: []
+  accesslog: None
+  reload_engine: auto
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x7f89180d20c8>
+  post_request: <function post_request at 0x7f89180d2140>
+  user: 504
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x7f89180c3d70>
+  paste: None
+  raw_paste_global_conf: []
+  threads: 1
+  max_requests: 0
+  limit_request_line: 0
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  on_starting: <function on_starting at 0x7f89180c37d0>
+  post_worker_init: <function post_worker_init at 0x7f89180c3c80>
+  worker_abort: <function worker_abort at 0x7f89180c3e60>
+  child_exit: <function child_exit at 0x7f89180d2230>
+  worker_exit: <function worker_exit at 0x7f89180d2320>
+  default_proc_name: gunicorn
+  loglevel: debug
+  syslog: False
+  syslog_prefix: None
+  chdir: /Users/tobiasg/Documents/work/projects/public/causal_language/code/experiments/experiment3
+  daemon: False
+  syslog_addr: unix:///var/run/syslog
+  ciphers: TLSv1
+  bind: ['0.0.0.0:22362']
+  raw_env: []
+  initgroups: False
+  capture_output: False
+  reload: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x7f89180d2410>
+  timeout: 30
+  keyfile: None
+  ca_certs: None
+  tmp_upload_dir: None
+  backlog: 2048
+  logger_class: gunicorn.glogging.Logger
+[2025-10-04 08:23:34 -0700] [78893] [INFO] Starting gunicorn 19.9.0
+[2025-10-04 08:23:34 -0700] [78893] [DEBUG] Arbiter booted
+[2025-10-04 08:23:34 -0700] [78893] [INFO] Listening at: http://0.0.0.0:22362 (78893)
+[2025-10-04 08:23:34 -0700] [78893] [INFO] Using worker: sync
+[2025-10-04 08:23:34 -0700] [78925] [INFO] Booting worker with pid: 78925
+[2025-10-04 08:23:34 -0700] [78926] [INFO] Booting worker with pid: 78926
+[2025-10-04 08:23:34 -0700] [78927] [INFO] Booting worker with pid: 78927
+[2025-10-04 08:23:34 -0700] [78928] [INFO] Booting worker with pid: 78928
+[2025-10-04 08:23:34 -0700] [78929] [INFO] Booting worker with pid: 78929
+[2025-10-04 08:23:34 -0700] [78931] [INFO] Booting worker with pid: 78931
+[2025-10-04 08:23:34 -0700] [78932] [INFO] Booting worker with pid: 78932
+[2025-10-04 08:23:34 -0700] [78933] [INFO] Booting worker with pid: 78933
+[2025-10-04 08:23:34 -0700] [78934] [INFO] Booting worker with pid: 78934
+[2025-10-04 08:23:34 -0700] [78935] [INFO] Booting worker with pid: 78935
+[2025-10-04 08:23:34 -0700] [78936] [INFO] Booting worker with pid: 78936
+2025-10-04 08:23:34,668 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:34,701 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:34,715 Secret key: 'this is my secret key which is hard to guess, i should change this'
+[2025-10-04 08:23:34 -0700] [78937] [INFO] Booting worker with pid: 78937
+2025-10-04 08:23:34,731 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2025-10-04 08:23:34,746 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2025-10-04 08:23:34,757 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2025-10-04 08:23:34 -0700] [78938] [INFO] Booting worker with pid: 78938
+2025-10-04 08:23:34,885 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:34,893 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:34,920 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2025-10-04 08:23:34 -0700] [78939] [INFO] Booting worker with pid: 78939
+2025-10-04 08:23:34,947 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2025-10-04 08:23:34,969 Secret key: 'this is my secret key which is hard to guess, i should change this'
+[2025-10-04 08:23:34 -0700] [78940] [INFO] Booting worker with pid: 78940
+2025-10-04 08:23:35,010 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2025-10-04 08:23:35,010 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:35,040 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:35,043 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2025-10-04 08:23:35 -0700] [78941] [INFO] Booting worker with pid: 78941
+2025-10-04 08:23:35,082 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2025-10-04 08:23:35,113 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:35,147 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2025-10-04 08:23:35 -0700] [78942] [INFO] Booting worker with pid: 78942
+2025-10-04 08:23:35,201 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:35,235 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2025-10-04 08:23:35 -0700] [78943] [INFO] Booting worker with pid: 78943
+2025-10-04 08:23:35,357 Secret key: 'this is my secret key which is hard to guess, i should change this'
+[2025-10-04 08:23:35 -0700] [78944] [INFO] Booting worker with pid: 78944
+2025-10-04 08:23:35,360 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:35,390 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2025-10-04 08:23:35,405 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2025-10-04 08:23:35 -0700] [78946] [INFO] Booting worker with pid: 78946
+[2025-10-04 08:23:35 -0700] [78951] [INFO] Booting worker with pid: 78951
+[2025-10-04 08:23:35 -0700] [78893] [DEBUG] 21 workers
+[2025-10-04 08:23:35 -0700] [78936] [DEBUG] Closing connection. 
+2025-10-04 08:23:35,538 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:35,589 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2025-10-04 08:23:35,679 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:35,685 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:35,713 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2025-10-04 08:23:35,719 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2025-10-04 08:23:35,768 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:35,802 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2025-10-04 08:23:35,838 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:35,873 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2025-10-04 08:23:35,910 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:35,944 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2025-10-04 08:23:35,970 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:36,004 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2025-10-04 08:23:36,008 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:36,041 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2025-10-04 08:23:36,084 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2025-10-04 08:23:36,117 /Users/tobiasg/opt/miniconda3/envs/py2/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2025-10-04 08:23:37 -0700] [78942] [DEBUG] Closing connection. 
+[2025-10-04 08:23:38 -0700] [78938] [DEBUG] GET /ad
+[2025-10-04 08:23:38 -0700] [78943] [DEBUG] GET /static/css/bootstrap.min.css
+[2025-10-04 08:23:38 -0700] [78936] [DEBUG] GET /static/favicon.ico
+[2025-10-04 08:23:39 -0700] [78946] [DEBUG] GET /consent
+[2025-10-04 08:23:39 -0700] [78927] [DEBUG] GET /static/js/utils.js
+[2025-10-04 08:23:39 -0700] [78946] [DEBUG] GET /static/css/general.css
+[2025-10-04 08:23:48 -0700] [78946] [DEBUG] GET /exp
+2025-10-04 08:23:48,310 Accessing /exp: debugR98HFE debug0HT9E9 debugW316CV 
+2025-10-04 08:23:48,344 given Counter({(0, 0): 0}) chose (0, 0)
+[2025-10-04 08:23:48 -0700] [78927] [DEBUG] GET /static/lib/seedrandom.js
+[2025-10-04 08:23:48 -0700] [78946] [DEBUG] GET /static/js/psiturk.js
+[2025-10-04 08:23:48 -0700] [78943] [DEBUG] GET /static/css/jquery-ui.min.css
+[2025-10-04 08:23:48 -0700] [78944] [DEBUG] GET /static/lib/underscore-min.js
+[2025-10-04 08:23:48 -0700] [78936] [DEBUG] GET /static/lib/jquery.min.js
+[2025-10-04 08:23:48 -0700] [78939] [DEBUG] GET /static/lib/backbone-min.js
+[2025-10-04 08:23:48 -0700] [78928] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2025-10-04 08:23:48 -0700] [78946] [DEBUG] GET /static/js/task.js
+[2025-10-04 08:23:48 -0700] [78943] [DEBUG] GET /static/js/config.js
+[2025-10-04 08:23:48 -0700] [78936] [DEBUG] GET /static/lib/mustache.js
+[2025-10-04 08:23:48 -0700] [78943] [DEBUG] GET /static/json/new_stim.json
+[2025-10-04 08:23:48 -0700] [78941] [DEBUG] GET /sync/debugW316CV%3Adebug0HT9E9
+2025-10-04 08:23:48,463 GET /sync route with id: debugW316CV:debug0HT9E9
+[2025-10-04 08:23:48 -0700] [78937] [DEBUG] GET /trial.html
+[2025-10-04 08:23:48 -0700] [78946] [DEBUG] GET /static/css/images/ui-bg_highlight-soft_100_eeeeee_1x100.png
+[2025-10-04 08:23:48 -0700] [78941] [DEBUG] GET /static/css/images/ui-bg_glass_100_f6f6f6_1x400.png
+[2025-10-04 08:23:48 -0700] [78931] [DEBUG] GET /static/images/inst_image2.jpeg
+[2025-10-04 08:23:48 -0700] [78932] [DEBUG] GET /static/images/inst_image1.jpeg
+[2025-10-04 08:23:48 -0700] [78946] [DEBUG] GET /static/videos/inst_video.mp4
+[2025-10-04 08:24:33 -0700] [78931] [DEBUG] GET /static/videos/mp4/training_clip_0.mp4
+[2025-10-04 08:24:51 -0700] [78931] [DEBUG] GET /static/videos/mp4/training_clip_2.mp4
+[2025-10-04 08:25:09 -0700] [78931] [DEBUG] GET /static/videos/mp4/training_clip_3.mp4
+[2025-10-04 08:25:26 -0700] [78931] [DEBUG] GET /static/videos/mp4/training_clip_1.mp4
+[2025-10-04 08:26:15 -0700] [78934] [DEBUG] GET /static/videos/mp4/clip_2.mp4
+[2025-10-04 08:26:15 -0700] [78929] [DEBUG] GET /static/videos/mp4/clip_28.mp4
+[2025-10-04 08:26:34 -0700] [78929] [DEBUG] GET /static/css/images/ui-bg_glass_65_ffffff_1x400.png
+[2025-10-04 08:26:35 -0700] [78936] [DEBUG] GET /static/css/images/ui-bg_glass_100_fdf5ce_1x400.png
